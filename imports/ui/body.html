@@ -1,0 +1,459 @@
+
+<body>
+
+    {{> navigation }}
+
+    <!-- retreive data from Mongo DB to fill up the next 3 batch of data in the top  table
+
+    <div id='next3batches'> <label>{{_ "Next Three Items for Auction"}} </label></div>  -->
+
+   {{> flower_batch_lists}}
+   
+   
+   <canvas id="myCanvas" width="600" height="600"></canvas>
+   
+   <!-- draw the clock interface -->
+   {{> clock}}
+     
+   {{> flower_auction_lists}}
+   
+   {{> form_buy_item}}
+
+   <hr>
+   <div>
+      <!-- Check to see if user is admin , if so show the form to set an item on auction  -->
+       {{#if isInRole 'admin' 'default-group'}}
+           <b><h3> <div id="AdminSection" >  {{_ "Admin Section - User"}} : {{currentUser.username}}    </div></h3></b>
+       
+
+            {{> form_set_item_on_auction}}
+           <hr>
+           <!-- User input form to add flowers -->
+           {{> form_enter_product}}
+
+           <hr>
+           <div>
+               <!-- User input form to add flowers
+               {{> form_enter_product}}   -->
+
+           </div>
+           <hr>
+              <!-- Add/Edit users -->
+              {{> form_edit_user}}
+              <br><hr>
+           <div>
+              <!-- Report of all items which went on auction  -->
+              {{> report}}
+           </div>
+           <div>
+               {{> online_users }}
+           </div>
+
+       {{else}}
+         <div name="buyer_report" > {{> report_user_purchase}} </div><!--user is not in admin role, so do not display the form to set an item on auction -->
+       {{/if}}
+   </div>
+
+
+
+   <div>
+       <!-- Real-time metrics to confirm oplog tailing -->
+       <!--   {{> serverFacts}}   -->
+   </div>
+
+</body >
+
+
+
+
+<template name="addForm">
+    <div style="margin:20px; text-align:center; background-color:#fcfcfc">
+        <form class="form-inline addForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" name="name" placeholder="Type name" />
+            </div>
+            <div class="form-group">
+                <label for="score">Score</label>
+                <input class="form-control" type="text" name="score" placeholder="0" />
+            </div>
+            <button type="submit" class="btn btn-default">Add</button>
+        </form>
+    </div>
+</template>
+
+
+<template name="clock">
+  <!-- <button class="buy_btn" type="submit" value="buy" name="buyme">Buy Me </button> -->
+  
+</template>
+
+
+<template name="localizedDateAndTime">
+
+    {{localizedDateAndTime }}
+</template>
+
+
+
+
+<template name="form_buy_item">
+    <form id="buyitem">
+        <div><input class="col-xs-3" type="text" id="num_container_field" name="buyitem"/></div>
+        
+        <input class="btn btn-danger"  type="submit" id="buy_item" value={{_ "Buy"}} />  
+    </form>
+
+</template>
+
+<!-- template to populate inside the clock -->
+<template name="flower_auction_lists">
+
+     {{#each OnAuction}}
+         <div id="MonetaryUnitLabel"> {{_ "Monetary Unit"}}</div>
+         <div id="MonetaryUnit_Value"> {{this.MoneteraryUnit}} </div>
+
+         <div id="PricePerFlowerLabel">{{_ "Price/Flower"}}</div>
+         <div class="clock_items"  id="PricePerFlower_Value"> {{this.PricePerFlower}} </div>
+
+         <div id="BuyersNumberLabel">{{_ "Buyer Number"}}</div>
+         <div class="clock_items"  id="BuyersNumber_Value"> {{this.Buyer_Number}} </div>
+
+         <div  id="TrolleysLabel"> {{_ "Trolleys"}}</div>
+         <div class="clock_items" id="Trolleys_Value"> {{this.Trolleys}} </div>
+
+          <div id="ContainersPerTrollyLabel">{{_ "Containers/Trolley"}}</div>
+          <div class="clock_items" id="ContainersPerTrolly_Value"> {{this.ContainersPerTrolly}} </div>
+
+          <div id="TotalContainersLabel">{{_ "Total Containers"}}</div>
+          <div class="clock_items" id="TotalContainers_Value"> {{this.TotalContainers}} </div>
+
+          <div id="FlowerPerContainerLabel">{{_ "Flower/Container"}}</div>
+          <div class="clock_items" id="FlowerPerContainer_Value"> {{this.FlowerPerContainer}} </div>
+
+          <div id="MinContainerToBuyLabel">{{_ "Minimum Container To Buy"}}</div>
+          <div class="clock_items" id="MinContainerToBuy_Value"> {{this.MinContainerToBuy}} </div>
+
+          <div id="ProductImage_Value"> <img src="/images/flower/{{this.ProductImage}}" height="160" width="160"/> </div>
+         <div id="Logo_Value"> <img src="/images/logo/{{this.Logo}}" height="50" width="50"/> </div>
+
+
+          <div id="producer_table">
+           <table width= "360" border="2" >
+                <thead id="head1">
+                  <tr>
+                    <th>{{_ "Supplier Name"}}</th>
+                    <th>{{_ "ID"}}</th>
+                    <th>{{_ "Country"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td width="60%">{{this.Producer_name}}</td>
+                    <td width="15%">{{this.Producer_id}}</td>
+                    <td width="15%">{{this.Country}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+          <div id="product_table">
+           <table width= "360" border="2">
+              <thead id="head2">
+                    <tr>
+                      <th >{{_ "Product"}}</th>
+                      <th>{{_ "ID"}}</th>
+                      <th>{{_ "Grade"}}</th>
+                      </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td width="60%">{{this.ProductName}}</td>
+                    <td width="15%">{{this.Product_id}}</td>
+                    <td width="15%">{{this.Product_grade}}</td>
+                  </tr>
+                </tbody>
+           </table> </div>
+      
+     {{/each}}
+
+    <div id="Payaneh_Date"> <strong> {{ localizedDateAndTime  }} </strong>  </div>
+    <div id="Payaneh_Auction"> <img src="/images/payagol.png" height="100" width="90"/> </div>
+
+
+</template>
+
+
+<template name="flower_batch_lists">
+        <table class="flower_batch_table" border="4" rows="3">
+            <tr><th>{{_ "Producer"}}</th><th>{{_ "Logo"}}</th><th>{{_ "Product"}}</th><th>{{_ "ID"}}</th><th>{{_ "Total Containers"}}</th><th>{{_ "Flower/Container"}}</th><th>{{_ "Quality"}}</th><th>{{_ "Storage"}}</th><th>S2</th><th>S3</th></tr>
+        {{#each OneBatch}}
+
+        <tr><td><div class="Producer_name"> {{this.Producer_name}} </div></td><td><img src="/images/logo/{{this.Logo}}"></td><td> {{this.ProductName}}</td><td>{{this.Product_id}}</td><td>{{this.TotalContainers}}</td><td>{{this.FlowerPerContainer}}</td><td>{{this.Quality}}</td><td>{{this.Storage}}</td><td></td><td></td></tr>
+        {{/each}}
+        </table>
+</template>
+
+
+
+<template name ="form_enter_product">
+      <form id="myform">
+        <h3>{{_ "Search/Add products"}}</h3>
+
+       <table class="usertable" border="4">
+
+           {{#each Search_Item_found}}
+
+        <tr>
+            <td>{{_ "Producer Name"}} <br><input type="text" name="Producer_name" value="{{this.Producer_name}}" required></td>
+            <td>{{_ "Producer ID"}} <br><input type="text" name="Producer_id" value="{{this.Producer_id}}" required></td>
+            <td>{{_ "Logo"}} <br><input type="text" name="Logo" value="{{this.Logo}}"/></td>
+            <td>{{_ "Product Name"}} <br><input type="text" name="ProductName" value="{{this.ProductName}}"/></td>
+            <td>{{_ "Product ID"}} <br><input id="Product_Id" type="text"  name="Product_id" value="{{this.Product_id}}" required></td>
+        </tr>
+         <tr>
+             <td>{{_ "Product Image"}} <br><input type="text" name="ProductImage" value="{{this.ProductImage}}"/></td>
+             <td>{{_ "Buyer Number"}} <br><input type="text" name="Buyer_Number" value="{{this.Buyer_Number}}"/></td>
+             <td>{{_ "NumberOfItems"}} <br><input type="text" name="NumberOfItems" value="{{this.NumberOfItems}}"/></td>
+             <td>{{_ "PricePerFlower"}} <br><input type="text" name="PricePerFlower" value="{{this.PricePerFlower}}"/></td>
+             <td>{{_ "Trolleys"}} <br><input type="text" name="Trolleys" value="{{this.Trolleys}}" /></td>
+          </tr>
+        <tr>
+            <td> {{_ "Containers/Trolley"}} <br><input type="text" name="ContainersPerTrolly" value="{{this.ContainersPerTrolly}}"/> </td>
+            <td>{{_ "Total Containers"}} <br><input type="text" name="TotalContainers" value="{{this.TotalContainers}}"/></td>
+            <td>{{_ "Flower/Container"}} <br><input type="text" name="FlowerPerContainer" value="{{this.FlowerPerContainer}}"/></td>
+            <td>{{_ "Minimum Container To Buy"}} <br><input type="text" name="MinContainerToBuy" value="{{this.MinContainerToBuy}}"/></td>
+            <td>{{_ "Quality"}} <br><input type="text" name="quality" value="{{this.quality}}"/></td>
+         </tr>
+         <tr>
+             <td>{{_ "Storage"}} <br><input type="text" name="storage" value="{{this.storage}}"/></td>
+             <td>s1 <br><input type="text" name="s1" value="{{this.s1}}"/></td>
+             <td>s2  <br><input type="text" name="s2" value="{{this.s2}}" /></td>
+             <td>s3  <br><input type="text" name="s3" value="{{this.s3}}" /></td>
+            <td>s4  <br><input type="text" name="s4" value="{{this.s4}}"/> </td>
+       </tr>
+            <tr>
+             <td>fuet<br><input type="text" name="fuet" value="{{this.fuet}}"/></td>
+             <td>{{_ "Product Grade"}}<br><input type="text" name="Product_grade" value="{{this.Product_grade}}"/></td>
+             <td>{{_ "Monetary Unit"}} <br><input type="text" name="MoneteraryUnit" value="{{this.MoneteraryUnit}}" /></td>
+             <td>{{_ "Country"}} <br><input type="text" name="Country" value="{{this.Country}}"/></td>
+             <td>{{_ "Creator Id"}}<br><input type="text" name="CreatorId" value="{{this.CreatorId}}"/></td>
+            </tr>
+          <tr>
+              <td div class="date_field">{{_ "Created At"}}<br><input type="text" id="created-datepicker"   name="createdAt" value="{{this.createdAt}}"/> </td>
+              <td >{{_ "Auction Date"}}<br><input type="text" id="auctiondate-datepicker"  name="AuctionDate" value="{{this.AuctionDate}}" /></td>
+
+          </tr>
+       {{/each}}
+
+        </table>
+        <p>{{_ "Upload product image" }}</p>
+        {{> upload_bootstrap }}
+        {{> dropzone contentType='images' fileTypes='.jpg' multiple=true formData=specificFormData }}
+
+        <div style="text-align: center;">
+         <input class="btn btn-danger" id="Search_Item" type="submit"  value= {{_ "Search"}} />
+         <input class="btn btn-danger" id ="Edit_Item" type="submit"   value= {{_ "Edit"}} />
+         <input class="btn btn-danger" id = "Add_Item" type="submit"   value= {{_ "Add"}} />
+        </div>
+         
+    </form>
+
+
+</template>
+
+
+
+<template name ="form_edit_user">      
+    <form id="userform">
+        <h3>{{_ "Add/Edit Users"}}</h3>
+       <table class="usertable" border="4">
+        <tr><th>{{_ "ID"}}</th><th>{{_ "Name"}}</th><th>{{_ "Email"}}</th><th>{{_ "Role"}}</th><th>{{_ "Created At"}}</th>        </tr>   
+        {{#each Search_User_found}}  
+        <tr>  
+            <td> <input id="#user_field" type="text" name="User_id"    value="{{this._id}}"/></td>
+            <td> <input type="text" name="User_name"  value="{{username}}" /></td>
+            <td> <input type="text" name="User_email" value="{{emails.[0].address}}"/></td>
+            <td> <input type="text" name="User_role"  value="{{roles}}"/></td>
+            <td> <input type="text" name="User_created" value="{{createdAt}}"/></td>
+           
+        </tr>
+        {{/each}}
+        
+        </table>
+
+        <div style="text-align: center;">
+         <input class="btn btn-danger" id="Search_Item" type="submit"  value= {{_ "Search"}} />
+         <input class="btn btn-danger" id ="Edit_Item" type="submit"   value= {{_ "Edit"}} />
+         <input class="btn btn-danger" id = "Add_Item" type="submit"   value= {{_ "Add"}} />
+        </div>
+         
+    </form>
+</template>
+
+
+<template name ="form_set_item_on_auction">
+    <h3>{{_ "Set Item for Auction "}}</h3>
+    
+    <form id="my_auction_price">
+        {{_ "Product ID"}}:<input type="text" name="on_auction"/>
+    <input type="submit" class="auction_price" value={{_ "Set Auction"}} />
+    </form>
+    
+    <button class="btn btn-danger"  type="submit" value="-5" name="-5"> -5 </button>
+    <button class="btn btn-danger"  type="submit" value="-1" name="-1"> -1 </button>
+    <button class="btn btn-danger"  type="submit" value="1" name="+1"> +1 </button>
+    <button class="btn btn-danger"  type="submit" value="5" name="+1"> +5 </button>
+</template>
+
+
+
+<!-- report all purchases for a day -->
+<template name ="report">
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{_ "Purchased Report"}}</h3>
+            </div>
+            <div class="panel-body">
+                {{> reactiveTable collection=purchased class="table table-bordered table-hover" settings=tableSettings}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<!--report all purchases for a day for the logged in user -->
+<template name ="report_user_purchase">
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{_ "Purchased Report"}}</h3>
+            </div>
+            <div class="panel-body">
+                {{> reactiveTable collection=purchased class="table table-bordered table-hover" settings=tableSettings}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="register">
+    <h2>Register</h2>
+     You must register before being able to bid on items in the auction .
+     
+</template>
+
+
+
+<template name="login">
+    <h2>Login</h2>
+</template>
+
+
+
+
+<template name="aboutPage">
+    <h1>About Payaneh </h1>
+         <p>
+         A service to provide real time auction of flowers to Payaneh organization members.
+         Payaneh contact information is
+         Phone : 0218803-2627
+         Address
+         </p>
+</template>
+
+
+<template name="home">
+    <p>Welcome to Payaneh Auction </p>
+</template>
+
+
+<template name="auction_list">
+     <!-- Add login mechanism  -->
+
+    
+    <div id='next3batches'> <label>{{_ "Next Three Items for Auction"}} </label></div>
+    {{> flower_batch_lists}}
+    
+     <canvas id="myCanvas" width="600" height="630"></canvas>
+   
+   <!-- draw the clock interface -->
+   {{> clock}}
+     
+   {{> flower_auction_lists}}
+   
+   {{> form_buy_item}}
+
+</template>
+
+<template name="navigation">
+
+    <nav class="navbar navbar-custom navbar-static-top" style="margin-bottom: 0px; font-size: 12px; height: 40px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div id="loginButtons"> {{> loginButtons}} </div>
+        </div>
+        <div class="collapse navbar-collapse" >
+            <div id="welcome">{{_ "welcome"}}</div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{pathFor route='home'}}">{{_"Home"}}</a></li>
+                <li><a href="{{pathFor route='login'}}">{{_"Login"}}</a></li>
+                <li><a href="{{pathFor route='register'}}">{{_"Register"}}</a></li>
+                <li><a href="{{pathFor route='auction_list'}}">{{_"Auction List"}}</a></li>
+                <li><a href="{{pathFor route='about'}}">{{_"About"}}</a>  </li>
+                {{#if isInRole 'admin'}}
+                    <!-- Reports  -->
+                    <li> <a href="{{pathFor route='report'}}">{{_"Report"}}</a></li>
+                    <li> <a href="{{pathFor route='form_enter_product'}}">{{_"Edit/Search Items"}}</a></li>
+                 <!--   <li> <a href="{{pathFor route='form_edit_user'}}">{{_"Edit Users"}}</a></li> -->
+
+                {{/if}}
+
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <div id="languages"> {{> i18n_dropdown_bootstrap3_component}} </div>
+
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</template>
+
+
+<template name="online_users">
+    <h1>{{_"There are currently"}} {{usersOnlineCount}} {{_"users in Auction"}}</h1>
+
+    <ul>
+        {{#each usersOnline}}
+            <li> <div class="boxed">{{username}}  </div>
+                {{#with currentUser}}
+                <p>{{> avatar  user=this size="small" shape="rounded"}}</p>
+
+                    {{#if isUserInRole _id 'buyer'}} Buyer.. {{/if}}
+                    {{#if isUserInRole _id 'admin'}} Admin.. {{/if}}
+            {{/with}}
+            </li>
+        {{/each}}
+    </ul>
+    <button onclick="TogetherJS(this); return false;">Start Talk</button>
+</template>
+
+
+
+<template name="main">
+
+    {{> yield}}
+    <hr />
+    <p><center>Copyright &copy; Payaneh, 2015-2020.</center></p>
+</template>
+
+<template name="_loginButtonsAdditionalLoggedInDropdownActions">
+    <button class="btn btn-default btn-block" id="login-buttons-edit-profile">{{_ "Edit profile"}}</button>
+</template>
+

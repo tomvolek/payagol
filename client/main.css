@@ -1,0 +1,179 @@
+/* CSS declarations go here */
+
+body {
+    background-color: #C3E8C1;
+    margin: 0px;
+    padding: 0px;
+}
+
+.tftable {font-size:10px;color:#333333;width:100%;border-width: 2px;border-color: #9dcc7a;border-collapse: collapse;}
+.tftable th {font-size:20px;background-color:#abd28e;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:center;  }
+.tftable tr {background-color:#ffffff;}
+.tftable td {font-size:10px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;}
+.tftable tr:hover {background-color:#ffff99;}
+
+.flower_batch_table  {font-size:10px;color:#333333;width:100%;border-width: 4px;border-color: #9dcc7a; border-style: groove;}
+.flower_batch_table th {font-size:15px;background-color:#abd28e;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:center;  }
+.flower_batch_table tr {background-color:#ffffff;}
+.flower_batch_table td {font-size:10px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;}
+.flower_batch_table tr:hover {background-color:#ffff99;}
+
+
+.usertable {font-size:10px;color:#333333;width:100%;border-width: 2px;border-color: #9dcc7a;border-collapse: collapse;}
+.usertable th {font-size:10px;background-color:#abd28e;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;text-align:center;  }
+.usertable tr {background-color:#ffffff;}
+.usertable td {font-size:10px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a; }
+.usertable tr:hover {background-color:#ffff99;}
+
+.clock_items  {font-size:20px;}
+
+#user_field  {font-size:10px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a; width: 150px;}
+
+div#myCanvas{ position: absolute; margin-left: 5px; }
+div#MonetaryUnitLabel{ position: absolute; z-index: 1; left:275px; top:320px; }
+div#MonetaryUnit_Value {position: absolute; z-index: 1; left:275px; top:340px; width: 60px; height: 30px; overflow:hidden; background: white; text-align: center; vertical-align: middle;}
+
+div#PricePerFlowerLabel { position: absolute; z-index: 1; left:190px; top:400px;}
+div#PricePerFlower_Value {position: absolute; z-index: 1; left:190px; top:420px; width: 100px; height: 30px; overflow:hidden; background: white; text-align: center; vertical-align: middle;display: table-cell;}
+
+div#BuyersNumberLabel { position: absolute; z-index: 1; left:310px; top:400px;  }
+div#BuyersNumber_Value {position: absolute; z-index: 1; left:310px; top:420px; width: 190px; height: 30px; overflow:hidden; background-color : yellow;  text-align: center; vertical-align: middle;}
+
+div#TrolleysLabel { position: absolute; z-index: 1; left:125px; top:480px;  }
+div#Trolleys_Value {position: absolute; z-index: 1; left:120px; top:500px; width: 40px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+
+div#ContainersPerTrollyLabel { position: absolute; z-index: 1; left:180px; top:480px;  }
+div#ContainersPerTrolly_Value {position: absolute; z-index: 1; left:190px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+
+div#TotalContainersLabel { position: absolute; z-index: 1; left:310px; top:480px;  }
+div#TotalContainers_Value {position: absolute; z-index: 1; left:310px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+
+div#FlowerPerContainerLabel { position: absolute; z-index: 1; left:420px; top:480px;  }
+div#FlowerPerContainer_Value {position: absolute; z-index: 1; left:420px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+
+div#MinContainerToBuyLabel { position: absolute; z-index: 1; left:230px; top:550px;  }
+div#MinContainerToBuy_Value {position: absolute; z-index: 1; left:275px; top:570px; width: 40px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+
+div#ProductImage_Value {position: absolute; z-index: 1; left:690px; top:370px; }
+div#Logo_Value {position: absolute; z-index: 1; left:860px; top:370px; }
+
+div#producer_table {position: absolute; z-index: 1; left:610px; top:245px; border-style: groove; }
+div#product_table {position: absolute; z-index: 1; left:610px; top:303px; border-style: groove;}
+
+#Product_Id { overflow:hidden; background-color : yellow;  text-align: center; vertical-align: middle;}
+
+#head1 { font-size: 22px;  }
+#head2 { font-size: 22px; }
+
+button.buy_btn { background: red; text-align  : center; width: auto; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :700px; top:500px; font-size: 24px; }
+button.inc_btn { background: red;  z-index:1; font-size: 24px; }
+
+
+#Search_Item {  text-align  : center; width: auto; padding-left:10px; padding-right:10px;  z-index:1; font-size: 16px; }
+#Edit_Item { text-align  : center; width: auto; padding-left:10px; padding-right:10px;    z-index:1; font-size: 16px; }
+#Add_Item {  text-align  : center; width: auto; padding-left:10px; padding-right:10px;    z-index:1; font-size: 16px; }
+
+#loginButtons {float: left;  color: #FFFFFF; }
+#welcome {float: left;  margin-left: 10px; }
+#languages {position: absolute; left :735px; width: 80px; top:5px;}
+#buy_item {position: absolute; text-align  : center; width: auto; padding-left:10px; padding-right:10px; height:45px; left :670px; top:560px; z-index:1; font-size: 24px; }
+#Purchased_Items  {position: absolute; width:300px; height:15px; left :670px; top:610px; z-index:1; font-size: 24px; }
+#num_container_field  {   position: absolute; width:80px; height:40px; left :735px; top:560px; z-index:1; font-size: 24px; }
+#Payaneh_Date {  position: absolute;   left : 230px; top:640px; z-index:1; font-size: 24px; color:blue;  }
+#Payaneh_Auction {  position: absolute;   left : 250px; top:670px; z-index:1; font-size: 24px; color:blue;  }
+
+div#num_container_label  {   position: absolute; width:20px; height:40px; left :740px; top:500px; z-index:1; font-size: 16px; }
+
+
+#unit {width: 30px;}
+#auction_price {width: 20em;  height: 2em; z-index:1;}
+#AdminSection {text-align: center;}
+div#report_image {width: 50px; height: 50px;}
+.ProductImage {width: 50px; height: 50px;}
+.img-thumbnail {width: 40px; height: 40px;}
+
+table {
+  border: 0;
+}
+
+th {
+  border: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+td {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: white;
+}
+
+.heading1 {height: 20px; }
+
+
+
+.navbar-custom {
+
+    background-color:#8AE65C;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+    padding-left:20px;
+    padding-right:20px;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+
+.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #33aa33;
+}
+
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+.navbar-custom .navbar-toggle {
+    background-color:#eeeeee;
+}
+.navbar-custom .icon-bar {
+    background-color:#33aa33;
+
+}
+
+.boxed {
+    text-align:left;
+    text-shadow: 0 0 5px blue;
+}
+
+.jqDropZone {
+    background: lightgrey;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+.jqDropZone.in {
+    width: 600px;
+    height: 200px;
+    line-height: 200px;
+    font-size: larger;
+}
+.jqDropZone.hover {
+    background: lawngreen;
+}
+.jqDropZone.fade {
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    opacity: 1;
+}
+
