@@ -8,6 +8,7 @@ import { IronRouter } from  'meteor/iron:router' ;
 import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
+import { FlowerCatalog } from '/imports/api/models.js';
 import { FilesCollection } from 'meteor/ostrio:files';
 import { UploadServer } from 'meteor/tomi:upload-server';
 import { UploadJquery } from 'meteor/tomi:upload-jquery';
@@ -135,6 +136,14 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
         }
     });
 
+    Meteor.subscribe("flower_catalog", {
+       onReady: function () {
+           console.log("onReady flower_catalog actually Arrive", arguments);
+          },
+         onError: function () {
+         console.log("onError", arguments);
+       }
+     });
 
     Meteor.subscribe("userlist", {
         onReady: function () {
@@ -188,172 +197,173 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
         console.log("inside after language", TAPi18n.getLanguage());
        // i18n.setDefaultLanguage(TAPi18n.getLanguage());
 
-        var canvas = document.getElementById('myCanvas');
-        canvas.width = 600;
-        canvas.height = 630;
-        var ctx = canvas.getContext('2d');
-
-        // 425,425 are cx,cy will control distance of circle from left or top
-        var pointArray = calcPointsCirc(425, 455, 360);
-
-        var radius = 8;  //RADIUS OF THE DOTS
-        var p;
-
-        //diamater of the clock
-        ctx.scale(0.7, 0.7);
-        ctx.strokeStyle = "rgb(0,0,0)";
-        ctx.lineWidth = 7;
-
-        //for (p = pointArray.length - 1; p > 0; p--) {
-        for (p = 0; p < pointArray.length; p++) {
-            drawPoint(p, 'white');
-        }
-
-        // draw  blue clock marks on the circle
-        ctx.fillStyle = "blue";
-        ctx.font = "bold 45px Arial";
-
-
-        if (TAPi18n.getLanguage() === 'en') {
-            console.log("inside en  drawClock function");
-            i18n.setLanguage('en');
-
-            ctx.font = "bold 15px Arial";
-            ctx.fillText(i18n('one'), 444, 85);
-            ctx.fillText(i18n('two'), 466, 88);
-            ctx.fillText(i18n('three'), 490, 93);
-            ctx.fillText(i18n('four'), 512, 97);
-            ctx.fillText(i18n('five'), 537, 103);
-            ctx.fillText(i18n('six'), 560, 110);
-            ctx.fillText(i18n('seven'), 582, 120);
-            ctx.fillText(i18n('eight'), 602, 131);
-            ctx.fillText(i18n('nine'), 622, 142);
-
-            ctx.font = "bold 30px Arial";
-            ctx.fillText(i18n('zero'), 418, 80);
-            ctx.fillText(i18n('ten'), 640, 151);
-            ctx.fillText(i18n('twenty'), 785, 355);
-            ctx.fillText(i18n('thirty'), 780, 580);
-            ctx.fillText(i18n('forty'), 640, 775);
-            ctx.fillText(i18n('fifty'), 410, 851);
-            ctx.fillText(i18n('sixty'), 175, 778);
-            ctx.fillText(i18n('seventy'), 35, 580);
-            ctx.fillText(i18n('eighty'), 35, 355);
-            ctx.fillText(i18n('ninety'), 175, 151);
-
-        } else if (TAPi18n.getLanguage() === 'fa') {
-            console.log("inside fa drawClock function");
-            i18n.setLanguage('fa');
-            ctx.font = "bold 50px Arial";
-            ctx.fillText(i18n('zero'), 413, 80);
-            ctx.fillText(i18n('ten'), 640, 161);
-            ctx.fillText(i18n('twenty'), 780, 365);
-            ctx.fillText(i18n('thirty'), 780, 590);
-            ctx.fillText(i18n('forty'), 640, 790);
-            ctx.fillText(i18n('fifty'), 410, 862);
-            ctx.fillText(i18n('sixty'), 175, 788);
-            ctx.fillText(i18n('seventy'), 25, 580);
-            ctx.fillText(i18n('eighty'), 25, 355);
-            ctx.fillText(i18n('ninety'), 170, 161);
-
-            ctx.font = "bold 20px Arial";
-            ctx.fillText(i18n('one'), 441, 87);
-            ctx.fillText(i18n('two'), 465, 91);
-            ctx.fillText(i18n('three'), 488, 94);
-            ctx.fillText(i18n('four'), 514, 102);
-            ctx.fillText(i18n('five'), 530, 107);
-            ctx.fillText(i18n('six'), 555, 114);
-            ctx.fillText(i18n('seven'), 580, 123);
-            ctx.fillText(i18n('eight'), 604, 134);
-            ctx.fillText(i18n('nine'), 623, 147);
-        }
-
-        //draw the black markers
-        ctx.fillStyle = "black";
-        ctx.font = "bold 45px Arial";
-        ctx.fillText('.', 419, 115);
-        ctx.fillText('.', 618, 180);
-        ctx.fillText('.', 745, 350);
-        ctx.fillText('.', 745, 565);
-        ctx.fillText('.', 620, 737);
-        ctx.fillText('.', 421, 803);
-        ctx.fillText('.', 220, 737);
-        ctx.fillText('.', 93, 568);
-        ctx.fillText('.', 93, 350);
-        ctx.fillText('.', 220, 180);
-        ctx.closePath();
-
-        function drawPoint(p, color) {
-
-            var circle = new Path2D();
-            circle.moveTo(pointArray[p].x, pointArray[p].y);
-            circle.arc(pointArray[p].x, pointArray[p].y, radius, 0, 2 * Math.PI, false);
-            circle.closePath();
-            ctx.fillStyle = color;
-            ctx.fill(circle);
-            ctx.stroke();
-        }
-
-        function calcPointsCirc(cx, cy, rad) {
-            var numPoints = 100;  // number of dots in the circle
-            var points = [];
-            var angle;
-            var i = 0;
-
-            for (i = 0; i <= numPoints; i++) {
-
-                angle = 2 * Math.PI * i / numPoints;
-                points.push({
-                    x: cx + rad * Math.sin(angle),
-                    y: cy - rad * Math.cos(angle)
-                });
-            }
-
-            return points;
-        }
-
-
-
-        // Using Tracker mechanism, watch any changes to PricePosition collection on server side
-        var oldValue = 0;
-        var newValue = 0;
-
-        Tracker.autorun(function () {
-
-            // Attach an handler for a specific message
-            Streamy.on('hello', function (d) {
-                console.log("doing streamy stuff:", d.data); // Will print 'world!'
-                newValue = d.data;
-                if (newValue == 0) {
-
-                    var firstRecord;
-                    firstRecord = PricePosition.find().fetch()[0];
-                    console.log("value zero: PreviousRunPosition:", firstRecord.PreviousRunPosition);
-                    drawPoint(firstRecord.PreviousRunPosition, 'white');  //white out the previous auction price on the clocl.
-                    drawPoint(0, 'red');  //set the red dot top of the clock at 0
-                }
-                else drawPoint(newValue, 'red');
-
-                if (oldValue != newValue) {
-                    oldValue = newValue;
-                    // report that we have a new value
-                    // code here will run when we get an update
-                    if (newValue != 0) {
-                        drawPoint(newValue + 1, 'white');
-                        // drawPoint(newValue,'red');
-                        console.log("NewValue:", newValue);
-                    }
-
-                }
-
-            });
-
-
-        });
 
     }); //Meteor.startup()
 
+    // draw the clock face 
+    Template.draw_circle.onRendered (function(){
 
+    var canvas = document.getElementById('myCanvas');
+    canvas.style.width = 600;
+    canvas.style.height = 630;
+    var ctx = canvas.getContext('2d');
+
+    // 425,425 are cx,cy will control distance of circle from left or top
+    var pointArray = calcPointsCirc(425, 455, 360);
+
+    var radius = 8;  //RADIUS OF THE DOTS
+    var p;
+
+    //diamater of the clock
+    ctx.scale(0.7, 0.7);
+    ctx.strokeStyle = "rgb(0,0,0)";
+    ctx.lineWidth = 7;
+
+    //for (p = pointArray.length - 1; p > 0; p--) {
+    for (p = 0; p < pointArray.length; p++) {
+        drawPoint(p, 'white');
+    }
+
+    // draw  blue clock marks on the circle
+    ctx.fillStyle = "blue";
+    ctx.font = "bold 45px Arial";
+
+
+    if (TAPi18n.getLanguage() === 'en') {
+        console.log("inside en  drawClock function");
+        i18n.setLanguage('en');
+
+        ctx.font = "bold 15px Arial";
+        ctx.fillText(i18n('one'), 444, 85);
+        ctx.fillText(i18n('two'), 466, 88);
+        ctx.fillText(i18n('three'), 490, 93);
+        ctx.fillText(i18n('four'), 512, 97);
+        ctx.fillText(i18n('five'), 537, 103);
+        ctx.fillText(i18n('six'), 560, 110);
+        ctx.fillText(i18n('seven'), 582, 120);
+        ctx.fillText(i18n('eight'), 602, 131);
+        ctx.fillText(i18n('nine'), 622, 142);
+
+        ctx.font = "bold 30px Arial";
+        ctx.fillText(i18n('zero'), 418, 80);
+        ctx.fillText(i18n('ten'), 640, 151);
+        ctx.fillText(i18n('twenty'), 785, 355);
+        ctx.fillText(i18n('thirty'), 780, 580);
+        ctx.fillText(i18n('forty'), 640, 775);
+        ctx.fillText(i18n('fifty'), 410, 851);
+        ctx.fillText(i18n('sixty'), 175, 778);
+        ctx.fillText(i18n('seventy'), 35, 580);
+        ctx.fillText(i18n('eighty'), 35, 355);
+        ctx.fillText(i18n('ninety'), 175, 151);
+
+    } else if (TAPi18n.getLanguage() === 'fa') {
+        console.log("inside fa drawClock function");
+        i18n.setLanguage('fa');
+        ctx.font = "bold 50px Arial";
+        ctx.fillText(i18n('zero'), 413, 80);
+        ctx.fillText(i18n('ten'), 640, 161);
+        ctx.fillText(i18n('twenty'), 780, 365);
+        ctx.fillText(i18n('thirty'), 780, 590);
+        ctx.fillText(i18n('forty'), 640, 790);
+        ctx.fillText(i18n('fifty'), 410, 862);
+        ctx.fillText(i18n('sixty'), 175, 788);
+        ctx.fillText(i18n('seventy'), 25, 580);
+        ctx.fillText(i18n('eighty'), 25, 355);
+        ctx.fillText(i18n('ninety'), 170, 161);
+
+        ctx.font = "bold 20px Arial";
+        ctx.fillText(i18n('one'), 441, 87);
+        ctx.fillText(i18n('two'), 465, 91);
+        ctx.fillText(i18n('three'), 488, 94);
+        ctx.fillText(i18n('four'), 514, 102);
+        ctx.fillText(i18n('five'), 530, 107);
+        ctx.fillText(i18n('six'), 555, 114);
+        ctx.fillText(i18n('seven'), 580, 123);
+        ctx.fillText(i18n('eight'), 604, 134);
+        ctx.fillText(i18n('nine'), 623, 147);
+    }
+
+    //draw the black markers
+    ctx.fillStyle = "black";
+    ctx.font = "bold 45px Arial";
+    ctx.fillText('.', 419, 115);
+    ctx.fillText('.', 618, 180);
+    ctx.fillText('.', 745, 350);
+    ctx.fillText('.', 745, 565);
+    ctx.fillText('.', 620, 737);
+    ctx.fillText('.', 421, 803);
+    ctx.fillText('.', 220, 737);
+    ctx.fillText('.', 93, 568);
+    ctx.fillText('.', 93, 350);
+    ctx.fillText('.', 220, 180);
+    ctx.closePath();
+
+    function drawPoint(p, color) {
+
+        var circle = new Path2D();
+        circle.moveTo(pointArray[p].x, pointArray[p].y);
+        circle.arc(pointArray[p].x, pointArray[p].y, radius, 0, 2 * Math.PI, false);
+        circle.closePath();
+        ctx.fillStyle = color;
+        ctx.fill(circle);
+        ctx.stroke();
+    }
+
+    function calcPointsCirc(cx, cy, rad) {
+        var numPoints = 100;  // number of dots in the circle
+        var points = [];
+        var angle;
+        var i = 0;
+
+        for (i = 0; i <= numPoints; i++) {
+
+            angle = 2 * Math.PI * i / numPoints;
+            points.push({
+                x: cx + rad * Math.sin(angle),
+                y: cy - rad * Math.cos(angle)
+            });
+        }
+
+        return points;
+    }
+    // Using Tracker mechanism, watch any changes to PricePosition collection on server side
+    var oldValue = 0;
+    var newValue = 0;
+
+    Tracker.autorun(function () {
+
+        // Attach an handler for a specific message
+        Streamy.on('hello', function (d) {
+            console.log("doing streamy stuff:", d.data); // Will print 'world!'
+            newValue = d.data;
+            if (newValue == 0) {
+
+                var firstRecord;
+                firstRecord = PricePosition.find().fetch()[0];
+                console.log("value zero: PreviousRunPosition:", firstRecord.PreviousRunPosition);
+                drawPoint(firstRecord.PreviousRunPosition, 'white');  //white out the previous auction price on the clocl.
+                drawPoint(0, 'red');  //set the red dot top of the clock at 0
+            }
+            else drawPoint(newValue, 'red');
+
+            if (oldValue != newValue) {
+                oldValue = newValue;
+                // report that we have a new value
+                // code here will run when we get an update
+                if (newValue != 0) {
+                    drawPoint(newValue + 1, 'white');
+                    // drawPoint(newValue,'red');
+                    console.log("NewValue:", newValue);
+                }
+
+            }
+
+        });
+
+
+    });
+
+})
     Template.registerHelper("localizedDateAndTime", function (timestamp) {
 
         // return moment(new Date(timestamp));
@@ -816,7 +826,7 @@ Template.report_user_purchase.helpers({
     });
 
 
- console.log(Router.current().route.getName());
+ //console.log(Router.current().route.getName());
 
 // show stack trace
     function logRenders() {

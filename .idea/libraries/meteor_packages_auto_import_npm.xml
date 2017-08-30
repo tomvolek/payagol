@@ -439,6 +439,10 @@
         <item url="file://$USER_HOME$/.meteor/packages/reywood_publish-composite/1.5.2/npm/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/aria-proptypes-test.js" />
         <item url="file://$USER_HOME$/.meteor/packages/reywood_publish-composite/1.5.2/npm/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/lang-test.js" />
         <item url="file://$USER_HOME$/.meteor/packages/reywood_publish-composite/1.5.2/npm/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/aria-role-test.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/lib/test.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/lib/index.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/src/test.coffee" />
+        <item url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/src/index.coffee" />
         <item url="file://$USER_HOME$/.meteor/packages/fortawesome_fontawesome/4.7.0/npm/node_modules/parse-json/vendor/parse.js" />
         <item url="file://$USER_HOME$/.meteor/packages/fortawesome_fontawesome/4.7.0/npm/node_modules/parse-json/vendor/unicode.js" />
         <item url="file://$USER_HOME$/.meteor/packages/fortawesome_fontawesome/4.7.0/npm/node_modules/randomatic/index.js" />
@@ -7285,6 +7289,10 @@
       <root url="file://$USER_HOME$/.meteor/packages/reywood_publish-composite/1.5.2/npm/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/aria-proptypes-test.js" />
       <root url="file://$USER_HOME$/.meteor/packages/reywood_publish-composite/1.5.2/npm/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/lang-test.js" />
       <root url="file://$USER_HOME$/.meteor/packages/reywood_publish-composite/1.5.2/npm/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/aria-role-test.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/lib/test.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/lib/index.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/src/test.coffee" />
+      <root url="file://$USER_HOME$/.meteor/packages/martino_iron-router-i18n/1.2.3/npm/node_modules/locale/src/index.coffee" />
       <root url="file://$USER_HOME$/.meteor/packages/fortawesome_fontawesome/4.7.0/npm/node_modules/parse-json/vendor/parse.js" />
       <root url="file://$USER_HOME$/.meteor/packages/fortawesome_fontawesome/4.7.0/npm/node_modules/parse-json/vendor/unicode.js" />
       <root url="file://$USER_HOME$/.meteor/packages/fortawesome_fontawesome/4.7.0/npm/node_modules/randomatic/index.js" />

@@ -2,9 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
+import { FlowerCatalog } from '/imports/api/models.js';
 
 
 if (Meteor.isServer) {
+
+
 
     Meteor.startup(() => {
 
@@ -35,8 +38,8 @@ if (Meteor.isServer) {
         });
 
         // Add user and Houston admin page collections to the list of collections to be shown by Admin page
-       // Houston.add_collection(Meteor.users);
-       // Houston.add_collection(Houston._admins);
+        Houston.add_collection(Meteor.users);
+        Houston.add_collection(Houston._admins);
 
         // disable updates by any user except Admin
         /* Meteor.users.deny({
@@ -182,6 +185,11 @@ if (Meteor.isServer) {
         Meteor.publish("purchased", function () {
             //this.unblock();
             return Purchased.find({});
+        }, {is_auto: true});
+
+
+        Meteor.publish("flower_catalog", function () {
+            return FlowerCatalog.find({});
         }, {is_auto: true});
 
         //publish users collection but only selected fields

@@ -1,1 +1,1 @@
-import '/imports/lib/routes.js';
+import '/lib/routes.js';

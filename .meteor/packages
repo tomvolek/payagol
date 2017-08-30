@@ -72,3 +72,6 @@ aldeed:tabular
 aldeed:autoform
 aldeed:simple-schema
 ian:accounts-ui-bootstrap-3
+houston:admin
+iron:middleware-stack
+martino:iron-router-i18n

@@ -8,4 +8,3 @@ export const Purchased = new Mongo.Collection('purchased');
 export const FlowerCatalog = new Meteor.Collection('flower_catalog');
 export const PricePosition = new Mongo.Collection('price_positions');
 
-                                                              
