@@ -69,6 +69,8 @@ button.buy_btn { background: red; text-align  : center; width: auto; padding-lef
 button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #form_set_item_on_auction {  text-align  : center; width: auto; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :550px; top:600px; font-size: 24px; }
 
+
+
 #Search_Item {  text-align  : center; width: auto; padding-left:10px; padding-right:10px;  z-index:1; font-size: 16px; }
 #Edit_Item { text-align  : center; width: auto; padding-left:10px; padding-right:10px;    z-index:1; font-size: 16px; }
 #Add_Item {  text-align  : center; width: auto; padding-left:10px; padding-right:10px;    z-index:1; font-size: 16px; }
@@ -83,7 +85,17 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #Payaneh_Auction {  position: absolute;   left : 250px; top:670px; z-index:1; font-size: 24px; color:blue;  }
 
 div#num_container_label  {   position: absolute; width:20px; height:40px; left :740px; top:500px; z-index:1; font-size: 16px; }
+#reactive-table-1 {width:800px;}
+#reactive-table-1 tr { line-height:30px; }
+.report_container {width:850px;}
 
+
+.AuctionDate {height: 30px;}
+.ProductName {height: 30px;}
+.Buyer_Number {height: 30px;}
+.NumberOfContainersBought {height: 30px;}
+.Current_auction_price {height: 20px;}
+.ProductImage {height:30px;}
 
 #unit {width: 30px;}
 #auction_price {width: 20em;  height: 2em; z-index:1;}

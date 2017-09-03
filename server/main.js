@@ -3,6 +3,7 @@ import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FlowerCatalog } from '/imports/api/models.js';
+import { OldAuctions } from '/imports/api/models.js';
 
 
 if (Meteor.isServer) {
@@ -76,7 +77,7 @@ if (Meteor.isServer) {
 
          if (!Meteor.users.findOne({"username": "tomtom"})) {
              var myusers = [
-                 {name: "essi", email: "essi@payaneh.com", roles: ['staff'],usernumber:100},
+                 {name: "essi", email: "essi@payaneh.com", roles: ['buyer'],usernumber:100},
                 // {name: "tomvolek1", email: "tomvolek@payaneh.com", roles: ['buyer']},
                 // {name: "tom", email: "tom@payaneh.com", roles: ['admin']},
                  {name: "tomtom", email: "tomtom@payaneh.com", roles: ['admin'],usernumber:101}
@@ -187,6 +188,10 @@ if (Meteor.isServer) {
             return Purchased.find({});
         }, {is_auto: true});
 
+        Meteor.publish("old_auctions", function () {
+            //this.unblock();
+            return OldAuctions.find({});
+        }, {is_auto: true});
 
         Meteor.publish("flower_catalog", function () {
             return FlowerCatalog.find({});
@@ -315,7 +320,7 @@ if (Meteor.isServer) {
                 }
 
                 //console.log("Server price position:", ClockCurrentPosition);
-            }, 80); //speed of red dot movement
+            }, 120); //speed of red dot movement
 
             // reset current position to zero
 
@@ -420,10 +425,21 @@ if (Meteor.isServer) {
                 return
             }
 
-            // test to see if the bidder has bid more than whats avaialble
+            // test to see if the bidder has bid more than whats available
             if (numberOfItemsToBuy >= found_item_on_auction.TotalContainers) {
                 found_item_on_auction.TotalContainers = 0;
                 FlowerBatchList.update({OnAuction: 1}, {$set: {OnAuction: 0}});
+               // add the sold out item to the auction history collection for further reporting
+                OldAuctions.insert ({found_item_on_auction});
+
+                // Move this block of code to a nightly job as it blocks the collection toll remove is done.
+                // Remove the sold out item from todays list of items to sell in collection
+                try {
+                    FlowerBatchList.remove ({"_id" :found_item_on_auction._id});
+                }
+                catch (e){
+                    console.log("not able to delete record with id: ",found_item_on_auction._id);
+                }
             }
             else {// subtract number numberOfItemsToBuy from Totalnumber of trolley
                 found_item_on_auction.TotalContainers = found_item_on_auction.TotalContainers - numberOfItemsToBuy;

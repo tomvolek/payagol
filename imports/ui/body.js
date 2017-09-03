@@ -96,7 +96,7 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
                     done: "انجام شده",
                     cancel: "لغو"
                     }
-                drawClock()  ; // redraw the numbers around the clock if language is changed
+               // drawClock()  ; // redraw the numbers around the clock if language is changed
             }
         }
     });
@@ -200,8 +200,8 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
 
     }); //Meteor.startup()
 
-    // draw the clock face 
-    Template.draw_circle.onRendered (function(){
+    // draw the clock face
+    Template.draw_clock.onRendered (function(){
 
     var canvas = document.getElementById('myCanvas');
     canvas.style.width = 600;
@@ -414,7 +414,7 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
 
 
     //Template to display reports of buying activity for all users
-    Template.report.helpers({
+    Template.Report.helpers({
         purchased: function () {
             return Purchased.find();
         },

@@ -7,4 +7,5 @@ export const Purchased = new Mongo.Collection('purchased');
 //CirclePoints = new Meteor.Collection('circle_points_collection');
 export const FlowerCatalog = new Meteor.Collection('flower_catalog');
 export const PricePosition = new Mongo.Collection('price_positions');
+export const OldAuctions = new Mongo.Collection('old_auctions');
 
