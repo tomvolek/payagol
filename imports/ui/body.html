@@ -8,21 +8,21 @@
 
    {{#if isInRole 'admin' 'default-group'}}
       {{> navigation}}
-      {{> flower_batch_lists}}
+
       {{> yield }}
    {{else}}   <!-- user is none-admin -->
        {{> navigation_buyer}}
-       {{> flower_batch_lists}}
        {{> yield }}
        <!--user is not in admin role, so do not display the form to set an item on auction -->
    {{/if}}
-
+  {{> footer}}
 </template>
 
 
 
 <template name="Main">
     <div class="container">
+    {{> flower_batch_lists}}
     <!-- draw the clock interface -->
     {{> clock}}
     {{> flower_auction_lists}}
@@ -36,10 +36,11 @@
         {{> form_set_item_on_auction }}
     {{/if}}
     </div>
+
 </template>
 
 <template name="footer">
-    <p><center>{{_ "Copyright  Payagol, 2017-2020"}}</center></p>
+    <p><center>{{_ "Copyright  Payagol, 2017"}}</center></p>
 </template>
 
 <template name="draw_clock">
@@ -270,10 +271,10 @@
 
 <template name ="form_set_item_on_auction">
     <div id="form_set_item_on_auction">
-    <h3>{{_ "Set Item for Auction "}}</h3>
+        {{_ "Product ID"}}
     
-    <form id="my_auction_price">
-        {{_ "Product ID"}}:<input type="text" name="on_auction"/>
+    <form id="my_auction_price" style="width: 30px;">
+        <input type="text" name="on_auction"/>
     <input type="submit" class="auction_price" value={{_ "Set Auction"}} />
     </form>
     
@@ -288,6 +289,8 @@
 
 <!-- report all purchases for a day -->
 <template name ="Report">
+    <br><br>
+
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -298,6 +301,8 @@
             </div>
         </div>
     </div>
+    {{yeild}}
+
 </template>
 
 <!--report all purchases for a day for the logged in user -->
@@ -329,14 +334,29 @@
 
 
 
-<template name="aboutPage">
-    <h1>About Payaneh </h1>
-         <p>
-         A service to provide real time auction of flowers to Payagol organization members.
-         Payagol contact information is
-         Phone : 0218803-2627
-         Address: Theran , Iran
+<template name="about">
+    <center><div id="About_Payagol">
+     <img src="/images/flower/payagol.jpg" height="100" width="100"/>
+
+         <p><b>
+             <h3><span>Who is Payagol  Market</span></h3>
+        <p><strong></strong></p>
+        <p>Payagol Market is a modern business where Iranian wholesalers and florists can find the widest and deepest assortment of cut flowers and cut greens. Payagol Market represents high quality, interesting offers, and an excellent, personalised service.</p>
+        <p>&nbsp;</p>
+        <h4 style="font-size: 16px; color: #ff5d00; margin-top: 15px;">Payagol Florist Market is:</h4>
+        <ul class="contentList">
+            <li>A reliable partner.</li>
+            <li>Largest assortment in Europe.</li>
+            <li>A hyper-modern, real-time purchasing system.</li>
+            <li>Personalised service.</li>
+            <li>Daily, deeply discounted offers.</li>
+        </ul>
+
+
+         </b>
          </p>
+    </div>
+    </center>
 </template>
 
 
@@ -379,8 +399,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{pathFor route='main'}}">{{_ "Home"}}</a></li>
                 <li><a href="{{pathFor route='login'}}">{{_ "Login"}}</a></li>
-                <li><a href="{{pathFor route='register'}}">{{_ "Register"}}</a></li>
-                <li><a href="{{pathFor route='auction_list'}}">{{_ "Auction List"}}</a></li>
+                <li><a href="{{pathFor route='report'}}">{{_ "Auction List"}}</a></li>
                 <li><a href="{{pathFor route='about'}}">{{_ "About"}}</a>  </li>
                 {{#if isInRole 'admin'}}
                     <!-- Reports  -->
@@ -416,7 +435,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{pathFor route='main'}}">{{_ "Home"}}</a></li>
                 <li><a href="{{pathFor route='login'}}">{{_ "Login"}}</a></li>
-                <li><a href="{{pathFor route='register'}}">{{_ "Register"}}</a></li>
                 <li><a href="{{pathFor route='auction_list'}}">{{_ "Auction List"}}</a></li>
                 <li><a href="{{pathFor route='about'}}">{{_ "About"}}</a>  </li>
                 {{#if isInRole 'admin'}}

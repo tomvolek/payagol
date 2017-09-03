@@ -83,13 +83,18 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #num_container_field  {   position: absolute; width:80px; height:40px; left :735px; top:560px; z-index:1; font-size: 24px; }
 #Payaneh_Date {  position: absolute;   left : 230px; top:640px; z-index:1; font-size: 24px; color:blue;  }
 #Payaneh_Auction {  position: absolute;   left : 250px; top:670px; z-index:1; font-size: 24px; color:blue;  }
+#About_Payagol { padding-left: 30px; background: whitesmoke; width:600px; height:600px;}
 
 div#num_container_label  {   position: absolute; width:20px; height:40px; left :740px; top:500px; z-index:1; font-size: 16px; }
 #reactive-table-1 {width:800px;}
 #reactive-table-1 tr { line-height:30px; }
 .report_container {width:850px;}
 
+ul li {
 
+    margin: 5px;
+
+}
 .AuctionDate {height: 30px;}
 .ProductName {height: 30px;}
 .Buyer_Number {height: 30px;}
