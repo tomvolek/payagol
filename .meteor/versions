@@ -45,7 +45,7 @@ check@1.2.5
 coffeescript@1.12.7_1
 coffeescript-compiler@1.12.7_1
 dburles:collection-helpers@1.1.0
-dburles:mongo-collection-instances@0.3.4
+dburles:mongo-collection-instances@0.3.5
 ddp@1.3.0
 ddp-client@2.0.0
 ddp-common@1.2.9
@@ -87,7 +87,7 @@ jparker:crypto-core@0.1.0
 jparker:crypto-md5@0.1.1
 jparker:gravatar@0.5.1
 jquery@1.11.10
-lai:collection-extensions@0.1.4
+lai:collection-extensions@0.2.1_1
 launch-screen@1.1.1
 less@2.7.9
 livedata@1.0.18

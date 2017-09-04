@@ -27,13 +27,20 @@
     {{> clock}}
     {{> flower_auction_lists}}
     {{> draw_clock}}
+
+
     {{#if isInRole 'buyer' 'default-group'}}
         <div name="buyer_report" >
             {{> form_buy_item}}
             {{> report_user_purchase}}
         </div>
         {{else}}
+
+    {{/if}}
+
+    {{#if isInRole 'admin' 'default-group'}}
         {{> form_set_item_on_auction }}
+        {{> barcode_scanner}}
     {{/if}}
     </div>
 
@@ -475,6 +482,9 @@
     <button class="btn btn-default btn-block" id="login-buttons-edit-profile">{{_ "Edit profile"}}</button>
 </template>
 
+<template name="barcode_scanner">
+    <button>Scan</button>
+</template>
 
 <template name="clock">
     <!-- place holder , it does nothing at the moment -->

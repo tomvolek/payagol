@@ -87,6 +87,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/rocketchat_streamer/0.5.0/web.browser/client/client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/tmeasday_paginated-subscription/0.2.4/web.browser/packages/tmeasday:paginated-subscription.js" />
         <item url="file://$USER_HOME$/.meteor/packages/rocketchat_streamer/0.5.0/web.browser/lib/ev.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/lai_collection-extensions/0.2.1_1/web.browser/collection-extensions.js" />
         <item url="file://$USER_HOME$/.meteor/packages/softwarerero_accounts-t9n/1.3.11/web.browser/packages/softwarerero_accounts-t9n/t9n.coffee.js" />
         <item url="file://$USER_HOME$/.meteor/packages/softwarerero_accounts-t9n/1.3.11/web.browser/packages/softwarerero_accounts-t9n/t9n/el.coffee.js" />
         <item url="file://$USER_HOME$/.meteor/packages/softwarerero_accounts-t9n/1.3.11/web.browser/packages/softwarerero_accounts-t9n/t9n/en.coffee.js" />
@@ -195,10 +196,9 @@
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-validation-new.js" />
         <item url="file://$USER_HOME$/.meteor/packages/useraccounts_iron-routing/1.14.2/web.browser/lib/client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/useraccounts_iron-routing/1.14.2/web.browser/lib/templates_helpers/at_input.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/dburles_mongo-collection-instances/0.3.4/web.browser/packages/dburles_mongo-collection-instances.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/dburles_mongo-collection-instances/0.3.5/web.browser/mongo-instances.js" />
         <item url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.13/web.browser/pre.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ian_accounts-ui-bootstrap-3/1.2.89/web.browser/login_buttons.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/lai_collection-extensions/0.1.4/web.browser/packages/lai_collection-extensions.js" />
         <item url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.13/web.browser/fastclick.js" />
         <item url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.13/web.browser/post.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema.js" />
@@ -720,6 +720,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/rocketchat_streamer/0.5.0/web.browser/client/client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/tmeasday_paginated-subscription/0.2.4/web.browser/packages/tmeasday:paginated-subscription.js" />
       <root url="file://$USER_HOME$/.meteor/packages/rocketchat_streamer/0.5.0/web.browser/lib/ev.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/lai_collection-extensions/0.2.1_1/web.browser/collection-extensions.js" />
       <root url="file://$USER_HOME$/.meteor/packages/softwarerero_accounts-t9n/1.3.11/web.browser/packages/softwarerero_accounts-t9n/t9n.coffee.js" />
       <root url="file://$USER_HOME$/.meteor/packages/softwarerero_accounts-t9n/1.3.11/web.browser/packages/softwarerero_accounts-t9n/t9n/el.coffee.js" />
       <root url="file://$USER_HOME$/.meteor/packages/softwarerero_accounts-t9n/1.3.11/web.browser/packages/softwarerero_accounts-t9n/t9n/en.coffee.js" />
@@ -828,10 +829,9 @@
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-validation-new.js" />
       <root url="file://$USER_HOME$/.meteor/packages/useraccounts_iron-routing/1.14.2/web.browser/lib/client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/useraccounts_iron-routing/1.14.2/web.browser/lib/templates_helpers/at_input.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/dburles_mongo-collection-instances/0.3.4/web.browser/packages/dburles_mongo-collection-instances.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/dburles_mongo-collection-instances/0.3.5/web.browser/mongo-instances.js" />
       <root url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.13/web.browser/pre.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ian_accounts-ui-bootstrap-3/1.2.89/web.browser/login_buttons.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/lai_collection-extensions/0.1.4/web.browser/packages/lai_collection-extensions.js" />
       <root url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.13/web.browser/fastclick.js" />
       <root url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.13/web.browser/post.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema.js" />

@@ -154,6 +154,29 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
         }
     });
 
+    // add support for cordova plugin to read in bar codes.
+if (Meteor.isCordova) {
+
+    Template.barcode_scanner.events({
+        'click button': function () {
+
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    alert("We got a barcode\n" +
+                        "Result: " + result.text + "\n" +
+                        "Format: " + result.format + "\n" +
+                        "Cancelled: " + result.cancelled);
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+            );
+
+        }
+
+    });
+
+}
 
     Meteor.startup(function () {
 
