@@ -3,15 +3,15 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n }   from 'meteor/tap:i18n';
 import { TAPi18nui} from 'meteor/tap:i18n-ui';
 import  { Moment }  from 'meteor/momentjs:moment';
+import { UploadServer } from 'meteor/tomi:upload-server';
+import { UploadJquery } from 'meteor/tomi:upload-jquery';
 //import { FlowRouter}  from 'meteor/kadira:flow-router';
 import { IronRouter } from  'meteor/iron:router' ;
 import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
-import { FlowerCatalog } from '/imports/api/models.js';
 import { FilesCollection } from 'meteor/ostrio:files';
-import { UploadServer } from 'meteor/tomi:upload-server';
-import { UploadJquery } from 'meteor/tomi:upload-jquery';
+import { FlowersCatalog } from '/imports/api/models.js';
 import { Accounts } from 'meteor/accounts-base';
 
 
@@ -136,7 +136,7 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
         }
     });
 
-    Meteor.subscribe("flower_catalog", {
+    Meteor.subscribe("flowers_catalog", {
        onReady: function () {
            console.log("onReady flower_catalog actually Arrive", arguments);
           },
@@ -456,7 +456,7 @@ if (Meteor.isCordova) {
                     {key: 'Buyer_Number', label: i18n('Buyer_Number')},
                     {key: 'NumberOfContainersBought', label: i18n('Items_Bought')},
                     {key: 'Current_Auction_Price', label: i18n('Price_Bought')},
-                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img class="img-thumbnail" width="60" height="60" src="/images/flower/'+ ProductImage +'" /></div>'); } }
+                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img  class="img-thumbnail"  width="60" height="60" src="/images/flower/'+ ProductImage +'" /></div>'); } }
 
                 ],
                 useFontAwesome: true,
@@ -467,35 +467,65 @@ if (Meteor.isCordova) {
 
 
 //Template to display reports of buying activity for buyer
-Template.report_user_purchase.helpers({
-    purchased: function () {
-        return Purchased.find({username: Meteor.userId()});
-    },
-    tableSettings: function () {
-        return {
-            rowsPerPage: 10,
-            showFilter: true,
-            showNavigation: 'auto',
-            showColumnToggles: true,
-            showRowCount: true,
-            showNavigationRowsPerPage: true,
-            multiColumnSort: true,
-            fields: [
-                {key: 'AuctionDate', label: i18n('AuctionDate')},
-                {key: 'ProductName', label: i18n('Product_Name'), headerClass: 'col-md-4'},
-                {key: 'Buyer_Number', label: i18n('Buyer_Number')},
-                {key: 'NumberOfContainersBought', label: i18n('Items_Bought')},
-                {key: 'Current_Auction_Price', label: i18n('Price_Bought')},
-                {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<img class="img-thumbnail" width="60" height="60" src="/images/flower/'+ ProductImage +'" />'); } }
+    Template.report_user_purchase.helpers({
+        purchased: function () {
+            return Purchased.find({username: Meteor.userId()});
+        },
+        tableSettings: function () {
+            return {
+                rowsPerPage: 10,
+                showFilter: true,
+                showNavigation: 'auto',
+                showColumnToggles: true,
+                showRowCount: true,
+                showNavigationRowsPerPage: true,
+                multiColumnSort: true,
+                fields: [
+                    {key: 'AuctionDate', label: i18n('AuctionDate')},
+                    {key: 'ProductName', label: i18n('Product_Name'), headerClass: 'col-md-4'},
+                    {key: 'Buyer_Number', label: i18n('Buyer_Number')},
+                    {key: 'NumberOfContainersBought', label: i18n('Items_Bought')},
+                    {key: 'Current_Auction_Price', label: i18n('Price_Bought')},
+                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<img class="hvr-grow" class="img-thumbnail" width="60" height="60" src="/images/flower/'+ ProductImage +'" />'); } }
 
-            ],
-            useFontAwesome: true,
-            group: 'purchase'
-        };
+                ],
+                useFontAwesome: true,
+                group: 'purchase'
+            };
 
-    }
-});
+        }
+    });
 
+
+    //Template to display reports of buying activity for all users
+    Template.Flowers_Catalog.helpers({
+        flowerscatalog : function () {
+            return FlowersCatalog.find();
+        },
+        tableSettings: function () {
+            return {
+                rowsPerPage: 10,
+                showFilter: true,
+                showNavigation: 'auto',
+                showColumnToggles: true,
+                showRowCount: true,
+                showNavigationRowsPerPage: true,
+                multiColumnSort: true,
+                fields: [
+                    {key: 'ProductId', label: i18n('Producer_ID')},
+                    {key: 'ProductType', label: i18n('Product_Type'), headerClass: 'col-md-4'},
+                    {key: 'ProductName', label: i18n('Product_Name')},
+                    {key: 'Country', label: i18n('Country')},
+                    {key: 'Region', label: i18n('Region')},
+                    {key: 'Seasonality', label: i18n('Season')},
+                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img class="hvr-grow" class="img-thumbnail" width="60" height="60" src="/images/flower/'+ ProductImage +'" /></div>'); } }
+
+                ],
+                useFontAwesome: true,
+                group: 'flowerscatalog'
+            };
+        }
+    });
 
     Template.form_edit_user.created = function () {
         // Search_Product_Id starts at 222

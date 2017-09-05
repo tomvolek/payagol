@@ -42,11 +42,13 @@
         {{> form_set_item_on_auction }}
         {{> barcode_scanner}}
     {{/if}}
+
     </div>
 
 </template>
 
 <template name="footer">
+    <br><br>
     <p><center>{{_ "Copyright  Payagol, 2017"}}</center></p>
 </template>
 
@@ -213,19 +215,19 @@
              <td>{{_ "Storage"}} <br><input type="text" name="storage" value="{{this.storage}}"/></td>
              <td>s1 <br><input type="text" name="s1" value="{{this.s1}}"/></td>
              <td>s2  <br><input type="text" name="s2" value="{{this.s2}}" /></td>
-             <td>s3  <br><input type="text" name="s3" value="{{this.s3}}" /></td>
-            <td>s4  <br><input type="text" name="s4" value="{{this.s4}}"/> </td>
-       </tr>
-            <tr>
              <td>fuet<br><input type="text" name="fuet" value="{{this.fuet}}"/></td>
              <td>{{_ "Product Grade"}}<br><input type="text" name="Product_grade" value="{{this.Product_grade}}"/></td>
+
+       </tr>
+            <tr>
              <td>{{_ "Monetary Unit"}} <br><input type="text" name="MoneteraryUnit" value="{{this.MoneteraryUnit}}" /></td>
              <td>{{_ "Country"}} <br><input type="text" name="Country" value="{{this.Country}}"/></td>
              <td>{{_ "Creator Id"}}<br><input type="text" name="CreatorId" value="{{this.CreatorId}}"/></td>
+             <td div class="date_field">{{_ "Created At"}}<br><input type="text" id="created-datepicker"   name="createdAt" value="{{this.createdAt}}"/> </td>
+             <td >{{_ "Auction Date"}}<br><input type="text" id="auctiondate-datepicker"  name="AuctionDate" value="{{this.AuctionDate}}" /></td>
             </tr>
           <tr>
-              <td div class="date_field">{{_ "Created At"}}<br><input type="text" id="created-datepicker"   name="createdAt" value="{{this.createdAt}}"/> </td>
-              <td >{{_ "Auction Date"}}<br><input type="text" id="auctiondate-datepicker"  name="AuctionDate" value="{{this.AuctionDate}}" /></td>
+
 
           </tr>
        {{/each}}
@@ -277,10 +279,11 @@
 
 
 <template name ="form_set_item_on_auction">
-    <div id="form_set_item_on_auction">
-        {{_ "Product ID"}}
+    <div id="on_auction_container">
+    <div id="formset_item_on_auction">
+        <b> {{_ "Product ID"}} </b>
     
-    <form id="my_auction_price" style="width: 30px;">
+    <form id="my_auction_price" >
         <input type="text" name="on_auction"/>
     <input type="submit" class="auction_price" value={{_ "Set Auction"}} />
     </form>
@@ -290,6 +293,7 @@
     <button class="btn btn-danger"  type="submit" value="1" name="+1"> +1 </button>
     <button class="btn btn-danger"  type="submit" value="5" name="+1"> +5 </button>
     </div>
+    </div>
 </template>
 
 
@@ -297,11 +301,10 @@
 <!-- report all purchases for a day -->
 <template name ="Report">
     <br><br>
-
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">{{_ "Purchased Report"}}</h3>
+                <h3 class="panel-title">{{_ "Purchased Items"}}</h3>
             </div>
             <div class="panel-body">
                 {{> reactiveTable collection=purchased class="table table-bordered table-hover" settings=tableSettings}}
@@ -314,10 +317,11 @@
 
 <!--report all purchases for a day for the logged in user -->
 <template name ="report_user_purchase">
+    <br><br>
     <div class="report_container">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">{{_ "Purchased Report"}}</h3>
+                <h3 class="panel-title">{{_ "Purchased Items"}}</h3>
             </div>
             <div class="panel-body">
                 {{> reactiveTable collection=purchased class="table table-bordered table-hover" settings=tableSettings}}
@@ -325,6 +329,25 @@
         </div>
     </div>
 </template>
+
+
+<!--report all purchases for a day for the logged in user -->
+<template name ="Flowers_Catalog">
+    <br><br>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{_ "Flowers Catalog"}}</h3>
+            </div>
+            <div class="panel-body">
+                {{> reactiveTable collection=flowerscatalog class="table table-bordered table-hover" settings=tableSettings}}
+            </div>
+        </div>
+    </div>
+    {{yeild}}
+</template>
+
+
 
 <template name="Register">
     <h2>Register</h2>
@@ -405,13 +428,13 @@
             <div id="welcome">{{_ "welcome"}}</div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{pathFor route='main'}}">{{_ "Home"}}</a></li>
-                <li><a href="{{pathFor route='login'}}">{{_ "Login"}}</a></li>
-                <li><a href="{{pathFor route='report'}}">{{_ "Auction List"}}</a></li>
-                <li><a href="{{pathFor route='about'}}">{{_ "About"}}</a>  </li>
-                {{#if isInRole 'admin'}}
+
+                {{#if isInRole 'admin' 'default-group'}}
                     <!-- Reports  -->
                     <li> <a href="{{pathFor route='report'}}">{{_ "Report"}}</a></li>
+                    <li><a href="{{pathFor route='flowers_catalog'}}">{{_ "Flowers Catalog"}}</a></li>
                     <li> <a href="{{pathFor route='form_enter_product'}}">{{_ "Edit/Search Items"}}</a></li>
+                    <li><a href="{{pathFor route='about'}}">{{_ "About"}}</a>  </li>
                  <!--   <li> <a href="{{pathFor route='form_edit_user'}}">{{_ "Edit Users"}}</a></li> -->
 
                 {{/if}}
@@ -425,7 +448,7 @@
 </template>
 
 
-<template name="navigation_buyer">
+<template name="navigation_buyer" >
     <nav class="navbar navbar-custom navbar-static-top" style="margin-bottom: 0px; font-size: 12px; height: 40px;">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -441,8 +464,7 @@
             <div id="welcome">{{_ "welcome"}}</div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{pathFor route='main'}}">{{_ "Home"}}</a></li>
-                <li><a href="{{pathFor route='login'}}">{{_ "Login"}}</a></li>
-                <li><a href="{{pathFor route='auction_list'}}">{{_ "Auction List"}}</a></li>
+                <li><a href="{{pathFor route='flowers_catalog'}}">{{_ "Flowers Catalog"}}</a></li>
                 <li><a href="{{pathFor route='about'}}">{{_ "About"}}</a>  </li>
                 {{#if isInRole 'admin'}}
                     <!-- Reports  -->

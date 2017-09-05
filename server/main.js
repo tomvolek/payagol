@@ -2,7 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
-import { FlowerCatalog } from '/imports/api/models.js';
+import { FlowersCatalog } from '/imports/api/models.js';
+
 import { OldAuctions } from '/imports/api/models.js';
 
 
@@ -42,6 +43,7 @@ if (Meteor.isServer) {
         Houston.add_collection(Meteor.users);
         Houston.add_collection(Houston._admins);
 
+
         // disable updates by any user except Admin
         /* Meteor.users.deny({
          update: function() {
@@ -77,10 +79,11 @@ if (Meteor.isServer) {
 
          if (!Meteor.users.findOne({"username": "tomtom"})) {
              var myusers = [
-                 {name: "essi", email: "essi@payaneh.com", roles: ['buyer'],usernumber:100},
-                // {name: "tomvolek1", email: "tomvolek@payaneh.com", roles: ['buyer']},
-                // {name: "tom", email: "tom@payaneh.com", roles: ['admin']},
-                 {name: "tomtom", email: "tomtom@payaneh.com", roles: ['admin'],usernumber:101}
+                // {name: "essi", email: "essi@payagol.com", roles: ['buyer'],usernumber:100},
+                // {name: "tomvolek1", email: "tomvolek@payagol.com", roles: ['buyer']},
+                // {name: "tom", email: "tom@payagol.com", roles: ['admin']},
+                 {name: "tomtom", email: "tomtom@payagol.com", roles: ['admin'],usernumber:101},
+                 {name: "feri", email: "feri@payagol.com", roles: ['admin'],usernumber:102}
              ];
 
              _.each(myusers, function (myuser) {
@@ -99,15 +102,20 @@ if (Meteor.isServer) {
 
                  if (myuser.roles.length > 0) {
                      Roles.addUsersToRoles(id, myuser.roles, 'default-group')
+                 }
 
+                 if (myuser.name === "feri"){
+                     console.log("adding roles.......");
+                     Roles.addUsersToRoles(id, 'admin', Roles.GLOBAL_GROUP)
                  }
 
                  // Meteor.users.update(foundUser._id ,{ $set: {'emails.0.address': myuser.email }} );
                  console.log("users in system", foundUser);
                  //console.log(JSON.stringify(foundUser));
-                 if (foundUser) {
-                     Roles.addUsersToRoles(foundUser._id, myuser.roles);
-                 }
+                // if (foundUser) {
+                //     Roles.addUsersToRoles(foundUser._id, myuser.roles);
+                // }
+
 
              });
          }
@@ -193,8 +201,8 @@ if (Meteor.isServer) {
             return OldAuctions.find({});
         }, {is_auto: true});
 
-        Meteor.publish("flower_catalog", function () {
-            return FlowerCatalog.find({});
+        Meteor.publish("flowers_catalog", function () {
+            return FlowersCatalog.find({});
         }, {is_auto: true});
 
         //publish users collection but only selected fields
@@ -203,8 +211,6 @@ if (Meteor.isServer) {
             //return Meteor.users.find({}, {fields: {username: 1}});
             return Meteor.users.find({});
             //return UsersList.find({});
-
-
         }, {is_auto: true});
 
         // publish collection for online users
@@ -221,6 +227,7 @@ if (Meteor.isServer) {
                 fields: {
                     "profile": 1,
                     "emailHash": 1,
+                    "roles":1,
                     "services.twitter.profile_image_url_https": 1,
                     "services.twitter.profile_image_url": 1,
                     "services.facebook.id": 1,

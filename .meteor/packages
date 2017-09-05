@@ -30,7 +30,6 @@ email@1.2.3
 facts@1.0.9
 fortawesome:fontawesome
 gadicohen:messageformat
-iron:router
 logging@1.1.17
 mizzao:timesync
 mizzao:user-status
@@ -62,7 +61,6 @@ ostrio:files
 alanning:roles
 rocketchat:streamer
 useraccounts:iron-routing
-yogiben:admin
 dburles:collection-helpers
 twbs:bootstrap
 accounts-base
@@ -72,6 +70,8 @@ aldeed:tabular
 aldeed:autoform
 aldeed:simple-schema
 ian:accounts-ui-bootstrap-3
-houston:admin
 iron:middleware-stack
-martino:iron-router-i18n
+iron:router
+mizzao:bootboxjs
+houston:admin
+danappelxx:hover.css

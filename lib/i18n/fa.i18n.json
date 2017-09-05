@@ -22,7 +22,7 @@
  "Product ID":"کد محصول",
  "Set Auction":"حراج",
  "Search/Add products":"جستجو / اضافه کردن محصولات",
- "Purchased Report": "گزارش خرید",
+ "Purchased Items": "اقلام خریداری شده",
  "Search":"جستجو",
  "Edit":"ویرایش",
  "Add":"اضافه کن",
@@ -30,6 +30,7 @@
 "Producer ID":"کد سازنده",
 "Product Name":"نام محصول",
 "Product Image":"تصویر محصول",
+ "Product Type": "نوع محصول",
 "NumberOfItems":"تعداد آیتم ها",
 "Buyer_Number":"کد خریدار",
 "Items_Bought":"خریداری شده",
@@ -68,5 +69,7 @@
 "Storage": "انبار",
 "About": "درباره",
  "User": "کاربر",
- "Copyright  Payagol, 2017" : "کپی رایت پایاگل ۲۰١۷"
+ "Copyright  Payagol, 2017" : "کپی رایت پایاگل ۲۰١۷",
+ "Flowers Catalog": "کاتالوگ گل",
+ "Region": "منطقه"
 }
