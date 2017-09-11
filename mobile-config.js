@@ -5,17 +5,13 @@ App.info({
   description: 'Flower auction',
   author: 'SRAjayebi',
   email: 'tomvolek@yahoo.com',
-  website: 'http://payagol.com'
+  website: 'http://payaol.meteorapp.com'
 });
 // Set up resources such as icons and launch screens.
 App.icons({
-  'iphone': 'icons/icon-60.png',
-  'iphone_2x': 'icons/icon-60@2x.png',
-  // More screen sizes and platforms...
-});
-App.launchScreens({
-  'iphone': 'splash/Default~iphone.png',
-  'iphone_2x': 'splash/Default@2x~iphone.png',
+  'iphone': 'public/icons/ios/AppIcon.appiconset/Icon-App-60x60@1x.png',
+  'iphone_2x': 'public/icons/ios/AppIcon.appiconset/Icon-App-60x60@2x.png',
+  'iphone_3x': 'public/icons/ios/AppIcon.appiconset/Icon-App-60x60@3x.png',
   // More screen sizes and platforms...
 });
 // Set PhoneGap/Cordova preferences.

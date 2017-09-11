@@ -1,5 +1,5 @@
 {
- "welcome": " خوش آمدید",
+ "Welcome:": " خوش آمدید",
  "Next Three Items for Auction":"سه گل بعدی برای فروش",
  "Buy": "خرید",
  "Producer":"تولید کننده",
@@ -71,5 +71,8 @@
  "User": "کاربر",
  "Copyright  Payagol, 2017" : "کپی رایت پایاگل ۲۰١۷",
  "Flowers Catalog": "کاتالوگ گل",
- "Region": "منطقه"
+ "Region": "منطقه",
+ "Barcode": "بارکد",
+ "Color": "رنگ",
+ "Form_Number": "شماره فرم"
 }

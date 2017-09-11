@@ -8,7 +8,6 @@
 
    {{#if isInRole 'admin' 'default-group'}}
       {{> navigation}}
-
       {{> yield }}
    {{else}}   <!-- user is none-admin -->
        {{> navigation_buyer}}
@@ -24,18 +23,14 @@
     <div class="container">
     {{> flower_batch_lists}}
     <!-- draw the clock interface -->
-    {{> clock}}
+
     {{> flower_auction_lists}}
     {{> draw_clock}}
 
-
     {{#if isInRole 'buyer' 'default-group'}}
-        <div name="buyer_report" >
             {{> form_buy_item}}
             {{> report_user_purchase}}
-        </div>
         {{else}}
-
     {{/if}}
 
     {{#if isInRole 'admin' 'default-group'}}
@@ -44,6 +39,7 @@
     {{/if}}
 
     </div>
+
 
 </template>
 
@@ -84,10 +80,10 @@
 
 
 <template name="form_buy_item">
-    <div class="container">
+
+    <div id="buyitem_container">
     <form id="buyitem">
-        <div><input class="col-xs-3" type="text" id="num_container_field" name="buyitem"/></div>
-        
+        <input  type="text" id="num_container_field" name="buyitem"/>
         <input class="btn btn-danger"  type="submit" id="buy_item" value={{_ "Buy"}} />  
     </form>
     </div>
@@ -124,7 +120,7 @@
           <div id="ProductImage_Value"> <img src="/images/flower/{{this.ProductImage}}" height="160" width="160"/> </div>
          <div id="Logo_Value"> <img src="/images/logo/{{this.Logo}}" height="50" width="50"/> </div>
 
-
+         <div id="producer_container">
           <div id="producer_table">
            <table width= "360" border="2" >
                 <thead id="head1">
@@ -149,18 +145,21 @@
                     <tr>
                       <th >{{_ "Product"}}</th>
                       <th>{{_ "ID"}}</th>
+                      <th>{{_ "Storage"}}</th>
                       <th>{{_ "Grade"}}</th>
                       </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td width="60%">{{this.ProductName}}</td>
+                    <td width="30%">{{this.ProductName}}</td>
                     <td width="15%">{{this.Product_id}}</td>
-                    <td width="15%">{{this.Product_grade}}</td>
+                    <td width="20%">{{this.Storage}}</td>
+                    <td width="5%">{{this.Product_grade}}</td>
                   </tr>
                 </tbody>
-           </table> </div>
-      
+           </table>
+          </div>
+         </div>
      {{/each}}
 
     <div id="Payaneh_Date"> <strong> {{ localizedDateAndTime  }} </strong>  </div>
@@ -172,10 +171,9 @@
 
 <template name="flower_batch_lists">
         <table class="flower_batch_table" border="4" rows="3">
-            <tr><th>{{_ "Producer"}}</th><th>{{_ "Logo"}}</th><th>{{_ "Product"}}</th><th>{{_ "ID"}}</th><th>{{_ "Total Containers"}}</th><th>{{_ "Flower/Container"}}</th><th>{{_ "Quality"}}</th><th>{{_ "Storage"}}</th><th>S2</th><th>S3</th></tr>
+            <tr><th>{{_ "Product"}}</th><th>{{_ "ID"}}</th><th>{{_ "Total Containers"}}</th><th></th><th>{{_ "Flower/Container"}}</th><th>{{_ "Quality"}}</th><th>{{_ "Storage"}}</th><th>{{_ "Color"}}</th><th>{{_ "Producer"}}</th><th>{{_ "Logo"}}</th><th>{{_ "Form_Number" }}</th></tr>
         {{#each OneBatch}}
-
-        <tr><td><div class="Producer_name"> {{this.Producer_name}} </div></td><td><img src="/images/logo/{{this.Logo}}"></td><td> {{this.ProductName}}</td><td>{{this.Product_id}}</td><td>{{this.TotalContainers}}</td><td>{{this.FlowerPerContainer}}</td><td>{{this.Quality}}</td><td>{{this.Storage}}</td><td></td><td></td></tr>
+        <tr><td> {{this.ProductName}}</td><td>{{this.Product_id}}</td><td>{{this.TotalContainers}}</td><td> X </td><td>{{this.FlowerPerContainer}}</td><td>{{this.Quality}}</td><td>{{this.Storage}}</td><td>{{this.color}}</td><td><div class="Producer_name"> {{this.Producer_name}} </div></td><td><img src="/images/logo/{{this.Logo}}"></td><td>{{this.formnumber}}</td></tr>
         {{/each}}
         </table>
 </template>
@@ -214,8 +212,8 @@
          <tr>
              <td>{{_ "Storage"}} <br><input type="text" name="storage" value="{{this.storage}}"/></td>
              <td>s1 <br><input type="text" name="s1" value="{{this.s1}}"/></td>
-             <td>s2  <br><input type="text" name="s2" value="{{this.s2}}" /></td>
-             <td>fuet<br><input type="text" name="fuet" value="{{this.fuet}}"/></td>
+             <td>{{_ "Color"}}  <br><input type="text" name="color" value="{{this.color}}" /></td>
+             <td>{{_ "Form_Number" }}<br><input type="text" name="formnumber" value="{{this.formnumber}}"/></td>
              <td>{{_ "Product Grade"}}<br><input type="text" name="Product_grade" value="{{this.Product_grade}}"/></td>
 
        </tr>
@@ -233,7 +231,8 @@
        {{/each}}
 
         </table>
-        <p>{{_ "Upload product image" }}</p>
+      <!--  <p>{{_ "Upload product image" }}</p> -->
+
         {{> upload_bootstrap }}
         {{> dropzone contentType='images' fileTypes='.jpg' multiple=true formData=specificFormData }}
 
@@ -344,6 +343,12 @@
             </div>
         </div>
     </div>
+
+    <br><br>
+   
+
+    <script type="text/javascript" id="WolframAlphaScriptefe258f69ee4e0cef08af165af0ce54a" src="//www.wolframalpha.com/widget/widget.jsp?id=efe258f69ee4e0cef08af165af0ce54a"></script>
+
     {{yeild}}
 </template>
 
@@ -382,7 +387,6 @@
             <li>Daily, deeply discounted offers.</li>
         </ul>
 
-
          </b>
          </p>
     </div>
@@ -401,13 +405,8 @@
     <div id='next3batches'> <label>{{_ "Next Three Items for Auction"}} </label></div>
     {{> flower_batch_lists}}
 
-    <canvas id="myCanvas" width="600" height="630"></canvas>
-
     <!-- draw the clock interface -->
-    {{> clock}}
-
     {{> flower_auction_lists}}
-
     {{> form_buy_item}}
 
 </template>
@@ -422,10 +421,10 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <div id="loginButtons"> {{> loginButtons}} </div>
         </div>
         <div class="collapse navbar-collapse" >
-            <div id="welcome">{{_ "welcome"}}</div>
+            <div id="welcome">{{_ "Welcome:"}}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+            <div id="loginButtons"><b> {{> loginButtons}} </b></div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{pathFor route='main'}}">{{_ "Home"}}</a></li>
 
@@ -457,11 +456,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <div id="loginButtons"> {{> loginButtons}} </div>
         </div>
         <div class="collapse navbar-collapse" >
-            <div id="welcome">{{_ "welcome"}}</div>
+            <div id="welcome">{{_ "Welcome:"}}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+            <div id="loginButtons"> <b>{{> loginButtons}} </b></div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{pathFor route='main'}}">{{_ "Home"}}</a></li>
                 <li><a href="{{pathFor route='flowers_catalog'}}">{{_ "Flowers Catalog"}}</a></li>
@@ -506,6 +504,7 @@
 
 <template name="barcode_scanner">
     <button>Scan</button>
+    {{> xvendo_barcoder id="idme" ean="1234567890123"}}
 </template>
 
 <template name="clock">

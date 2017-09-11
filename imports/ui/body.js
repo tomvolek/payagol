@@ -221,6 +221,7 @@ if (Meteor.isCordova) {
        // i18n.setDefaultLanguage(TAPi18n.getLanguage());
 
 
+
     }); //Meteor.startup()
 
     // draw the clock face
@@ -237,7 +238,7 @@ if (Meteor.isCordova) {
     var radius = 8;  //RADIUS OF THE DOTS
     var p;
 
-    //diamater of the clock
+    //diameter  of the clock
     ctx.scale(0.7, 0.7);
     ctx.strokeStyle = "rgb(0,0,0)";
     ctx.lineWidth = 7;
@@ -322,7 +323,6 @@ if (Meteor.isCordova) {
     ctx.closePath();
 
     function drawPoint(p, color) {
-
         var circle = new Path2D();
         circle.moveTo(pointArray[p].x, pointArray[p].y);
         circle.arc(pointArray[p].x, pointArray[p].y, radius, 0, 2 * Math.PI, false);
@@ -346,9 +346,9 @@ if (Meteor.isCordova) {
                 y: cy - rad * Math.cos(angle)
             });
         }
-
         return points;
     }
+
     // Using Tracker mechanism, watch any changes to PricePosition collection on server side
     var oldValue = 0;
     var newValue = 0;
@@ -360,12 +360,14 @@ if (Meteor.isCordova) {
             console.log("doing streamy stuff:", d.data); // Will print 'world!'
             newValue = d.data;
             if (newValue == 0) {
-
                 var firstRecord;
                 firstRecord = PricePosition.find().fetch()[0];
                 console.log("value zero: PreviousRunPosition:", firstRecord.PreviousRunPosition);
-                drawPoint(firstRecord.PreviousRunPosition, 'white');  //white out the previous auction price on the clocl.
+                drawPoint(firstRecord.PreviousRunPosition, 'white');  //white out the previous auction price on the clock.
                 drawPoint(0, 'red');  //set the red dot top of the clock at 0
+
+                console.log("Blue the target point ..............",parseInt(String(firstRecord.TargetPrice).split('.').pop(), 10));
+                drawPoint(parseInt(String(firstRecord.TargetPrice).split('.').pop(), 10), 'blue');
             }
             else drawPoint(newValue, 'red');
 
@@ -378,15 +380,11 @@ if (Meteor.isCordova) {
                     // drawPoint(newValue,'red');
                     console.log("NewValue:", newValue);
                 }
-
             }
-
         });
-
-
     });
-
 })
+
     Template.registerHelper("localizedDateAndTime", function (timestamp) {
 
         // return moment(new Date(timestamp));
@@ -456,7 +454,7 @@ if (Meteor.isCordova) {
                     {key: 'Buyer_Number', label: i18n('Buyer_Number')},
                     {key: 'NumberOfContainersBought', label: i18n('Items_Bought')},
                     {key: 'Current_Auction_Price', label: i18n('Price_Bought')},
-                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img  class="img-thumbnail"  width="60" height="60" src="/images/flower/'+ ProductImage +'" /></div>'); } }
+                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img  class="hvr-grow"  width="20" height="20" src="/images/flower/'+ ProductImage +'" /></div>'); } }
 
                 ],
                 useFontAwesome: true,
@@ -480,15 +478,16 @@ if (Meteor.isCordova) {
                 showRowCount: true,
                 showNavigationRowsPerPage: true,
                 multiColumnSort: true,
-                fields: [
+                rowClass: 'line-height:10px',
+                    fields: [
                     {key: 'AuctionDate', label: i18n('AuctionDate')},
                     {key: 'ProductName', label: i18n('Product_Name'), headerClass: 'col-md-4'},
                     {key: 'Buyer_Number', label: i18n('Buyer_Number')},
                     {key: 'NumberOfContainersBought', label: i18n('Items_Bought')},
                     {key: 'Current_Auction_Price', label: i18n('Price_Bought')},
-                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<img class="hvr-grow" class="img-thumbnail" width="60" height="60" src="/images/flower/'+ ProductImage +'" />'); } }
+                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<img class="hvr-grow" class="img-thumbnail" width="20" height="20" src="/images/flower/'+ ProductImage +'" />'); } }
 
-                ],
+                    ],
                 useFontAwesome: true,
                 group: 'purchase'
             };
@@ -518,7 +517,8 @@ if (Meteor.isCordova) {
                     {key: 'Country', label: i18n('Country')},
                     {key: 'Region', label: i18n('Region')},
                     {key: 'Seasonality', label: i18n('Season')},
-                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img class="hvr-grow" class="img-thumbnail" width="60" height="60" src="/images/flower/'+ ProductImage +'" /></div>'); } }
+                    {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img class="hvr-grow" class="img-thumbnail" width="30" height="30" src="/images/flower/'+ ProductImage +'" /></div>'); } },
+                    {key: 'Barcode', label:  i18n('Barcode') , fn: function(Barcode){ return new Spacebars.SafeString('<div>' + Barcode + '</div>'); }}
 
                 ],
                 useFontAwesome: true,
@@ -527,10 +527,10 @@ if (Meteor.isCordova) {
         }
     });
 
+
     Template.form_edit_user.created = function () {
         // Search_Product_Id starts at 222
         this.Search_User_Id = new ReactiveVar("000");
-
     };
 
      //attach datepicker to date fields in the forms
@@ -585,10 +585,10 @@ if (Meteor.isCordova) {
             var eenh = template.find("input[name=eenh]").value;
             var aps = template.find("input[name=aps]").value;
             var s1 = template.find("input[name=s1]").value;
-            var s2 = template.find("input[name=s2]").value;
+            var color = template.find("input[name=color]").value;
             var s3 = template.find("input[name=s3]").value;
             var s4 = template.find("input[name=s4]").value;
-            var fuet = template.find("input[name=fuet]").value;
+            var formnumber = template.find("input[name=formnumber]").value;
             var MoneteraryUnit = template.find("input[name=MoneteraryUnit]").value;
             var Country = template.find("input[name=Country]").value;
             var Product_grade = template.find("input[name=Product_grade]").value;
@@ -617,10 +617,10 @@ if (Meteor.isCordova) {
                 eenh: eenh,
                 aps: aps,
                 s1: s1,
-                s2: s2,
+                color: color,
                 s3: s3,
                 s4: s4,
-                fuet: fuet,
+                formnumber: formnumber,
                 MoneteraryUnit: MoneteraryUnit,
                 Country: Country,
                 Product_grade: Product_grade,
@@ -657,10 +657,10 @@ if (Meteor.isCordova) {
             var eenh = template.find("input[name=eenh]").value;
             var aps = template.find("input[name=aps]").value;
             var s1 = template.find("input[name=s1]").value;
-            var s2 = template.find("input[name=s2]").value;
+            var color = template.find("input[name=color]").value;
             var s3 = template.find("input[name=s3]").value;
             var s4 = template.find("input[name=s4]").value;
-            var fuet = template.find("input[name=fuet]").value;
+            var formnumber = template.find("input[name=formnumber]").value;
             var MoneteraryUnit = template.find("input[name=MoneteraryUnit]").value;
             var Country = template.find("input[name=Country]").value;
             var Product_grade = template.find("input[name=Product_grade]").value;
@@ -689,10 +689,10 @@ if (Meteor.isCordova) {
                 eenh: eenh,
                 aps: aps,
                 s1: s1,
-                s2: s2,
+                color: color,
                 s3: s3,
                 s4: s4,
-                fuet: fuet,
+                formnumber: formnumber,
                 MoneteraryUnit: MoneteraryUnit,
                 Country: Country,
                 Product_grade: Product_grade,
@@ -768,6 +768,7 @@ if (Meteor.isCordova) {
             event.preventDefault();
             var id_on_auction = event.target.on_auction.value;
             console.log("id on auction=", id_on_auction);
+            // set the dot on clock pertaining to the auction price to blue
 
             //white out the red dot on the clock from last run
             //resetLastAuctionRun();
@@ -879,7 +880,6 @@ if (Meteor.isCordova) {
     });
 
 
- //console.log(Router.current().route.getName());
 
 // show stack trace
     function logRenders() {
@@ -1076,8 +1076,6 @@ Template._loginButtonsAdditionalLoggedInDropdownActions.events({
             ctx.fillText(i18n('eighty'), 35, 355);
             ctx.fillText(i18n('ninety'), 175, 151);
 
-
-
         } else if (TAPi18n.getLanguage() === 'fa') {
             console.log("inside fa drawClock function");
             i18n.setLanguage('fa');
@@ -1103,7 +1101,6 @@ Template._loginButtonsAdditionalLoggedInDropdownActions.events({
             ctx.fillText(i18n('seven'), 580, 123);
             ctx.fillText(i18n('eight'), 604, 134);
             ctx.fillText(i18n('nine'), 623, 147);
-
         }
 
         //draw the black markers
@@ -1121,6 +1118,8 @@ Template._loginButtonsAdditionalLoggedInDropdownActions.events({
         ctx.fillText('.', 220, 180);
         ctx.closePath();
 
+
+
         function drawPoint(p, color) {
 
             var circle = new Path2D();
@@ -1132,6 +1131,7 @@ Template._loginButtonsAdditionalLoggedInDropdownActions.events({
             ctx.stroke();
         }
 
+        // shahkareh Mack azeez
         function calcPointsCirc(cx, cy, rad) {
 
             var numPoints = 100;  // number of dots in the circle
@@ -1140,7 +1140,6 @@ Template._loginButtonsAdditionalLoggedInDropdownActions.events({
             var i = 0;
 
             for (i = 0; i <= numPoints; i++) {
-
                 angle = 2 * Math.PI * i / numPoints;
                 points.push({
                     x: cx + rad * Math.sin(angle),

@@ -1,7 +1,8 @@
 {
   "galaxy.meteor.com": {
      "env": {
-       "MONGO_URL": "mongodb://user:user123@ds045531.mlab.com:45531/payagoldb"
+       "ROOT_URL": "http://payagol.meteorapp.com",
+       "MONGO_URL": "mongodb://tomvolek:volek123@ds125914.mlab.com:25914/tom_mongo"
      }
    }
 }

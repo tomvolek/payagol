@@ -246,6 +246,7 @@ if (Meteor.isServer) {
 
     //Server side methods,  Call moveClock function after this time to move he price position
     Meteor.methods({
+        // function to increase pr decrease price of an item on auction at will
         'movePriceUp': function (id_on_auction) {
         },
         'movePrice': function (id_on_auction) {
@@ -270,6 +271,7 @@ if (Meteor.isServer) {
 
             //look for the record which admin has passed in to set it to auction
             var onAuctionItem = FlowerBatchList.findOne({Product_id: id_on_auction});
+            PricePosition.update({_id: last_run_position[0]._id}, {$set: {TargetPrice: onAuctionItem.PricePerFlower}});
 
             FlowerBatchList.update({_id: onAuctionItem._id}, {
                 $set: {
@@ -285,7 +287,7 @@ if (Meteor.isServer) {
 
             console.log("Maximum_price=", Maximum_Price_Position);
 
-            // move the clock pointer every xxx millisecond
+            // Move the clock pointer every xxx millisecond
             firstRecord_id = PricePosition.find().fetch()[0]._id;
             console.log("previous position outside  Max price  =", PricePosition.find().fetch()[0].PreviousRunPosition);
             var refreshClockPosition = Meteor.setInterval(function () {
@@ -366,10 +368,10 @@ if (Meteor.isServer) {
                     Quality: data.quality,
                     Storage: data.storage,
                     s1: data.s1,
-                    s2: data.s2,
+                    color: data.color,
                     s3: data.s3,
                     s4: data.s4,
-                    fuet: data.fuet,
+                    formnumber: data.formnumber,
                     MoneteraryUnit: data.MoneteraryUnit,
                     Country: data.Country,
                     Product_grade: data.Product_grade,
@@ -474,10 +476,10 @@ if (Meteor.isServer) {
                 Quality: found_item_on_auction.quality,
                 Storage: found_item_on_auction.storage,
                 s1: found_item_on_auction.s1,
-                s2: found_item_on_auction.s2,
+                color: found_item_on_auction.color,
                 s3: found_item_on_auction.s3,
                 s4: found_item_on_auction.s4,
-                fuet: found_item_on_auction.fuet,
+                formnumber: found_item_on_auction.formnumber,
                 OnAuction: found_item_on_auction.OnAuction,
                 Current_Auction_Price: found_item_on_auction.Current_Auction_Price,
                 MoneteraryUnit: found_item_on_auction.MoneteraryUnit,
