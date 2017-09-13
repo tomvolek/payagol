@@ -73,7 +73,7 @@ ian:accounts-ui-bootstrap-3
 iron:middleware-stack
 iron:router
 mizzao:bootboxjs
-houston:admin
 danappelxx:hover.css
 xvendo:barcoder
 lc3t35:datatables-bootstrap3
+ignacy130:yadmin

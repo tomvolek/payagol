@@ -755,11 +755,25 @@ if (Meteor.isCordova) {
             var numberOfItemsToBuy = event.target.buyitem.value;
             var userId = Meteor.userId();
             console.log("Buyer ID=",userId);
-            Meteor.call('buyItem', userId, numberOfItemsToBuy);
+            Meteor.call('buyItem', userId, numberOfItemsToBuy, function(error, result) {
+                if (error) {
+                    console.log("no user returned from Meteor.user ...");
+                }
+                else {
+                    console.log(result);
+                }
+            });
         }
     });
 
-
+    Template.user_balance.helpers ({
+        balance: function() {
+            var userId = Meteor.userId();
+            console.log()
+             var user_balance =  Meteor.users.findOne({_id: userId}, {fields: {'balance': 1}});
+             return user_balance.balance;
+        }
+     });
 
     Template.form_set_item_on_auction.events({
 

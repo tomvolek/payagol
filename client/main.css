@@ -29,37 +29,41 @@ body {
 
 #user_field  {font-size:10px;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a; width: 150px;}
 
-div#myCanvas{ position: absolute; margin-left: 5px; width:600px; height: 600px;}
-div#MonetaryUnitLabel{ position: absolute; z-index: 1; left:320px; top:320px; font-weight: bold; }
-div#MonetaryUnit_Value {position: absolute; z-index: 1; left:320px; top:340px; width: 60px; height: 30px; overflow:hidden; background: white; text-align: center; vertical-align: middle;}
+div#myCanvas{display: inline-block; float: left; margin-left: 0px; width:600px; height: 600px;}
+div#MonetaryUnitLabel{ position: absolute; z-index: 1; left:260px; top:320px; font-weight: bold; }
+div#MonetaryUnit_Value {position: absolute; z-index: 1; left:260px; top:340px; width: 60px; height: 30px; overflow:hidden; background: white; text-align: center; vertical-align: middle;}
 
-div#PricePerFlowerLabel { position: absolute; z-index: 1; left:220px; top:400px; font-weight: bold;}
-div#PricePerFlower_Value {position: absolute; z-index: 1; left:200px; top:420px; width: 110px; height: 30px; overflow:hidden; background: white; text-align: center; vertical-align: middle;display: table-cell;}
+div#PricePerFlowerLabel { position: absolute; z-index: 1; left:180px; top:400px; font-weight: bold;}
+div#PricePerFlower_Value {position: absolute; z-index: 1; left:150px; top:420px; width: 110px; height: 30px; overflow:hidden; background: white; text-align: center; vertical-align: middle;display: table-cell;}
 
 div#BuyersNumberLabel { position: absolute; z-index: 1; left:395px; top:400px; font-weight: bold; }
-div#BuyersNumber_Value {position: absolute; z-index: 1; left:350px; top:420px; width: 195px; height: 30px; overflow:hidden; background-color : yellow;  text-align: center; vertical-align: middle; font-size: 18px;}
+div#BuyersNumber_Value {position: absolute; z-index: 1; left:320px; top:420px; width: 195px; height: 30px; overflow:hidden; background-color : yellow;  text-align: center; vertical-align: middle; font-size: 18px;}
 
-div#TrolleysLabel { position: absolute; z-index: 1; left:155px; top:480px; font-weight: bold; }
-div#Trolleys_Value {position: absolute; z-index: 1; left:150px; top:500px; width: 40px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+div#TrolleysLabel { position: absolute; z-index: 1; left:115px; top:480px; font-weight: bold; }
+div#Trolleys_Value {position: absolute; z-index: 1; left:100px; top:500px; width: 40px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
 
-div#ContainersPerTrollyLabel { position: absolute; z-index: 1; left:230px; top:480px; font-weight: bold; }
-div#ContainersPerTrolly_Value {position: absolute; z-index: 1; left:230px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+div#ContainersPerTrollyLabel { position: absolute; z-index: 1; left:180px; top:480px; font-weight: bold; }
+div#ContainersPerTrolly_Value {position: absolute; z-index: 1; left:180px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
 
-div#TotalContainersLabel { position: absolute; z-index: 1; left:360px; top:480px;  font-weight: bold;}
-div#TotalContainers_Value {position: absolute; z-index: 1; left:360px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+div#TotalContainersLabel { position: absolute; z-index: 1; left:320px; top:480px;  font-weight: bold;}
+div#TotalContainers_Value {position: absolute; z-index: 1; left:320px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
 
-div#FlowerPerContainerLabel { position: absolute; z-index: 1; left:470px; top:480px; font-weight: bold; }
-div#FlowerPerContainer_Value {position: absolute; z-index: 1; left:470px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+div#FlowerPerContainerLabel { position: absolute; z-index: 1; left:435px; top:480px; font-weight: bold; }
+div#FlowerPerContainer_Value {position: absolute; z-index: 1; left:435px; top:500px; width: 80px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
 
-div#MinContainerToBuyLabel { position: absolute; z-index: 1; left:270px; top:550px; font-weight: bold; }
-div#MinContainerToBuy_Value {position: absolute; z-index: 1; left:325px; top:570px; width: 40px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
+div#MinContainerToBuyLabel { position: absolute; z-index: 1; left:250px; top:560px; font-weight: bold; }
+div#MinContainerToBuy_Value {position: absolute; z-index: 1; left:275px; top:580px; width: 40px; height: 30px; overflow:hidden; background-color : white;  text-align: center; vertical-align: middle;}
 
-div#ProductImage_Value {position: absolute; z-index: 1; left:750px; top:410px; }
-div#Logo_Value {position: absolute; z-index: 1; left:925px; top:410px; }
+div#Payaneh_Date {  position: absolute;  left: 230px; top:640px; z-index:1; font-size: 24px; color:blue;  }
+div#Payaneh_Auction {  position: absolute;   left : 260px; top:670px; z-index:1; font-size: 24px; color:blue;  }
+div#About_Payagol { padding-left: 30px; background: whitesmoke; width:600px; height:600px;}
 
+div#ProductImage_Value {position: absolute;  left:850px; top:330px; }
+div#Logo_Value {position: absolute; z-index: 1; left:1020px; top:330px; }
 
-div#producer_table {position:absolute;  z-index: 1; left:610px;  top: 250px; border-style: groove; }
- div#product_table  {position:absolute;  z-index: 1; left:610px; top:305px; border-style: groove;}
+div#producer_container {display: inline-block; float: right; left: 600px; vertical-align: middle; z-index: 1;}
+div#producer_table {  z-index: 1; left:610px;  top: 250px; border-style: groove; }
+ div#product_table  {  z-index: 1; left:610px; top:305px; border-style: groove;}
 
 #Product_Id { overflow:hidden; background-color : yellow;  text-align: center; vertical-align: middle;}
 
@@ -67,7 +71,7 @@ div#producer_table {position:absolute;  z-index: 1; left:610px;  top: 250px; bor
 #head2 { font-size: 22px; }
 
 button.inc_btn { background: red;  z-index:1; font-size: 24px; }
-#on_auction_container {position: absolute; z-index: 1; left: 730px; top:580px; border-style: groove;}
+#on_auction_container {position: absolute; z-index: 1; left: 730px; top:540px; border-style: groove;}
 
 
 #Search_Item {  text-align  : center; width: auto; padding-left:10px; padding-right:10px;  z-index:1; font-size: 16px; }
@@ -82,12 +86,10 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 div#buyitem_container {position: absolute; z-index: 1; left: 720px; top:620px; border-style: groove; }
 div#num_container_field  { position: absolute; width:60px; height:40px; left :721px; top:621px;  font-size: 24px; }
 div#buy_item {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :760px; top:621px;  font-size: 24px; }
+div#BalanceLabel {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :760px; top:650px;  font-size: 24px; }
 
 button.buy_btn { background: red; text-align  : center; width: auto; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :740px; top:550px; font-size: 24px; }
 
-#Payaneh_Date {  position: absolute;   left : 250px; top:640px; z-index:1; font-size: 24px; color:blue;  }
-#Payaneh_Auction {  position: absolute;   left : 300px; top:670px; z-index:1; font-size: 24px; color:blue;  }
-#About_Payagol { padding-left: 30px; background: whitesmoke; width:600px; height:600px;}
 
 div#num_container_label  {   position: absolute; width:20px; height:40px; left :740px; top:500px; z-index:1; font-size: 16px; }
 #reactive-table-1 {width:800px;}
@@ -135,7 +137,6 @@ td {
 
 
 .navbar-custom {
-
     background-color:#8AE65C;
     color:#ffffff;
     border-radius:0;
@@ -145,6 +146,7 @@ td {
     color:#fff;
     padding-left:20px;
     padding-right:20px;
+
 }
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
     color: #ffffff;
@@ -154,6 +156,7 @@ td {
 .navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus {
     text-decoration: none;
     background-color: #33aa33;
+
 }
 
 .navbar-custom .navbar-brand {
@@ -164,8 +167,10 @@ td {
 }
 .navbar-custom .icon-bar {
     background-color:#33aa33;
-
 }
+
+.navbar-nav > li > a {padding-top:5px !important; padding-bottom:5px !important;}
+.navbar {min-height:30px !important}
 
 .boxed {
     text-align:left;
@@ -199,10 +204,14 @@ td {
 }
 
 
-.reactive-table tr thead {
+.reactive-table tr thead th {
     height: 10px;
+    font-size:5px;
 }
 
+.rective-table-1 th thead {
+    font-size:10px;
+}
 .panel-heading {
     background-color: greenyellow ;
 }

@@ -20,12 +20,12 @@
 
 
 <template name="Main">
-    <div class="container">
+
     {{> flower_batch_lists}}
     <!-- draw the clock interface -->
-
-    {{> flower_auction_lists}}
     {{> draw_clock}}
+    {{> flower_auction_lists}}
+
 
     {{#if isInRole 'buyer' 'default-group'}}
             {{> form_buy_item}}
@@ -38,7 +38,6 @@
         {{> barcode_scanner}}
     {{/if}}
 
-    </div>
 
 
 </template>
@@ -49,9 +48,9 @@
 </template>
 
 <template name="draw_clock">
-    <div class="container">
+
       <canvas id="myCanvas" width="600" height="600"></canvas>
-    </div>
+
 </template>
 
 <template name="addForm">
@@ -77,16 +76,22 @@
 </template>
 
 
+    <template name="user_balance">
+        <div id="user_balance">
+        {{balance}}
+        </div>
+    </template>
 
 
 <template name="form_buy_item">
-
     <div id="buyitem_container">
     <form id="buyitem">
         <input  type="text" id="num_container_field" name="buyitem"/>
         <input class="btn btn-danger"  type="submit" id="buy_item" value={{_ "Buy"}} />  
     </form>
     </div>
+    <div id="BalanceLabel"><b> {{_ "Balance"}} :</b> {{> user_balance}} </div>
+
 </template>
 
 <!-- template to populate inside the clock -->
@@ -345,11 +350,9 @@
     </div>
 
     <br><br>
-   
-
-    <script type="text/javascript" id="WolframAlphaScriptefe258f69ee4e0cef08af165af0ce54a" src="//www.wolframalpha.com/widget/widget.jsp?id=efe258f69ee4e0cef08af165af0ce54a"></script>
 
     {{yeild}}
+
 </template>
 
 
@@ -412,7 +415,7 @@
 </template>
 
 <template name="navigation">
-    <nav class="navbar navbar-custom navbar-static-top" style="margin-bottom: 0px; font-size: 12px; height: 40px;">
+    <nav class="navbar navbar-custom navbar-static-top" style="margin-bottom: 0px; font-size: 12px; height: 20px;">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -448,7 +451,7 @@
 
 
 <template name="navigation_buyer" >
-    <nav class="navbar navbar-custom navbar-static-top" style="margin-bottom: 0px; font-size: 12px; height: 40px;">
+    <nav class="navbar navbar-custom navbar-static-top" style="margin-bottom: 0px; font-size: 12px; height: 20px;">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>

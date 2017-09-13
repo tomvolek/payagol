@@ -3,7 +3,7 @@ import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FlowersCatalog } from '/imports/api/models.js';
-
+import { Accounts } from 'meteor/accounts-base';
 import { OldAuctions } from '/imports/api/models.js';
 
 
@@ -40,8 +40,8 @@ if (Meteor.isServer) {
         });
 
         // Add user and Houston admin page collections to the list of collections to be shown by Admin page
-        Houston.add_collection(Meteor.users);
-        Houston.add_collection(Houston._admins);
+        //Houston.add_collection(Meteor.users);
+        //Houston.add_collection(Houston._admins);
 
 
         // disable updates by any user except Admin
@@ -83,7 +83,7 @@ if (Meteor.isServer) {
                 // {name: "tomvolek1", email: "tomvolek@payagol.com", roles: ['buyer']},
                 // {name: "tom", email: "tom@payagol.com", roles: ['admin']},
                  {name: "tomtom", email: "tomtom@payagol.com", roles: ['admin'],usernumber:101},
-                 {name: "feri", email: "feri@payagol.com", roles: ['admin'],usernumber:102}
+                 {name: "feri", email: "feri@payagol.com", roles: ['staff'],usernumber:102}
              ];
 
              _.each(myusers, function (myuser) {
@@ -97,6 +97,7 @@ if (Meteor.isServer) {
                      username: myuser.name,
                      password: "apple1",
                      usernumber: myuser.usernumber,
+                     balance: 0.0,
                      profile: {name: myuser.name}
                  });
 
@@ -106,7 +107,7 @@ if (Meteor.isServer) {
 
                  if (myuser.name === "feri"){
                      console.log("adding roles.......");
-                     Roles.addUsersToRoles(id, 'admin', Roles.GLOBAL_GROUP)
+                     Roles.addUsersToRoles(id, 'staff', Roles.GLOBAL_GROUP)
                  }
 
                  // Meteor.users.update(foundUser._id ,{ $set: {'emails.0.address': myuser.email }} );
@@ -434,15 +435,23 @@ if (Meteor.isServer) {
                 return
             }
 
+            var purchased_amount = 0.0 ;
+            var return_result;
             // test to see if the bidder has bid more than whats available
             if (numberOfItemsToBuy >= found_item_on_auction.TotalContainers) {
                 found_item_on_auction.TotalContainers = 0;
                 FlowerBatchList.update({OnAuction: 1}, {$set: {OnAuction: 0}});
+                purchased_amount = numberOfItemsToBuy * found_item_on_auction.PricePerFlower * found_item_on_auction.FlowerPerContainer ;
+                return_result = "Ran out of items to sell";
+                // subtract the purchased items from users account balance
+               // Meteor.users.update({_id: userId}, {$set: {balance: { $subtract : ["$balance",purchased_amount] }}});
+
+               // PricePosition.update({_id: last_run_position[0]._id}, {$set: {current_position: 0, PreviousRunPosition: 0}});
                // add the sold out item to the auction history collection for further reporting
                 OldAuctions.insert ({found_item_on_auction});
-
-                // Move this block of code to a nightly job as it blocks the collection toll remove is done.
-                // Remove the sold out item from todays list of items to sell in collection
+                return_result = "Bought less items than available."
+                // Move this block of code to a nightly job as it blocks the collection till remove is done.
+                // Remove the sold out item from today's list of items to sell in collection
                 try {
                     FlowerBatchList.remove ({"_id" :found_item_on_auction._id});
                 }
@@ -450,12 +459,28 @@ if (Meteor.isServer) {
                     console.log("not able to delete record with id: ",found_item_on_auction._id);
                 }
             }
-            else {// subtract number numberOfItemsToBuy from Totalnumber of trolley
+            else {// Subtract number numberOfItemsToBuy from Totalnumber of trolley
                 found_item_on_auction.TotalContainers = found_item_on_auction.TotalContainers - numberOfItemsToBuy;
-                found_item_on_auction.Buyer_Number = userId ;
-                FlowerBatchList.update({OnAuction: 1}, {$set: {TotalContainers: found_item_on_auction.TotalContainers,Buyer_Number: found_item_on_auction.Buyer_Number }});
-            }
+                //found_item_on_auction.Buyer_Number = userId ;
+                purchased_amount = numberOfItemsToBuy * found_item_on_auction.PricePerFlower * found_item_on_auction.FlowerPerContainer ;
 
+                FlowerBatchList.update({OnAuction: 1}, {$set: {
+                    TotalContainers: found_item_on_auction.TotalContainers,
+                    Buyer_Number: userId
+                }});
+
+
+                var user_balance = Meteor.users.findOne({ _id: Meteor.userId() }).balance  - purchased_amount ;
+                console.log("user_balance: ",user_balance);
+
+                // Subtract the purchased items from users account balance
+                Meteor.users.update({_id: Meteor.userId()},
+                     {$set : {
+                           'balance':user_balance
+                             }
+                     });
+                return_result = "Bought items."
+            }
 
             // move the purchased items to purchased collection
             Purchased.insert({
@@ -491,8 +516,10 @@ if (Meteor.isServer) {
                 AuctionDate: found_item_on_auction.AuctionDate,
                 NumberOfContainersBought: numberOfItemsToBuy
             });
-
+         // return Meteor.users.findOne({_id: userId}, {fields: { balance: 1}});
+            return return_result ;
         }
+
 
     });
 
