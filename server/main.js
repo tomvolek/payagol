@@ -10,7 +10,6 @@ import { OldAuctions } from '/imports/api/models.js';
 if (Meteor.isServer) {
 
 
-
     Meteor.startup(() => {
 
 
@@ -77,41 +76,46 @@ if (Meteor.isServer) {
         // console.log("username=",foundUser);
 
 
-         if (!Meteor.users.findOne({"username": "tomtom"})) {
+         if (!Meteor.users.findOne({"username": "ajayebi"})) {
              var myusers = [
-                // {name: "essi", email: "essi@payagol.com", roles: ['buyer'],usernumber:100},
+                 {name: "ajayebi", email: "ajayebi@payagol.com", roles: ['admin'],user_number:100},
+                 {name: "tom", email: "tomtom@payagol.com", roles: ['admin'],user_number:101},
+                 {name: "essi", email: "essi@payagol.com",  roles: ['buyer'],user_number:102},
                 // {name: "tomvolek1", email: "tomvolek@payagol.com", roles: ['buyer']},
-                // {name: "tom", email: "tom@payagol.com", roles: ['admin']},
-                 {name: "tomtom", email: "tomtom@payagol.com", roles: ['admin'],usernumber:101},
-                 {name: "feri", email: "feri@payagol.com", roles: ['staff'],usernumber:102}
+                 {name: "feri", email: "feri@payagol.com", roles: ['staff'],user_number:103},
+                 {name: "Jalal", email: "jalal@payagol.com", roles: ['management'],user_number:104}
              ];
 
              _.each(myusers, function (myuser) {
                  var id;
-
-                 var foundUser = Meteor.users.findOne({"profile.username": myuser.name});
-                 console.log("username=",foundUser);
-
                  id = Accounts.createUser({
                      email: myuser.email,
                      username: myuser.name,
                      password: "apple1",
-                     usernumber: myuser.usernumber,
-                     balance: 0.0,
-                     profile: {name: myuser.name}
+                     user_number: myuser.usernumber,
+                     balance: 1000000,
+                     profile: {name: myuser.name},
+                     profile: {balance: 1000000}
                  });
 
                  if (myuser.roles.length > 0) {
                      Roles.addUsersToRoles(id, myuser.roles, 'default-group')
                  }
 
-                 if (myuser.name === "feri"){
+                 if (myuser.username === "feri"){
                      console.log("adding roles.......");
                      Roles.addUsersToRoles(id, 'staff', Roles.GLOBAL_GROUP)
                  }
 
+                 if (myuser.username === "ajayebi"){
+                     console.log("adding roles for user ajayebi as admin");
+                     Roles.addUsersToRoles(id, 'admin', Roles.GLOBAL_GROUP)
+                 }
+
+                 var foundUser = Meteor.users.findOne({"user name": myuser.username});
+                 console.log("username=",foundUser);
+
                  // Meteor.users.update(foundUser._id ,{ $set: {'emails.0.address': myuser.email }} );
-                 console.log("users in system", foundUser);
                  //console.log(JSON.stringify(foundUser));
                 // if (foundUser) {
                 //     Roles.addUsersToRoles(foundUser._id, myuser.roles);

@@ -122,8 +122,7 @@
           <div id="MinContainerToBuyLabel">{{_ "Minimum Container To Buy"}}</div>
           <div class="clock_items" id="MinContainerToBuy_Value"> {{this.MinContainerToBuy}} </div>
 
-          <div id="ProductImage_Value"> <img src="/images/flower/{{this.ProductImage}}" height="160" width="160"/> </div>
-         <div id="Logo_Value"> <img src="/images/logo/{{this.Logo}}" height="50" width="50"/> </div>
+
 
          <div id="producer_container">
           <div id="producer_table">
@@ -163,6 +162,16 @@
                   </tr>
                 </tbody>
            </table>
+          </div>
+          <div id="product_image_table">
+             <table width= "360" border="2">
+                     <tbody>
+                     <tr>
+                         <td width="70%"><div id="ProductImage_Value"> <img src="/images/flower/{{this.ProductImage}}" height="160" width="160"/> </div></td>
+                         <td width="20%"><div id="Logo_Value"> <img src="/images/logo/{{this.Logo}}" height="50" width="50"/> </div></td>
+                     </tr>
+                     </tbody>
+                 </table>
           </div>
          </div>
      {{/each}}

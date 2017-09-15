@@ -58,12 +58,12 @@ div#Payaneh_Date {  position: absolute;  left: 230px; top:640px; z-index:1; font
 div#Payaneh_Auction {  position: absolute;   left : 260px; top:670px; z-index:1; font-size: 24px; color:blue;  }
 div#About_Payagol { padding-left: 30px; background: whitesmoke; width:600px; height:600px;}
 
-div#ProductImage_Value {position: absolute;  left:850px; top:330px; }
-div#Logo_Value {position: absolute; z-index: 1; left:1020px; top:330px; }
+
 
 div#producer_container {display: inline-block; float: right; left: 600px; vertical-align: middle; z-index: 1;}
-div#producer_table {  z-index: 1; left:610px;  top: 250px; border-style: groove; }
- div#product_table  {  z-index: 1; left:610px; top:305px; border-style: groove;}
+div#producer_table {  z-index: 1; left:610px;  top: 250px; border-style: groove;}
+ div#product_table  {  z-index: 1; left:610px;  top: 305px; border-style: groove;}
+div#product_image_table {  z-index: 1; left:610px; top:405px; border-style: groove;}
 
 #Product_Id { overflow:hidden; background-color : yellow;  text-align: center; vertical-align: middle;}
 
@@ -83,10 +83,10 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #languages {position: absolute; left :735px; width: 80px; top:5px;}
 #Purchased_Items  {position: absolute; width:300px; height:15px; left :670px; top:610px; z-index:1; font-size: 24px; }
 
-div#buyitem_container {position: absolute; z-index: 1; left: 720px; top:620px; border-style: groove; }
+div#buyitem_container {position: absolute; z-index: 1; left: 720px; top:540px; border-style: groove; }
 div#num_container_field  { position: absolute; width:60px; height:40px; left :721px; top:621px;  font-size: 24px; }
 div#buy_item {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :760px; top:621px;  font-size: 24px; }
-div#BalanceLabel {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :760px; top:650px;  font-size: 24px; }
+div#BalanceLabel {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :740px; top:600px;  font-size: 24px; }
 
 button.buy_btn { background: red; text-align  : center; width: auto; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :740px; top:550px; font-size: 24px; }
 
