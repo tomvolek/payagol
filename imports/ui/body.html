@@ -17,10 +17,7 @@
   {{> footer}}
 </template>
 
-
-
 <template name="Main">
-
     {{> flower_batch_lists}}
     <!-- draw the clock interface -->
     {{> draw_clock}}
@@ -36,8 +33,12 @@
     {{#if isInRole 'admin' 'default-group'}}
         {{> form_set_item_on_auction }}
         {{> barcode_scanner}}
+
     {{/if}}
 
+{{#if isInRole 'admin' 'default-group'}}
+    <p> I am admin........  </p>
+{{/if}}
 
 
 </template>

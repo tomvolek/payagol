@@ -212,6 +212,10 @@ td {
 .rective-table-1 th thead {
     font-size:10px;
 }
-.panel-heading {
-    background-color: greenyellow ;
+
+.rective-table-1 > thead {
+    font-size:10px;
+}
+.panel-primary > .panel-heading {
+    background-color: #337ab7 ;
 }

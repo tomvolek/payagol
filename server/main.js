@@ -75,7 +75,7 @@ if (Meteor.isServer) {
         //var foundUser = Meteor.users.findOne({"profile.name": "tomtom"});
         // console.log("username=",foundUser);
 
-
+         var foundUser = "";
          if (!Meteor.users.findOne({"username": "ajayebi"})) {
              var myusers = [
                  {name: "ajayebi", email: "ajayebi@payagol.com", roles: ['admin'],user_number:100},
@@ -86,33 +86,33 @@ if (Meteor.isServer) {
                  {name: "Jalal", email: "jalal@payagol.com", roles: ['management'],user_number:104}
              ];
 
-             _.each(myusers, function (myuser) {
+             _.each(myusers, function (user) {
                  var id;
                  id = Accounts.createUser({
-                     email: myuser.email,
-                     username: myuser.name,
+                     email: user.email,
+                     username: user.name,
                      password: "apple1",
-                     user_number: myuser.usernumber,
+                     user_number: user.usernumber,
                      balance: 1000000,
-                     profile: {name: myuser.name},
+                     profile: {name: user.name},
                      profile: {balance: 1000000}
                  });
 
-                 if (myuser.roles.length > 0) {
-                     Roles.addUsersToRoles(id, myuser.roles, 'default-group')
+                 if (user.roles.length > 0 ) {
+                     Roles.addUsersToRoles(id, user.roles, 'default-group')
                  }
 
-                 if (myuser.username === "feri"){
-                     console.log("adding roles.......");
+                 if (user.username === "feri"){
+                     //console.log("adding roles.......");
                      Roles.addUsersToRoles(id, 'staff', Roles.GLOBAL_GROUP)
                  }
 
-                 if (myuser.username === "ajayebi"){
+                 if (user.name === "ajayebi" ){
                      console.log("adding roles for user ajayebi as admin");
-                     Roles.addUsersToRoles(id, 'admin', Roles.GLOBAL_GROUP)
+                     Roles.addUsersToRoles(id, 'admin', 'default-group')
                  }
-
-                 var foundUser = Meteor.users.findOne({"user name": myuser.username});
+                 //console.log("username=", user.username);
+                 foundUser = Meteor.users.findOne({username: user.name});
                  console.log("username=",foundUser);
 
                  // Meteor.users.update(foundUser._id ,{ $set: {'emails.0.address': myuser.email }} );
@@ -120,8 +120,6 @@ if (Meteor.isServer) {
                 // if (foundUser) {
                 //     Roles.addUsersToRoles(foundUser._id, myuser.roles);
                 // }
-
-
              });
          }
          else {}
@@ -223,6 +221,10 @@ if (Meteor.isServer) {
             return Meteor.users.find({"status.online": true});
         }, {is_auto: true});
 
+        // in server/publish.js
+        Meteor.publish(null, function (){
+            return Meteor.roles.find({})
+        });
 
         Meteor.publish(null, function () {
             if (!this.userId) {
@@ -474,13 +476,14 @@ if (Meteor.isServer) {
                 }});
 
 
-                var user_balance = Meteor.users.findOne({ _id: Meteor.userId() }).balance  - purchased_amount ;
+                var user_balance = Meteor.users.findOne({ _id: Meteor.userId() }).profile.balance  - purchased_amount ;
                 console.log("user_balance: ",user_balance);
+
 
                 // Subtract the purchased items from users account balance
                 Meteor.users.update({_id: Meteor.userId()},
                      {$set : {
-                           'balance':user_balance
+                           'profile.balance':user_balance
                              }
                      });
                 return_result = "Bought items."

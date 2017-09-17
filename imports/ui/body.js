@@ -429,7 +429,7 @@ if (Meteor.isCordova) {
     //Template to pull three records from list of items for sale to be displayed on auction table
     Template.flower_auction_lists.helpers({
         OnAuction: function () {
-            return FlowerBatchList.find({OnAuction: 1});
+            return FlowerBatchList.find({OnAuction: 1 });
         }
     });
 
@@ -766,12 +766,14 @@ if (Meteor.isCordova) {
         }
     });
 
+
     Template.user_balance.helpers ({
         balance: function() {
-            var userId = Meteor.userId();
-            console.log()
-             var user_balance =  Meteor.users.findOne({_id: userId}, {fields: {'balance': 1}});
-             return user_balance.balance;
+            //var userId = Meteor.userId();
+             var user_record = Meteor.users.findOne({ _id: Meteor.userId() });
+            // var user_balance =  Meteor.users.findOne({_id: userId}, {fields: {'profile.balance': 1}});
+            console.log("balance",user_record.profile.balance) ;
+            return user_record.profile.balance;
         }
      });
 
