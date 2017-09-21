@@ -36,10 +36,6 @@
 
     {{/if}}
 
-{{#if isInRole 'admin' 'default-group'}}
-    <p> I am admin........  </p>
-{{/if}}
-
 
 </template>
 
@@ -123,8 +119,6 @@
           <div id="MinContainerToBuyLabel">{{_ "Minimum Container To Buy"}}</div>
           <div class="clock_items" id="MinContainerToBuy_Value"> {{this.MinContainerToBuy}} </div>
 
-
-
          <div id="producer_container">
           <div id="producer_table">
            <table width= "360" border="2" >
@@ -188,7 +182,7 @@
         <table class="flower_batch_table" border="4" rows="3">
             <tr><th>{{_ "Product"}}</th><th>{{_ "ID"}}</th><th>{{_ "Total Containers"}}</th><th></th><th>{{_ "Flower/Container"}}</th><th>{{_ "Quality"}}</th><th>{{_ "Storage"}}</th><th>{{_ "Color"}}</th><th>{{_ "Producer"}}</th><th>{{_ "Logo"}}</th><th>{{_ "Form_Number" }}</th></tr>
         {{#each OneBatch}}
-        <tr><td> {{this.ProductName}}</td><td>{{this.Product_id}}</td><td>{{this.TotalContainers}}</td><td> X </td><td>{{this.FlowerPerContainer}}</td><td>{{this.Quality}}</td><td>{{this.Storage}}</td><td>{{this.color}}</td><td><div class="Producer_name"> {{this.Producer_name}} </div></td><td><img src="/images/logo/{{this.Logo}}"></td><td>{{this.formnumber}}</td></tr>
+        <tr><td> {{this.ProductName}}</td><td>{{this.Product_id}}</td><td>{{this.TotalContainers}}</td><td> X </td><td>{{this.FlowerPerContainer}}</td><td>{{this.Quality}}</td><td>{{this.Storage}}</td><td  width="1%" class="{{this.color}}"></td><td><div class="Producer_name"> {{this.Producer_name}} </div></td><td><img src="/images/logo/{{this.Logo}}"></td><td>{{this.formnumber}}</td></tr>
         {{/each}}
         </table>
 </template>
@@ -196,13 +190,18 @@
 
 
 <template name ="form_enter_product">
-      <form id="myform">
-        <h3>{{_ "Search/Add products"}}</h3>
 
+
+    <br><br>
+    <div class="container">
+         <div class="panel panel-primary">
+             <div class="panel-heading">
+                 <h3 class="panel-title">{{_ "Insert/Update/Search Product"}}</h3>
+             </div>
+         <form id="myform">
        <table class="usertable" border="4">
 
            {{#each Search_Item_found}}
-
         <tr>
             <td>{{_ "Producer Name"}} <br><input type="text" name="Producer_name" value="{{this.Producer_name}}" required></td>
             <td>{{_ "Producer ID"}} <br><input type="text" name="Producer_id" value="{{this.Producer_id}}" required></td>
@@ -227,7 +226,7 @@
          <tr>
              <td>{{_ "Storage"}} <br><input type="text" name="storage" value="{{this.storage}}"/></td>
              <td>s1 <br><input type="text" name="s1" value="{{this.s1}}"/></td>
-             <td>{{_ "Color"}}  <br><input type="text" name="color" value="{{this.color}}" /></td>
+             <td>{{_ "color"}} <br> <input type="text" name="color" value="{{this.color}}" /></td>
              <td>{{_ "Form_Number" }}<br><input type="text" name="formnumber" value="{{this.formnumber}}"/></td>
              <td>{{_ "Product Grade"}}<br><input type="text" name="Product_grade" value="{{this.Product_grade}}"/></td>
 
@@ -240,8 +239,6 @@
              <td >{{_ "Auction Date"}}<br><input type="text" id="auctiondate-datepicker"  name="AuctionDate" value="{{this.AuctionDate}}" /></td>
             </tr>
           <tr>
-
-
           </tr>
        {{/each}}
 
@@ -256,9 +253,11 @@
          <input class="btn btn-danger" id ="Edit_Item" type="submit"   value= {{_ "Edit"}} />
          <input class="btn btn-danger" id = "Add_Item" type="submit"   value= {{_ "Add"}} />
         </div>
-         
-    </form>
+         </form>
+      </div>
+    </div>
 
+    {{> quickForm collection=Collections.FlowerBatchList id="form_enter_product" type="insert"}}
 
 </template>
 
@@ -345,7 +344,7 @@
 </template>
 
 
-<!--report all purchases for a day for the logged in user -->
+<!--List all flowers in the catalog  -->
 <template name ="Flowers_Catalog">
     <br><br>
     <div class="container">
@@ -524,3 +523,9 @@
     <!-- place holder , it does nothing at the moment -->
 
 </template >
+
+<template name="user_banking">
+    <p> Users current Bank Balance : </p>
+    {{> user_banking }}
+
+</template>

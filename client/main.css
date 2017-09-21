@@ -96,6 +96,8 @@ div#num_container_label  {   position: absolute; width:20px; height:40px; left :
 #reactive-table-1 tr { line-height:30px; }
 .form_set_item_on_auction_container {width:850px;}
 
+div#enter_prpduct_heading { background-color: rgb(51, 122, 183);   }
+
 ul li {
 
     margin: 5px;
@@ -169,6 +171,7 @@ td {
     background-color:#33aa33;
 }
 
+
 .navbar-nav > li > a {padding-top:5px !important; padding-bottom:5px !important;}
 .navbar {min-height:30px !important}
 
@@ -219,3 +222,14 @@ td {
 .panel-primary > .panel-heading {
     background-color: #337ab7 ;
 }
+
+.form-group { size: 30;}
+
+.blue {background-color: blue; }
+.pink {background-color: pink; }
+.yellow {background-color: yellow; }
+.gold {background-color: gold; }
+.green {background-color: lawngreen; }
+.red {background-color: red; }
+.orange {background-color: orange; }
+.white {background-color: white; }

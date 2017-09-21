@@ -110,6 +110,7 @@ if (Meteor.isServer) {
                  if (user.name === "ajayebi" ){
                      console.log("adding roles for user ajayebi as admin");
                      Roles.addUsersToRoles(id, 'admin', 'default-group')
+                     Roles.addUsersToRoles(id, 'super-admin', Roles.GLOBAL_GROUP)
                  }
                  //console.log("username=", user.username);
                  foundUser = Meteor.users.findOne({username: user.name});
@@ -525,8 +526,16 @@ if (Meteor.isServer) {
             });
          // return Meteor.users.findOne({_id: userId}, {fields: { balance: 1}});
             return return_result ;
+        },
+        'User_Banking': function (METHOD, data, userId ){
+            HTTP.call( METHOD, 'http://google.com',  function( error, response ) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(response);
+                }
+            });
         }
-
 
     });
 

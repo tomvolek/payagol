@@ -79,4 +79,5 @@ minimongo@1.2.0
 ddp-server@2.0.0
 ddp-client@2.1.0
 ddp@1.3.0
-okgrow:analytics
+http
+peppelg:bootstrap-3-modal

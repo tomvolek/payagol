@@ -14,7 +14,7 @@ import { FilesCollection } from 'meteor/ostrio:files';
 import { FlowersCatalog } from '/imports/api/models.js';
 import { Accounts } from 'meteor/accounts-base';
 
-
+const Collections = {FlowerBatchList};
 
 import "./body.html";
 
@@ -159,7 +159,6 @@ if (Meteor.isCordova) {
 
     Template.barcode_scanner.events({
         'click button': function () {
-
             cordova.plugins.barcodeScanner.scan(
                 function (result) {
                     alert("We got a barcode\n" +
@@ -448,6 +447,7 @@ if (Meteor.isCordova) {
                 showRowCount: true,
                 showNavigationRowsPerPage: true,
                 multiColumnSort: true,
+                rowClass: 'line-height:10px',
                 fields: [
                     {key: 'AuctionDate', label: i18n('AuctionDate')},
                     {key: 'ProductName', label: i18n('Product_Name'), headerClass: 'col-md-4'},
@@ -777,6 +777,15 @@ if (Meteor.isCordova) {
         }
      });
 
+    Template.user_banking.helpers({
+        user_banking: function () {
+            var data = {};
+            //var transactions = {};
+            Meteor.call('User_Banking', 'GET', data, Meteor.userId());
+            return data;
+}
+});
+
     Template.form_set_item_on_auction.events({
 
         'submit #my_auction_price': function (event, template) {
@@ -796,6 +805,7 @@ if (Meteor.isCordova) {
         }
     });
 
+    Template.registerHelper('Collections', Collections);
 
     Template.online_users.helpers({
         usersOnline:function(){
@@ -1133,7 +1143,6 @@ Template._loginButtonsAdditionalLoggedInDropdownActions.events({
         ctx.fillText('.', 93, 350);
         ctx.fillText('.', 220, 180);
         ctx.closePath();
-
 
 
         function drawPoint(p, color) {
