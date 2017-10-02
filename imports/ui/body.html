@@ -1,5 +1,8 @@
+<head>
+    <script src='build/pdfmake.min.js'></script>
+    <script src='build/vfs_fonts.js'></script>
+</head>
 <body>
-
 
 </body>
 <template name="ApplicationLayout">
@@ -25,7 +28,11 @@
 
 
     {{#if isInRole 'buyer' 'default-group'}}
+        <div id="buyitem_container">
+            <div id="BalanceLabel"> {{_ "Balance"}}  {{> user_balance}} </div>
             {{> form_buy_item}}
+            {{> user_keyboard}}
+         </div>
             {{> report_user_purchase}}
         {{else}}
     {{/if}}
@@ -35,6 +42,7 @@
         {{> barcode_scanner}}
 
     {{/if}}
+
 
 
 </template>
@@ -68,28 +76,61 @@
 
 
 <template name="localizedDateAndTime">
-
     {{localizedDateAndTime }}
 </template>
 
-
-    <template name="user_balance">
-        <div id="user_balance">
-        {{balance}}
-        </div>
-    </template>
-
-
 <template name="form_buy_item">
-    <div id="buyitem_container">
     <form id="buyitem">
         <input  type="text" id="num_container_field" name="buyitem"/>
         <input class="btn btn-danger"  type="submit" id="buy_item" value={{_ "Buy"}} />  
     </form>
-    </div>
-    <div id="BalanceLabel"><b> {{_ "Balance"}} :</b> {{> user_balance}} </div>
 
 </template>
+
+
+<template name="user_keyboard">
+    <form id="keyboard">
+        <div id ="firstrowbuttons">
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board20" value="20" name="20"> 20 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board22" value="22"  name="key_board24" >22 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board24" value="24"  name="keyboard" >24 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board26" value="26" name="26"> 26 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_boardall" value="All" name="all"> All </button>
+        </div>
+        <div id ="secondrowbuttons">
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board10" value="10" name="10"> 10</button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board12" value="12" name="12"> 12 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board14" value="14" name="14"> 14 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board16" value="16" name="16"> 16 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board18" value="18" name="18"> 18</button>
+
+        </div>
+        <div id ="thirdrowrowbuttons">
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board5" value="5" name="5"> 5 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board6" value="6" name="6"> 6</button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board7" value="7" name="7"> 7 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board8" value="8" name="8"> 8 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board9" value="9" name="9"> 9 </button>
+
+        </div>
+        <div id ="forthrowrowbuttons">
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board1" value="1" name="1"> 1 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board2" value="2" name="2"> 2</button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board3" value="3" name="3"> 3 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="key_board4" value="4" name="4"> 4 </button>
+            <button class="btn btn-danger small-btn"  type="submit" id="Minimum" value="Minimum" name="Minimum"> Min </button>
+
+        </div>
+
+    </form>
+</template>
+
+<template name="user_balance">
+        {{balance}}
+</template>
+
+
+
 
 <!-- template to populate inside the clock -->
 <template name="flower_auction_lists">
@@ -257,7 +298,9 @@
       </div>
     </div>
 
-    {{> quickForm collection=Collections.FlowerBatchList id="form_enter_product" type="insert"}}
+    <br><br><br>
+
+    {{> quickForm collection=Collections.FlowerBatchList id="form_enter_product"  type="insert"}}
 
 </template>
 
@@ -300,11 +343,8 @@
         <input type="text" name="on_auction"/>
     <input type="submit" class="auction_price" value={{_ "Set Auction"}} />
     </form>
-    
-    <button class="btn btn-danger"  type="submit" value="-5" name="-5"> -5 </button>
-    <button class="btn btn-danger"  type="submit" value="-1" name="-1"> -1 </button>
-    <button class="btn btn-danger"  type="submit" value="1" name="+1"> +1 </button>
-    <button class="btn btn-danger"  type="submit" value="5" name="+1"> +5 </button>
+
+
     </div>
     </div>
 </template>
@@ -334,7 +374,12 @@
     <div class="report_container">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">{{_ "Purchased Items"}}</h3>
+               <span id="panel-title_report"> {{_ "Purchased Items"}} </span>
+                 <div id="print_button">
+                <a href="#" class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-print"></span> Print
+                </a>
+                 </div>
             </div>
             <div class="panel-body">
                 {{> reactiveTable collection=purchased class="table table-bordered table-hover" settings=tableSettings}}
@@ -403,6 +448,7 @@
          </p>
     </div>
     </center>
+   {{> userbanking }}
 </template>
 
 
@@ -524,8 +570,8 @@
 
 </template >
 
-<template name="user_banking">
+<template name="userbanking">
     <p> Users current Bank Balance : </p>
-    {{> user_banking }}
+    {{ user_banking }}
 
 </template>

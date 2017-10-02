@@ -8,9 +8,11 @@
     "babel-runtime": "6.18.0",
     "bcrypt": "^1.0.2",
     "jalaali-js": "^1.0.0",
-    "meteor-node-stubs": "~0.2.0",
+    "meteor-node-stubs": "^0.2.11",
     "moment": "^2.18.1",
     "moment-jalaali": "^0.7.0",
+    "pdfmake": "^0.1.33",
+    "pdfmake-browserified": "^0.1.4",
     "simpl-schema": "^0.3.2"
   }
 }

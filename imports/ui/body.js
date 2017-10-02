@@ -12,6 +12,16 @@ import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FilesCollection } from 'meteor/ostrio:files';
 import { FlowersCatalog } from '/imports/api/models.js';
+//import  pdfMake from 'meteor/alexwine:pdfmake';
+//import { PdfMake } from 'meteor/alexwine:pdfmake';
+import  pdfMake from 'meteor/nilsdannemann:pdfmake';
+//import pdfMake from 'pdfmake';
+
+function openPdf() {
+    var docDefinition = { content: "This is a sample PDF printed with pdfMake" };
+    createPdf(docDefinition).open();
+}
+
 import { Accounts } from 'meteor/accounts-base';
 
 const Collections = {FlowerBatchList};
@@ -172,14 +182,11 @@ if (Meteor.isCordova) {
             );
 
         }
-
     });
-
 }
 
     Meteor.startup(function () {
-
-
+        TimeSync.loggingEnabled = false; // turn off loggin for clock Timesync messages
         TAPi18n.setLanguage('fa');
         i18n.setLanguage('fa');
         var language = TAPi18next.detectLanguage();
@@ -218,7 +225,6 @@ if (Meteor.isCordova) {
         TAPi18n.setLanguage("fa");
         console.log("inside after language", TAPi18n.getLanguage());
        // i18n.setDefaultLanguage(TAPi18n.getLanguage());
-
 
 
     }); //Meteor.startup()
@@ -495,6 +501,26 @@ if (Meteor.isCordova) {
         }
     });
 
+    Template.report_user_purchase.events({
+        'click #print_button': function() {
+            var customerPurchase = Purchased.find({username: Meteor.userId()});
+
+            // Define the pdf-document
+            var docDefinition = {
+                content: [
+                    'Some text',
+                    customerPurchase,
+                    'Some text'
+                ]
+            };
+
+            // Start the pdf-generation process
+
+            pdfMake.createPdf(docDefinition).open();
+            //pdfMake.createPdf(docDefinition).print();
+
+        }
+    });
 
     //Template to display reports of buying activity for all users
     Template.Flowers_Catalog.helpers({
@@ -518,7 +544,8 @@ if (Meteor.isCordova) {
                     {key: 'Region', label: i18n('Region')},
                     {key: 'Seasonality', label: i18n('Season')},
                     {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img class="hvr-grow" class="img-thumbnail" width="30" height="30" src="/images/flower/'+ ProductImage +'" /></div>'); } },
-                    {key: 'Barcode', label:  i18n('Barcode') , fn: function(Barcode){ return new Spacebars.SafeString('<div>' + Barcode + '</div>'); }}
+                   // {key: 'Barcode', label:  i18n('Barcode') , fn: function(Barcode){ return new Spacebars.SafeString('<div>' + Barcode + '</div>'); }}
+                    {key: 'Barcode', label:  i18n('Barcode') , fn: function(Barcode){ return new Spacebars.SafeString('<div><span class="barcode"> *'+Barcode+'* </span></div>'); }}
 
                 ],
                 useFontAwesome: true,
@@ -764,6 +791,157 @@ if (Meteor.isCordova) {
                 }
             });
         }
+
+    });
+
+    Template.user_keyboard.events({
+        'click #keyboard': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = event.currentTarget.keyboard.value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_boardall': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_boardall').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board26': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board26').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board24': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board24').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board22': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board22').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board20': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board20').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board18': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board18').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board16': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board16').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board14': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board14').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board12': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board12').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board10': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board10').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board9': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board9').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board8': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board8').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board7': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board7').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board6': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board6').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board5': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board5').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board4': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board4').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board3': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board3').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board2': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board2').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #key_board1': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#key_board1').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        },
+        'click #Minimum': function (event,template) {
+            event.preventDefault();
+            var keyBoardValue = template.find('#Minimum').value;
+            console.log("Value of pressed key",keyBoardValue);
+            document.getElementById("num_container_field").value  =  keyBoardValue ;
+            return false;
+        }
     });
 
 
@@ -773,11 +951,11 @@ if (Meteor.isCordova) {
              var user_record = Meteor.users.findOne({ _id: Meteor.userId() });
             // var user_balance =  Meteor.users.findOne({_id: userId}, {fields: {'profile.balance': 1}});
             console.log("balance",user_record.profile.balance) ;
-            return user_record.profile.balance;
+            return user_record.profile.balance.toFixed(3);
         }
      });
 
-    Template.user_banking.helpers({
+    Template.userbanking.helpers({
         user_banking: function () {
             var data = {};
             //var transactions = {};
@@ -804,6 +982,8 @@ if (Meteor.isCordova) {
 
         }
     });
+
+
 
     Template.registerHelper('Collections', Collections);
 

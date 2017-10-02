@@ -83,10 +83,10 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #languages {position: absolute; left :735px; width: 80px; top:5px;}
 #Purchased_Items  {position: absolute; width:300px; height:15px; left :670px; top:610px; z-index:1; font-size: 24px; }
 
-div#buyitem_container {position: absolute; z-index: 1; left: 720px; top:540px; border-style: groove; }
+div#buyitem_container {position: absolute; z-index: 1; left: 720px; top:525px; border-style: groove; }
 div#num_container_field  { position: absolute; width:60px; height:40px; left :721px; top:621px;  font-size: 24px; }
 div#buy_item {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :760px; top:621px;  font-size: 24px; }
-div#BalanceLabel {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :740px; top:600px;  font-size: 24px; }
+div#BalanceLabel {style: bold; font-size: 24px;}
 
 button.buy_btn { background: red; text-align  : center; width: auto; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :740px; top:550px; font-size: 24px; }
 
@@ -97,6 +97,8 @@ div#num_container_label  {   position: absolute; width:20px; height:40px; left :
 .form_set_item_on_auction_container {width:850px;}
 
 div#enter_prpduct_heading { background-color: rgb(51, 122, 183);   }
+div#panel-title_report {display:inline-block;margin-right:10px;}
+div#print_button {display:inline-block;  float:right;  }
 
 ul li {
 
@@ -225,6 +227,14 @@ td {
 
 .form-group { size: 30;}
 
+.small-btn {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    margin: 2px;
+
+}
+
 .blue {background-color: blue; }
 .pink {background-color: pink; }
 .yellow {background-color: yellow; }
@@ -233,3 +243,5 @@ td {
 .red {background-color: red; }
 .orange {background-color: orange; }
 .white {background-color: white; }
+.purple {background-color: mediumpurple; }
+

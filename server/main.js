@@ -8,10 +8,7 @@ import { OldAuctions } from '/imports/api/models.js';
 
 
 if (Meteor.isServer) {
-
-
     Meteor.startup(() => {
-
 
         // code to run on server at startup
 
@@ -426,6 +423,8 @@ if (Meteor.isServer) {
         'buyItem': function (userId, numberOfItemsToBuy) {
            console.log("Buyer id= ",userId);
 
+
+
             if (userId == undefined || userId.length <= 0) {
                 throw new Meteor.Error(404, " Not a valid user id to buy items")
                 return
@@ -441,6 +440,10 @@ if (Meteor.isServer) {
                 throw new Meteor.Error(406, " No item for auction ");
                 return
             }
+
+            // check to see if the pressed button to buy is Minimum or All of the containers
+            if (numberOfItemsToBuy === "Minimum") { numberOfItemsToBuy = found_item_on_auction.MinContainerToBuy}
+            else if (numberOfItemsToBuy === "All") { numberOfItemsToBuy = found_item_on_auction.TotalContainers}
 
             var purchased_amount = 0.0 ;
             var return_result;
@@ -496,7 +499,7 @@ if (Meteor.isServer) {
                 Producer_id: found_item_on_auction.Producer_id,
                 Logo: found_item_on_auction.Logo,
                 ProductName: found_item_on_auction.ProductName,
-                Product_id: found_item_on_auction.Product_id,
+                Product_id:  found_item_on_auction.Product_id,
                 ProductImage: found_item_on_auction.ProductImage,
                 Buyer_Number: found_item_on_auction.Buyer_Number,
                 NumberOfItems: found_item_on_auction.NumberOfItems,
@@ -538,6 +541,7 @@ if (Meteor.isServer) {
         }
 
     });
+
 
     // Set which users can see server metrics
     Facts.setUserIdFilter(function () {
