@@ -83,3 +83,5 @@ http@1.2.12
 peppelg:bootstrap-3-modal
 nilsdannemann:pdfmake
 clinical:barcode
+maazalik:highcharts
+tmeasday:presence

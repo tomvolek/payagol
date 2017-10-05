@@ -39,12 +39,17 @@
 
     {{#if isInRole 'admin' 'default-group'}}
         {{> form_set_item_on_auction }}
-        {{> barcode_scanner}}
+       <!-- {{> barcode_scanner}} -->
+        {{> myTemplate chartId="test" chartWidth="100%" chartHeight="100%" chartObject=topGenresChart}}
 
     {{/if}}
 
+    {{> myTemplate chartId="test" chartWidth="100%" chartHeight="100%" chartObject=topGenresChart}}
+    {{> Auction_Audio}}
+</template>
 
-
+<template name="myTemplate">
+    <div id="{{chartId}}" style="height: {{chartHeight}}; width: {{chartWidth}}"></div>
 </template>
 
 <template name="footer">
@@ -91,34 +96,34 @@
 <template name="user_keyboard">
     <form id="keyboard">
         <div id ="firstrowbuttons">
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board20" value="20" name="20"> 20 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board22" value="22"  name="key_board24" >22 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board24" value="24"  name="keyboard" >24 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board26" value="26" name="26"> 26 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_boardall" value="All" name="all"> All </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board20" value="20" name="20"> 20 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board22" value="22"  name="key_board24" >22 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board24" value="24"  name="keyboard" >24 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board26" value="26" name="26"> 26 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_boardall" value="All" name="all"> All </button>
         </div>
         <div id ="secondrowbuttons">
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board10" value="10" name="10"> 10</button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board12" value="12" name="12"> 12 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board14" value="14" name="14"> 14 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board16" value="16" name="16"> 16 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board18" value="18" name="18"> 18</button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board10" value="10" name="10"> 10</button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board12" value="12" name="12"> 12 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board14" value="14" name="14"> 14 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board16" value="16" name="16"> 16 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board18" value="18" name="18"> 18</button>
 
         </div>
         <div id ="thirdrowrowbuttons">
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board5" value="5" name="5"> 5 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board6" value="6" name="6"> 6</button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board7" value="7" name="7"> 7 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board8" value="8" name="8"> 8 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board9" value="9" name="9"> 9 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board5" value="5" name="5"> 5 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board6" value="6" name="6"> 6</button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board7" value="7" name="7"> 7 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board8" value="8" name="8"> 8 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board9" value="9" name="9"> 9 </button>
 
         </div>
         <div id ="forthrowrowbuttons">
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board1" value="1" name="1"> 1 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board2" value="2" name="2"> 2</button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board3" value="3" name="3"> 3 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="key_board4" value="4" name="4"> 4 </button>
-            <button class="btn btn-danger small-btn"  type="submit" id="Minimum" value="Minimum" name="Minimum"> Min </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board1" value="1" name="1"> 1 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board2" value="2" name="2"> 2</button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board3" value="3" name="3"> 3 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board4" value="4" name="4"> 4 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="Minimum" value="Minimum" name="Minimum"> Min </button>
 
         </div>
 
@@ -318,10 +323,8 @@
             <td> <input type="text" name="User_email" value="{{emails.[0].address}}"/></td>
             <td> <input type="text" name="User_role"  value="{{roles}}"/></td>
             <td> <input type="text" name="User_created" value="{{createdAt}}"/></td>
-           
         </tr>
         {{/each}}
-        
         </table>
 
         <div style="text-align: center;">
@@ -341,7 +344,7 @@
     
     <form id="my_auction_price" >
         <input type="text" name="on_auction"/>
-    <input type="submit" class="auction_price" value={{_ "Set Auction"}} />
+        <button class="btn btn-danger auction_price" type="submit"  value={{_ "Set Auction"}} >{{_ "Set Auction"}}</button>
     </form>
 
 
@@ -427,21 +430,22 @@
 
 
 <template name="about">
+    <br><br>
     <center><div id="About_Payagol">
      <img src="/images/flower/payagol.jpg" height="100" width="100"/>
 
          <p><b>
              <h3><span>Who is Payagol  Market</span></h3>
         <p><strong></strong></p>
-        <p>Payagol Market is a modern business where Iranian wholesalers and florists can find the widest and deepest assortment of cut flowers and cut greens. Payagol Market represents high quality, interesting offers, and an excellent, personalised service.</p>
-        <p>&nbsp;</p>
-        <h4 style="font-size: 16px; color: #ff5d00; margin-top: 15px;">Payagol Florist Market is:</h4>
+        <p> {{_ "Payagol"}}</p>
+
+        <h4 style="font-size: 16px; color: #ff5d00; margin-top: 15px;">{{_ "Florist Market is:" }}</h4>
         <ul class="contentList">
-            <li>A reliable partner.</li>
-            <li>Largest assortment in Europe.</li>
-            <li>A hyper-modern, real-time purchasing system.</li>
-            <li>Personalised service.</li>
-            <li>Daily, deeply discounted offers.</li>
+            <li>{{_ "A reliable partner."}}</li>
+            <li>{{_ "Largest assortment in Iran."}}</li>
+            <li>{{_ "A hyper-modern, real-time purchasing system."}}</li>
+            <li>{{_ "Personalised service."}}</li>
+            <li>{{_ "Daily, deeply discounted offers."}}</li>
         </ul>
 
          </b>
@@ -573,5 +577,27 @@
 <template name="userbanking">
     <p> Users current Bank Balance : </p>
     {{ user_banking }}
+
+</template>
+
+<template name="Auction_Audio">
+
+    <h2>{{_ "Video Chat"}}</h2>
+    <div id="video-container">
+        <!-- note the 'autoplay' -->
+        {{_ "Your friend"}}: <video id="theirVideo" class="theirVideo" autoplay></video>
+        <video id="myVideo" muted="false" class="myVideo" autoplay></video>: {{_ "You"}}
+    </div>
+
+    <h2>{{_ "Controls"}}</h2>
+    <div>
+        <p>{{_ "Your id"}}: <span id="myPeerId">...</span></p>
+        <p>{{_ "Make a call"}}</p><br>
+        {{#each users}}
+            <p><a href="#" id="makeCall">{{_ "Call"}} {{#each emails}}{{address}}{{/each}}</a></p>
+        {{/each}}
+        <p><a href="#" id="endCall">{{_ "End Call"}}</a></p>
+    </div>
+
 
 </template>

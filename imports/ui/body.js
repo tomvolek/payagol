@@ -12,6 +12,7 @@ import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FilesCollection } from 'meteor/ostrio:files';
 import { FlowersCatalog } from '/imports/api/models.js';
+
 //import  pdfMake from 'meteor/alexwine:pdfmake';
 //import { PdfMake } from 'meteor/alexwine:pdfmake';
 import  pdfMake from 'meteor/nilsdannemann:pdfmake';
@@ -163,6 +164,8 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
             console.log("onError", arguments);
         }
     });
+
+   Meteor.subscribe('presences');
 
     // add support for cordova plugin to read in bar codes.
 if (Meteor.isCordova) {
@@ -515,7 +518,6 @@ if (Meteor.isCordova) {
             };
 
             // Start the pdf-generation process
-
             pdfMake.createPdf(docDefinition).open();
             //pdfMake.createPdf(docDefinition).print();
 
@@ -727,10 +729,7 @@ if (Meteor.isCordova) {
                 CreatorId:CreatorId,
                 AuctionDate:AuctionDate
             };
-
-
             Meteor.call('UpdateItem', data);
-
         },
 
         'click #Search_Item': function (event, template) {
@@ -754,8 +753,6 @@ if (Meteor.isCordova) {
                 $('#created-datepicker').datepicker({language: 'fa',todayHighlight: true } );
                 $('#auctiondate-datepicker').datepicker({language: 'fa',todayHighlight: true});
             }
-
-
         },
         'click #auctiondate-datepicker': function (event, template) {
             event.preventDefault();
@@ -1019,6 +1016,51 @@ if (Meteor.isCordova) {
         }
     });
 
+    Template.myTemplate.helpers({
+    topGenresChart: function() {
+        return {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: this.username + "'s top genres"
+            },
+            tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        },
+                        connectorColor: 'silver'
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'genre',
+                data: [
+                    ['Adventure',   45.0],
+                    ['Action',       26.8],
+                    ['Ecchi',   12.8],
+                    ['Comedy',    8.5],
+                    ['Yuri',     6.2]
+                ]
+            }]
+        };
+    }
+});
+
+
+
     Template.form_edit_user.events({
         'click #Add_Item': function (event, template) {
             event.preventDefault();
@@ -1106,17 +1148,92 @@ if (Meteor.isCordova) {
 //  passwordSignupFields: "USERNAME_ONLY"
 //});
 
-Template._loginButtonsLoggedInDropdown.events({
+    Template._loginButtonsLoggedInDropdown.events({
     'click #login-buttons-edit-profile': function(event) {
         Router.go('profileEdit');
     }
-});
+    });
 
-Template._loginButtonsAdditionalLoggedInDropdownActions.events({
+    Template._loginButtonsAdditionalLoggedInDropdownActions.events({
     'click #login-buttons-edit-profile': function(event) {
         console.log('edit');
         Router.go('settings');
     }
+    });
+
+Template.Auction_Audio.events({
+    "click #makeCall": function () {
+        var user = this;
+        var outgoingCall = peer.call(user.profile.peerId, window.localStream);
+        window.currentCall = outgoingCall;
+        outgoingCall.on('stream', function (remoteStream) {
+            window.remoteStream = remoteStream;
+            var video = document.getElementById("theirVideo")
+            video.src = URL.createObjectURL(remoteStream);
+        });
+    },
+    "click #endCall": function () {
+        window.currentCall.close();
+    }
+});
+
+Template.Auction_Audio.helpers({
+    users: function () {
+        // exclude the currentUser
+        var userIds = Presences.find().map(function(presence) {return presence.userId;});
+        return Meteor.users.find({_id: {$in: userIds, $ne: Meteor.userId()}});
+    }
+});
+
+Template.Auction_Audio.onCreated(function () {
+    Meteor.subscribe("presences");
+    Meteor.subscribe("users");
+
+    window.peer = new Peer({
+        key: '2p9ffp7ol6p3nmi',  // change this key
+        debug: 3,
+        config: {'iceServers': [
+            { url: 'stun:stun.l.google.com:19302' },
+            { url: 'stun:stun1.l.google.com:19302' },
+        ]}
+    });
+
+    // This event: remote peer receives a call
+    peer.on('open', function () {
+        $('#myPeerId').text(peer.id);
+        // update the current user's profile
+        Meteor.users.update({_id: Meteor.userId()}, {
+            $set: {
+                profile: { peerId: peer.id}
+            }
+        });
+    });
+
+    // This event: remote peer receives a call
+    peer.on('call', function (incomingCall) {
+        window.currentCall = incomingCall;
+        incomingCall.answer(window.localStream);
+        incomingCall.on('stream', function (remoteStream) {
+            window.remoteStream = remoteStream;
+            var video = document.getElementById("theirVideo")
+            video.src = URL.createObjectURL(remoteStream);
+        });
+    });
+
+    navigator.getUserMedia = ( navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia );
+
+    // get audio/video
+    navigator.getUserMedia({audio:true, video: true}, function (stream) {
+            //display video
+            var video = document.getElementById("myVideo");
+            video.src = URL.createObjectURL(stream);
+            window.localStream = stream;
+        }, function (error) { console.log(error); }
+    );
+
 });
 
 
