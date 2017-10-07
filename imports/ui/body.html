@@ -33,11 +33,14 @@
             {{> form_buy_item}}
             {{> user_keyboard}}
          </div>
+            {{> mychat}}
+            <br><br>
             {{> report_user_purchase}}
         {{else}}
     {{/if}}
 
     {{#if isInRole 'admin' 'default-group'}}
+        {{> mychat}}
         {{> form_set_item_on_auction }}
        <!-- {{> barcode_scanner}} -->
         {{> myTemplate chartId="test" chartWidth="100%" chartHeight="100%" chartObject=topGenresChart}}
@@ -46,6 +49,7 @@
 
     {{> myTemplate chartId="test" chartWidth="100%" chartHeight="100%" chartObject=topGenresChart}}
     {{> Auction_Audio}}
+
 </template>
 
 <template name="myTemplate">
@@ -87,7 +91,7 @@
 <template name="form_buy_item">
     <form id="buyitem">
         <input  type="text" id="num_container_field" name="buyitem"/>
-        <input class="btn btn-danger"  type="submit" id="buy_item" value={{_ "Buy"}} />  
+        <input class="btn btn-danger custom1"  type="submit" id="buy_item" value={{_ "Buy"}} />
     </form>
 
 </template>
@@ -96,6 +100,8 @@
 <template name="user_keyboard">
     <form id="keyboard">
         <div id ="firstrowbuttons">
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board16" value="16" name="16"> 16 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board18" value="18" name="18"> 18</button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board20" value="20" name="20"> 20 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board22" value="22"  name="key_board24" >22 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board24" value="24"  name="keyboard" >24 </button>
@@ -103,27 +109,22 @@
             <button class="btn btn-primary small-btn"  type="submit" id="key_boardall" value="All" name="all"> All </button>
         </div>
         <div id ="secondrowbuttons">
-            <button class="btn btn-primary small-btn"  type="submit" id="key_board10" value="10" name="10"> 10</button>
-            <button class="btn btn-primary small-btn"  type="submit" id="key_board12" value="12" name="12"> 12 </button>
-            <button class="btn btn-primary small-btn"  type="submit" id="key_board14" value="14" name="14"> 14 </button>
-            <button class="btn btn-primary small-btn"  type="submit" id="key_board16" value="16" name="16"> 16 </button>
-            <button class="btn btn-primary small-btn"  type="submit" id="key_board18" value="18" name="18"> 18</button>
 
-        </div>
-        <div id ="thirdrowrowbuttons">
-            <button class="btn btn-primary small-btn"  type="submit" id="key_board5" value="5" name="5"> 5 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board6" value="6" name="6"> 6</button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board7" value="7" name="7"> 7 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board8" value="8" name="8"> 8 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board9" value="9" name="9"> 9 </button>
-
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board10" value="10" name="10"> 10</button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board12" value="12" name="12"> 12 </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board14" value="14" name="14"> 14 </button>
         </div>
-        <div id ="forthrowrowbuttons">
+        <div id ="thirdrowbuttons">
             <button class="btn btn-primary small-btn"  type="submit" id="key_board1" value="1" name="1"> 1 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board2" value="2" name="2"> 2</button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board3" value="3" name="3"> 3 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board4" value="4" name="4"> 4 </button>
-            <button class="btn btn-primary small-btn"  type="submit" id="Minimum" value="Minimum" name="Minimum"> Min </button>
+            <button class="btn btn-primary small-btn"  type="submit" id="key_board5" value="5" name="5"> 5 </button>
+            <button class="btn btn-primary custom1"  type="submit" id="Minimum" value="Minimum" name="Minimum"> Minimum </button>
 
         </div>
 
@@ -583,21 +584,58 @@
 <template name="Auction_Audio">
 
     <h2>{{_ "Video Chat"}}</h2>
-    <div id="video-container">
-        <!-- note the 'autoplay' -->
-        {{_ "Your friend"}}: <video id="theirVideo" class="theirVideo" autoplay></video>
-        <video id="myVideo" muted="false" class="myVideo" autoplay></video>: {{_ "You"}}
-    </div>
+    <table  border="2" >
+        <div id="video-container">
+        <thead id="head1">
+            <tr>
+            </tr>
+        </thead>
+        <tbody>
 
-    <h2>{{_ "Controls"}}</h2>
+            <tr>
+             <td>
+                    <!-- note the 'autoplay' -->
+                    {{_ "Your friend"}}: <video id="theirVideo" class="theirVideo" autoplay></video>
+             </td>
+             <td>
+                 <video id="myVideo" muted="false" class="myVideo" autoplay></video>
+                 <p>{{_ "Your id"}}: <span id="myPeerId">...</span></p>
+             </td>
+            </tr>
+
+        </tbody>
+        </div>
+    </table>
+
+
+            <h2>{{_ "Controls"}}</h2>
     <div>
-        <p>{{_ "Your id"}}: <span id="myPeerId">...</span></p>
         <p>{{_ "Make a call"}}</p><br>
         {{#each users}}
-            <p><a href="#" id="makeCall">{{_ "Call"}} {{#each emails}}{{address}}{{/each}}</a></p>
+            <a href="#" id="makeCall">{{_ "Call"}} {{#each emails}}{{address}}{{/each}}</a><br>
         {{/each}}
         <p><a href="#" id="endCall">{{_ "End Call"}}</a></p>
     </div>
+</template>
 
 
+
+
+<template name="mychat">
+<div id="chat_container">
+<div class="messages">
+    {{#each messages}}
+        <div class="message-line {{type}}">
+            <div class="message">
+                {{#if user}}
+                    <b class="username">{{user}}</b>
+                    <br/>
+                {{/if}}
+                {{text}}
+            </div>
+        </div>
+    {{/each}}
+</div>
+<input id="chat_input" type="text" placeholder={{_ "Send a new message"}} />
+</div>
 </template>

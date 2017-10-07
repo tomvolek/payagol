@@ -83,35 +83,37 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #languages {position: absolute; left :735px; width: 80px; top:5px;}
 #Purchased_Items  {position: absolute; width:300px; height:15px; left :670px; top:610px; z-index:1; font-size: 24px; }
 
-div#buyitem_container {position: absolute; z-index: 1; left: 720px; top:520px; border-style: groove; }
+div#buyitem_container {position: absolute; z-index: 1; width:366px; left: 720px; top:500px; border-style: groove; }
 div#num_container_field  { position: absolute; width:60px; height:40px; left :721px; top:621px;  font-size: 24px; }
-div#buy_item {position: absolute; text-align  : center;  padding-left:10px; padding-right:10px; height:15px; left :760px; top:621px;  font-size: 24px; }
+div#buy_item { width: 40 px; text-align  : center;  padding-left:10px; padding-right:10px; height:15px;  font-size: 24px; }
 div#BalanceLabel {style: bold; font-size: 24px; background-color: bisque}
 
-button.buy_btn { background: red; text-align  : center; width: auto; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :740px; top:550px; font-size: 24px; }
-
-
+button.buy_btn { background: red; text-align  : center; width: 50px; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :740px; top:550px; font-size: 24px; }
+div#Minimum {width:50px;}
 div#num_container_label  {   position: absolute; width:20px; height:40px; left :740px; top:500px; z-index:1; font-size: 16px; }
-#reactive-table-1 {width:800px;}
-#reactive-table-1 tr { line-height:30px; }
-.form_set_item_on_auction_container {width:850px;}
-
+div#reactive-table-1 {width:800px;}
+div#reactive-table-1 tr { line-height:30px; }
 div#enter_prpduct_heading { background-color: rgb(51, 122, 183);   }
 div#panel-title_report {display:inline-block;margin-right:10px;}
 div#print_button {display:inline-block;  float:right;  }
-
-.myVideo {width:300px; height:300px;}
+div#chat-message {  width: 500px;  height: 50px;  }
+#messages { width: 700px;  height: 300px;  border: 1px solid rgb(230, 230, 230);  margin: 0px 0px 10px 0px;  }
 
 ul li {
-
     margin: 5px;
-
 }
+.custom1 {  width: 90px !important;  }
+.custom2 {  width: 46px !important;  }
+
 .AuctionDate {height: 30px;}
 .ProductName {height: 30px;}
 .Buyer_Number {height: 30px;}
 .NumberOfContainersBought {height: 30px;}
 .Current_auction_price {height: 20px;}
+.form_set_item_on_auction_container {width:850px;}
+.myVideo {width:200px; height:200px;}
+.theirVideo {width:200px; height:200px;}
+
 
 
 #unit {width: 30px;}
@@ -247,3 +249,61 @@ td {
 .white {background-color: white; }
 .purple {background-color: mediumpurple; }
 
+
+
+.top-bar {
+    padding: 10px 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.messages {
+    border-style: groove;
+    background-color: #f1f1f1;
+    padding: 10px 5px;
+    overflow: auto;
+    width: 360px;
+    height:100px;
+    display: flex;
+    flex-direction: column;
+    direction:ltr;
+
+}
+
+div#chat_container{
+    display: inline-block;
+    float: right;
+    position: absolute;
+    z-index: 1;
+    border-style: groove;
+    top: 710px;
+    left: 720px;
+    direction:rtl;
+}
+
+
+.message {
+    display: inline-block;
+    border-radius: 15px;
+    color: white;
+    padding: 5px 10px;
+    min-width: 200px;
+}
+
+.message-line.user .message {
+    background-color: #7979EF;
+}
+
+.message-line.self {
+    text-align: right;
+}
+
+.message-line.self .message {
+    background-color: #c3c3c3;
+}
+input {
+    line-height: 1em;
+    font-size: 1.2em;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-width: 1px 0 0 0;
+}

@@ -189,11 +189,14 @@ if (Meteor.isCordova) {
 }
 
     Meteor.startup(function () {
+
+
         TimeSync.loggingEnabled = false; // turn off loggin for clock Timesync messages
         TAPi18n.setLanguage('fa');
         i18n.setLanguage('fa');
         var language = TAPi18next.detectLanguage();
         console.log("our language===============",language);
+
 
         // check to  see if we have any item
          function  hasFlowersToSell() {
@@ -230,7 +233,41 @@ if (Meteor.isCordova) {
        // i18n.setDefaultLanguage(TAPi18n.getLanguage());
 
 
+
+
     }); //Meteor.startup()
+   const streamer = new Meteor.Streamer('chat');
+    messages = new Mongo.Collection(null);
+    window.sendMessage = function(text) {
+        streamer.emit('message', {
+            type: 'user',
+            user: Meteor.user() ? Meteor.user().username : 'anonymous',
+            text: text
+        });
+        messages.insert({
+            type: 'self',
+            text: text
+        });
+    };
+
+    streamer.on('message', function(message) {
+        messages.insert(message);
+    });
+     //set up templates for chat
+    Template.mychat.events({
+        'keydown input'(e) {
+            if (e.which === 13) {
+                window.sendMessage(e.target.value);
+                e.target.value = '';
+            }
+        }
+    });
+
+    Template.mychat.helpers({
+        messages() {
+            return messages.find();
+        }
+    });
 
     // draw the clock face
     Template.draw_clock.onRendered (function(){
@@ -1216,7 +1253,8 @@ Template.Auction_Audio.onCreated(function () {
         incomingCall.on('stream', function (remoteStream) {
             window.remoteStream = remoteStream;
             var video = document.getElementById("theirVideo")
-            video.src = URL.createObjectURL(remoteStream);
+            //video.src = URL.createObjectURL(remoteStream);
+            video.srcObject = remoteStream;
         });
     });
 
@@ -1229,7 +1267,8 @@ Template.Auction_Audio.onCreated(function () {
     navigator.getUserMedia({audio:true, video: true}, function (stream) {
             //display video
             var video = document.getElementById("myVideo");
-            video.src = URL.createObjectURL(stream);
+            //video.src = URL.createObjectURL(stream);
+            video.srcObject = stream;
             window.localStream = stream;
         }, function (error) { console.log(error); }
     );

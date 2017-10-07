@@ -9,8 +9,20 @@ import { OldAuctions } from '/imports/api/models.js';
 
 if (Meteor.isServer) {
     Meteor.startup(() => {
-
+        const streamer = new Meteor.Streamer('chat');
         // code to run on server at startup
+        streamer.allowRead('all');
+       // streamer.allowWrite('all');
+        streamer.allowWrite('notifications', function(eventName, type) { // Only admin users can write notificaiton events
+            if (this.userId && type === 'new-message') {                   // and only if the first param is 'new-message'
+                const user = Meteor.users.findOne(this.userId);
+                if (user && user.admin === true) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
 
         // setup the upload directory for images, etc.
         UploadServer.init({
@@ -251,7 +263,8 @@ if (Meteor.isServer) {
         });
 
         Meteor.publish("users", function () {
-            return Meteor.users.find({}, {fields: {"profile.peerId": true, "emails.address": true} });
+            //return Meteor.users.find({}, {fields: {"profile.peerId": true, "emails.address": true} });
+            return Meteor.users.find({} );
         });
     });   // End Meteor.Startup
 
