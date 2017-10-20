@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FlowersCatalog } from '/imports/api/models.js';
-import { Accounts } from 'meteor/accounts-base';
 import { OldAuctions } from '/imports/api/models.js';
 
 
@@ -12,7 +12,9 @@ if (Meteor.isServer) {
         const streamer = new Meteor.Streamer('chat');
         // code to run on server at startup
         streamer.allowRead('all');
-       // streamer.allowWrite('all');
+        streamer.allowWrite('all');
+
+        /*
         streamer.allowWrite('notifications', function(eventName, type) { // Only admin users can write notificaiton events
             if (this.userId && type === 'new-message') {                   // and only if the first param is 'new-message'
                 const user = Meteor.users.findOne(this.userId);
@@ -20,9 +22,8 @@ if (Meteor.isServer) {
                     return true;
                 }
             }
-
             return false;
-        });
+        }); */
 
         // setup the upload directory for images, etc.
         UploadServer.init({
@@ -85,14 +86,16 @@ if (Meteor.isServer) {
         // console.log("username=",foundUser);
 
          var foundUser = "";
-         if (!Meteor.users.findOne({"username": "ajayebi"})) {
+         if (!Meteor.users.findOne({"username": "aghdas"})) {
              var myusers = [
-                 {name: "ajayebi", email: "ajayebi@payagol.com", roles: ['admin'],user_number:100},
-                 {name: "tom", email: "tomtom@payagol.com", roles: ['admin'],user_number:101},
-                 {name: "essi", email: "essi@payagol.com",  roles: ['buyer'],user_number:102},
+                // {name: "ajayebi", email: "ajayebi@payagol.com", roles: ['admin'],user_number:100},
+                // {name: "tom", email: "tomtom@payagol.com", roles: ['admin'],user_number:101},
+                // {name: "essi", email: "essi@payagol.com",  roles: ['buyer'],user_number:102},
                 // {name: "tomvolek1", email: "tomvolek@payagol.com", roles: ['buyer']},
-                 {name: "feri", email: "feri@payagol.com", roles: ['staff'],user_number:103},
-                 {name: "Jalal", email: "jalal@payagol.com", roles: ['management'],user_number:104}
+                // {name: "feri", email: "feri@payagol.com", roles: ['staff'],user_number:103},
+                // {name: "Jalal", email: "jalal@payagol.com", roles: ['management'],user_number:104}
+                  {name: "aghdas", email: "aghdas@payagol.com", roles: ['admin'],user_number:105},
+
              ];
 
              _.each(myusers, function (user) {
@@ -106,6 +109,8 @@ if (Meteor.isServer) {
                      profile: {name: user.name},
                      profile: {balance: 1000000}
                  });
+
+
 
                  if (user.roles.length > 0 ) {
                      Roles.addUsersToRoles(id, user.roles, 'default-group')
@@ -133,6 +138,9 @@ if (Meteor.isServer) {
              });
          }
          else {}
+
+         // add a balance feild to the user account
+
 
         //Setup mail :  In  server code: define a method that the client can call
         Meteor.methods({
@@ -268,6 +276,15 @@ if (Meteor.isServer) {
         });
     });   // End Meteor.Startup
 
+
+    // add new feild balance to any new user being created
+    Accounts.onCreateUser(function(options, user) {
+        user.balance = 10000;
+        if (options.profile) {
+            user.profile = options.profile;
+        }
+        return user;
+    });
 
     //Server side methods,  Call moveClock function after this time to move he price position
     Meteor.methods({

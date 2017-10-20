@@ -71,7 +71,7 @@ div#product_image_table {  z-index: 1; left:610px; top:405px; border-style: groo
 #head2 { font-size: 22px; }
 
 button.inc_btn { background: red;  z-index:1; font-size: 24px; }
-#on_auction_container {position: absolute; z-index: 1; left: 730px; top:540px; border-style: groove;}
+#on_auction_container {width: 368px; position: absolute; z-index: 1; left: 720px; top:598px; border-style: groove;}
 
 
 #Search_Item {  text-align  : center; width: auto; padding-left:10px; padding-right:10px;  z-index:1; font-size: 16px; }
@@ -83,7 +83,7 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #languages {position: absolute; left :735px; width: 80px; top:5px;}
 #Purchased_Items  {position: absolute; width:300px; height:15px; left :670px; top:610px; z-index:1; font-size: 24px; }
 
-div#buyitem_container {position: absolute; z-index: 1; width:366px; left: 720px; top:500px; border-style: groove; }
+div#buyitem_container { z-index: 1; width:366px; left: 720px; top:500px; border-style: groove; }
 div#num_container_field  { position: absolute; width:60px; height:40px; left :721px; top:621px;  font-size: 24px; }
 div#buy_item { width: 40 px; text-align  : center;  padding-left:10px; padding-right:10px; height:15px;  font-size: 24px; }
 div#BalanceLabel {style: bold; font-size: 24px; background-color: bisque}
@@ -104,20 +104,21 @@ ul li {
 }
 .custom1 {  width: 90px !important;  }
 .custom2 {  width: 46px !important;  }
+.custom3 {  width: 135px !important;  height: 40px; font-size: 22px ;}
 
 .AuctionDate {height: 30px;}
 .ProductName {height: 30px;}
 .Buyer_Number {height: 30px;}
 .NumberOfContainersBought {height: 30px;}
 .Current_auction_price {height: 20px;}
-.form_set_item_on_auction_container {width:850px;}
+.form_set_item_on_auction_container {width:850px; }
+
 .myVideo {width:200px; height:200px;}
 .theirVideo {width:200px; height:200px;}
 
 
-
 #unit {width: 30px;}
-#auction_price {width: 20em;  height: 2em; z-index:1;}
+#auction_price {width: 60em;  height: 2em; z-index:1;}
 #AdminSection {text-align: center;}
 div#report_image {width: 20px; height: 20px;}
 .ProductImage {width: 20px; height: 20px;}
@@ -256,14 +257,15 @@ td {
     border-bottom: 1px solid #ddd;
 }
 
-.messages {
+.messages{
     border-style: groove;
     background-color: #f1f1f1;
     padding: 10px 5px;
     overflow: auto;
     width: 360px;
-    height:100px;
+    height:80px;
     display: flex;
+
     flex-direction: column;
     direction:ltr;
 
@@ -272,12 +274,12 @@ td {
 div#chat_container{
     display: inline-block;
     float: right;
-    position: absolute;
     z-index: 1;
     border-style: groove;
     top: 710px;
     left: 720px;
     direction:rtl;
+
 }
 
 
@@ -306,4 +308,66 @@ input {
     padding: 10px 15px;
     border: 1px solid #ddd;
     border-width: 1px 0 0 0;
+}
+
+
+
+
+
+.col-xs-12 {
+    background-color: #fff;
+}
+
+#sidebar {
+    height: 100%;
+    padding-right: 0;
+    padding-top: 20px;
+}
+#sidebar .nav {
+    width: 95%;
+    background-color: #fff;
+}
+#sidebar li {
+    border:0 #f2f2f2 solid;
+    border-bottom-width:1px;
+}
+
+/* collapsed sidebar styles */
+.row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+}
+.row-offcanvas-right
+.sidebar-offcanvas {
+    right: -41.6%;
+}
+
+.row-offcanvas-left
+.sidebar-offcanvas {
+    left: -41.6%;
+}
+.row-offcanvas-right.active {
+    right: 41.6%;
+}
+.row-offcanvas-left.active {
+    left: 41.6%;
+}
+.sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 41.6%;
+}
+#sidebar {
+    padding-top:0;
+}
+
+
+
+/* always show hamburger */
+@media (min-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
 }

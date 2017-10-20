@@ -13,6 +13,7 @@
     "moment-jalaali": "^0.7.0",
     "pdfmake": "^0.1.33",
     "pdfmake-browserified": "^0.1.4",
-    "simpl-schema": "^0.3.2"
+    "simpl-schema": "^0.3.2",
+    "vue": "^2.4.4"
   }
 }

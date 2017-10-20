@@ -2,28 +2,32 @@ import { Template }    from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n }   from 'meteor/tap:i18n';
 import { TAPi18nui} from 'meteor/tap:i18n-ui';
-import  { Moment }  from 'meteor/momentjs:moment';
+import { Moment }  from 'meteor/momentjs:moment';
 import { UploadServer } from 'meteor/tomi:upload-server';
 import { UploadJquery } from 'meteor/tomi:upload-jquery';
-//import { FlowRouter}  from 'meteor/kadira:flow-router';
 import { IronRouter } from  'meteor/iron:router' ;
 import { PricePosition } from '/imports/api/models.js';
 import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FilesCollection } from 'meteor/ostrio:files';
 import { FlowersCatalog } from '/imports/api/models.js';
+import Vue from 'vue';
+import iView from 'meteor/efrancis:iview';
+
 
 //import  pdfMake from 'meteor/alexwine:pdfmake';
 //import { PdfMake } from 'meteor/alexwine:pdfmake';
-import  pdfMake from 'meteor/nilsdannemann:pdfmake';
+// import  pdfMake from 'meteor/nilsdannemann:pdfmake';
 //import pdfMake from 'pdfmake';
+//const  pdfmake = require('pdfmake');
+//var pdfmake = require("/node_modules/pdfmake/build/pdfmake.min.js");
 
 function openPdf() {
     var docDefinition = { content: "This is a sample PDF printed with pdfMake" };
     createPdf(docDefinition).open();
 }
 
-import { Accounts } from 'meteor/accounts-base';
+//import { Accounts } from 'meteor/accounts-base';
 
 const Collections = {FlowerBatchList};
 
@@ -31,12 +35,10 @@ import "./body.html";
 
 Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا";
 
-
     TAPi18n.setLanguage('fa');
     i18n.setLanguage('fa');
     var language = TAPi18next.detectLanguage();
     console.log("our language===============",language);
-
 
     var default_lang = TAPi18n.getLanguage();
     //default_lang = 'fa'; // due to a bug in TAPi18n.setLanguage, we cheat here and set default lang to fa
@@ -107,7 +109,7 @@ Uploader.localisation.dropFiles = "رها کردن فایل ها در اینجا
                     done: "انجام شده",
                     cancel: "لغو"
                     }
-               // drawClock()  ; // redraw the numbers around the clock if language is changed
+                drawClock()  ; // redraw the numbers around the clock if language is changed
             }
         }
     });
@@ -190,7 +192,7 @@ if (Meteor.isCordova) {
 
     Meteor.startup(function () {
 
-
+        Vue.use(iView);   // load the Vueand iview UI libraries.
         TimeSync.loggingEnabled = false; // turn off loggin for clock Timesync messages
         TAPi18n.setLanguage('fa');
         i18n.setLanguage('fa');
@@ -236,7 +238,7 @@ if (Meteor.isCordova) {
 
 
     }); //Meteor.startup()
-   const streamer = new Meteor.Streamer('chat');
+    const streamer = new Meteor.Streamer('chat');
     messages = new Mongo.Collection(null);
     window.sendMessage = function(text) {
         streamer.emit('message', {
@@ -248,6 +250,11 @@ if (Meteor.isCordova) {
             type: 'self',
             text: text
         });
+        //$("#messages").animate({ scrollTop: 0 }, "fast");
+        var myDiv = document.getElementById('messages');
+
+        myDiv.scrollIntoView(false);
+
     };
 
     streamer.on('message', function(message) {
@@ -268,6 +275,9 @@ if (Meteor.isCordova) {
             return messages.find();
         }
     });
+
+
+
 
     // draw the clock face
     Template.draw_clock.onRendered (function(){
@@ -315,30 +325,30 @@ if (Meteor.isCordova) {
 
         ctx.font = "bold 30px Arial";
         ctx.fillText(i18n('zero'), 418, 80);
-        ctx.fillText(i18n('ten'), 640, 151);
-        ctx.fillText(i18n('twenty'), 785, 355);
-        ctx.fillText(i18n('thirty'), 780, 580);
-        ctx.fillText(i18n('forty'), 640, 775);
-        ctx.fillText(i18n('fifty'), 410, 851);
-        ctx.fillText(i18n('sixty'), 175, 778);
-        ctx.fillText(i18n('seventy'), 35, 580);
-        ctx.fillText(i18n('eighty'), 35, 355);
-        ctx.fillText(i18n('ninety'), 175, 151);
+        ctx.fillText(i18n('hundred'), 640, 151);
+        ctx.fillText(i18n('twohundred'), 785, 355);
+        ctx.fillText(i18n('threehundred'), 780, 580);
+        ctx.fillText(i18n('fourhundred'), 640, 775);
+        ctx.fillText(i18n('fivehundred'), 410, 851);
+        ctx.fillText(i18n('sixhundred'), 175, 778);
+        ctx.fillText(i18n('sevenhundred'), 15, 580);
+        ctx.fillText(i18n('eighthundred'), 15, 355);
+        ctx.fillText(i18n('ninehundred'), 165, 151);
 
     } else if (TAPi18n.getLanguage() === 'fa') {
         console.log("inside fa drawClock function");
         i18n.setLanguage('fa');
         ctx.font = "bold 50px Arial";
         ctx.fillText(i18n('zero'), 413, 80);
-        ctx.fillText(i18n('ten'), 640, 161);
-        ctx.fillText(i18n('twenty'), 780, 365);
-        ctx.fillText(i18n('thirty'), 780, 590);
-        ctx.fillText(i18n('forty'), 640, 790);
-        ctx.fillText(i18n('fifty'), 410, 862);
-        ctx.fillText(i18n('sixty'), 175, 788);
-        ctx.fillText(i18n('seventy'), 25, 580);
-        ctx.fillText(i18n('eighty'), 25, 355);
-        ctx.fillText(i18n('ninety'), 170, 161);
+        ctx.fillText(i18n('hundred'), 640, 161);
+        ctx.fillText(i18n('twohundred'), 780, 365);
+        ctx.fillText(i18n('threehundred'), 780, 590);
+        ctx.fillText(i18n('fourhundred'), 640, 790);
+        ctx.fillText(i18n('fivehundred'), 410, 862);
+        ctx.fillText(i18n('sixhundred'), 140, 788);
+        ctx.fillText(i18n('sevenhundred'), 2, 580);
+        ctx.fillText(i18n('eighthundred'), 2, 355);
+        ctx.fillText(i18n('ninehundred'), 140, 161);
 
         ctx.font = "bold 20px Arial";
         ctx.fillText(i18n('one'), 441, 87);
@@ -543,16 +553,17 @@ if (Meteor.isCordova) {
 
     Template.report_user_purchase.events({
         'click #print_button': function() {
-            var customerPurchase = Purchased.find({username: Meteor.userId()});
+            //var customerPurchase = Purchased.find({username: Meteor.userId()});
 
-            // Define the pdf-document
+            /*Define the pdf-document
             var docDefinition = {
                 content: [
                     'Some text',
                     customerPurchase,
                     'Some text'
                 ]
-            };
+            }; */
+            var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
 
             // Start the pdf-generation process
             pdfMake.createPdf(docDefinition).open();
@@ -585,7 +596,6 @@ if (Meteor.isCordova) {
                     {key: 'ProductImage', label:  i18n('Product_Image') , fn: function(ProductImage){ return new Spacebars.SafeString('<div id="report_image"><img class="hvr-grow" class="img-thumbnail" width="30" height="30" src="/images/flower/'+ ProductImage +'" /></div>'); } },
                    // {key: 'Barcode', label:  i18n('Barcode') , fn: function(Barcode){ return new Spacebars.SafeString('<div>' + Barcode + '</div>'); }}
                     {key: 'Barcode', label:  i18n('Barcode') , fn: function(Barcode){ return new Spacebars.SafeString('<div><span class="barcode"> *'+Barcode+'* </span></div>'); }}
-
                 ],
                 useFontAwesome: true,
                 group: 'flowerscatalog'
@@ -825,8 +835,17 @@ if (Meteor.isCordova) {
                 }
             });
         }
-
     });
+
+    Template.navigation.events({
+        'click #menu-toggle': function (event,template) {
+           event.preventDefault();
+           console.log("Navigation");
+            $('.row-offcanvas').toggleClass('active');
+
+
+    }
+});
 
     Template.user_keyboard.events({
         'click #keyboard': function (event,template) {
@@ -984,8 +1003,8 @@ if (Meteor.isCordova) {
             //var userId = Meteor.userId();
              var user_record = Meteor.users.findOne({ _id: Meteor.userId() });
             // var user_balance =  Meteor.users.findOne({_id: userId}, {fields: {'profile.balance': 1}});
-            console.log("balance",user_record.profile.balance) ;
-            return user_record.profile.balance.toFixed(3);
+            console.log("balance",user_record.balance) ;
+            return user_record.balance.toFixed(3);
         }
      });
 
@@ -1053,6 +1072,7 @@ if (Meteor.isCordova) {
         }
     });
 
+
     Template.myTemplate.helpers({
     topGenresChart: function() {
         return {
@@ -1094,7 +1114,7 @@ if (Meteor.isCordova) {
             }]
         };
     }
-});
+    });
 
 
 
@@ -1428,30 +1448,30 @@ Template.Auction_Audio.onCreated(function () {
 
             ctx.font = "bold 30px Arial";
             ctx.fillText(i18n('zero'), 418, 80);
-            ctx.fillText(i18n('ten'), 640, 151);
-            ctx.fillText(i18n('twenty'), 785, 355);
-            ctx.fillText(i18n('thirty'), 780, 580);
-            ctx.fillText(i18n('forty'), 640, 775);
-            ctx.fillText(i18n('fifty'), 410, 851);
-            ctx.fillText(i18n('sixty'), 175, 778);
-            ctx.fillText(i18n('seventy'), 35, 580);
-            ctx.fillText(i18n('eighty'), 35, 355);
-            ctx.fillText(i18n('ninety'), 175, 151);
+            ctx.fillText(i18n('hundred'), 640, 151);
+            ctx.fillText(i18n('twohundred'), 785, 355);
+            ctx.fillText(i18n('threehundred'), 780, 580);
+            ctx.fillText(i18n('fourhundred'), 640, 775);
+            ctx.fillText(i18n('fivehundred'), 410, 851);
+            ctx.fillText(i18n('sixhundred'), 165, 778);
+            ctx.fillText(i18n('sevenhundred'), 15, 580);
+            ctx.fillText(i18n('eighthundred'), 15, 355);
+            ctx.fillText(i18n('ninehundred'), 165, 151);
 
         } else if (TAPi18n.getLanguage() === 'fa') {
             console.log("inside fa drawClock function");
             i18n.setLanguage('fa');
             ctx.font = "bold 50px Arial";
             ctx.fillText(i18n('zero'), 413, 80);
-            ctx.fillText(i18n('ten'), 640, 161);
-            ctx.fillText(i18n('twenty'), 780, 365);
-            ctx.fillText(i18n('thirty'), 780, 590);
-            ctx.fillText(i18n('forty'), 640, 790);
-            ctx.fillText(i18n('fifty'), 410, 862);
-            ctx.fillText(i18n('sixty'), 175, 788);
-            ctx.fillText(i18n('seventy'), 25, 580);
-            ctx.fillText(i18n('eighty'), 25, 355);
-            ctx.fillText(i18n('ninety'), 170, 161);
+            ctx.fillText(i18n('hundred'), 640, 161);
+            ctx.fillText(i18n('twohundred'), 780, 365);
+            ctx.fillText(i18n('threehundred'), 780, 590);
+            ctx.fillText(i18n('fourhundred'), 640, 790);
+            ctx.fillText(i18n('fivehundred'), 410, 862);
+            ctx.fillText(i18n('sixhundred'), 140, 788);
+            ctx.fillText(i18n('sevenhundred'), 2, 580);
+            ctx.fillText(i18n('eighthundred'), 2, 355);
+            ctx.fillText(i18n('ninehundred'), 140, 161);
 
             ctx.font = "bold 20px Arial";
             ctx.fillText(i18n('one'), 441, 87);
@@ -1512,3 +1532,285 @@ Template.Auction_Audio.onCreated(function () {
         }
 
     }
+
+    // Jquery specific functions
+    // setup function for side menu
+
+
+
+
+    /*
+     * Call the function to built the chart when the template is rendered
+     */
+    Template.Charts.rendered = function() {
+        builtPie();
+    }
+
+    Template.annualSales.rendered = function() {
+        builtColumn();
+    }
+
+    Template.quarterSales.rendered = function() {
+        CombinedChart();
+    }
+
+    // pie chart
+    function builtPie() {
+
+    // 'external' data
+    var data = new Array();
+
+    data.push({
+        name: 'زباله',
+        y: 10,
+        color: '#55BF3B'
+    });
+
+    data.push({
+        name: 'بدهی',
+        y: 12,
+        color: '#DDDF0D'
+    });
+
+    data.push({
+        name: 'اخذ شده',
+        y: 30,
+        color: '#DF5353'
+    });
+
+    $('#container-pie').highcharts({
+
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+
+        title: {
+            text: ''
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+
+        series: [{
+            type: 'pie',
+            name: 'Anteil',
+            data: data
+        }]
+    });
+}  //end pie chart
+
+    // column chart
+    function builtColumn() {
+
+    $('#container-column').highcharts({
+
+        chart: {
+            type: 'column'
+        },
+
+        title: {
+            text:  i18n('Monthly_Sales')
+        },
+
+        subtitle: {
+            text: i18n('Source: Payagol')
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        xAxis: {
+            categories: [
+                i18n('Jan'),
+                i18n('Feb'),
+                i18n('Mar'),
+                i18n('Apr'),
+                i18n('May'),
+                i18n('Jun'),
+                i18n('Jul'),
+                i18n('Aug'),
+                i18n('Sep'),
+                i18n('Oct'),
+                i18n('Nov'),
+                i18n('Dec')
+            ]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: i18n('Sales (million)')
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} m</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+
+        series: [{
+            name: 'Tehran',
+            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+        }, {
+            name: 'Mazandaran',
+            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+        }, {
+            name: 'Gilan',
+            data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+        }, {
+            name: 'Mahallat',
+            data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+
+        }]
+    });
+    }   // end of column chart
+
+
+   function CombinedChart() {
+       $('#container-combinedcharts').highcharts({
+    title: {
+        text: 'نمودار ترکیبی'
+    },
+    xAxis: {
+        categories: ['گلایول', 'میخک', 'گل رز', 'آنتوریوم', 'مریم']
+    },
+    labels: {
+        items: [{
+            html: 'فروش کل گل',
+            style: {
+                left: '50px',
+                top: '18px',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+            }
+        }]
+    },
+    series: [{
+        type: 'column',
+        name: 'بهرام',
+        data: [3, 2, 1, 3, 4]
+    }, {
+        type: 'column',
+        name: 'خادم',
+        data: [2, 3, 5, 7, 6]
+    }, {
+        type: 'column',
+        name: 'گل رز',
+        data: [4, 3, 3, 9, 0]
+    }, {
+        type: 'spline',
+        name: 'میانگین',
+        data: [3, 2.67, 3, 6.33, 3.33],
+        marker: {
+            lineWidth: 2,
+            lineColor: Highcharts.getOptions().colors[3],
+            fillColor: 'white'
+        }
+    }, {
+        type: 'pie',
+        name: 'مصرف کل',
+        data: [{
+            name: 'Jane',
+            y: 13,
+            color: Highcharts.getOptions().colors[0] // Jane's color
+        }, {
+            name: 'John',
+            y: 23,
+            color: Highcharts.getOptions().colors[1] // John's color
+        }, {
+            name: 'Joe',
+            y: 19,
+            color: Highcharts.getOptions().colors[2] // Joe's color
+        }],
+        center: [100, 80],
+        size: 100,
+        showInLegend: false,
+        dataLabels: {
+            enabled: false
+        }
+    }]}
+       )
+}
+
+ Template.mytable.rendered = function() {
+
+  MyTable();
+ }
+
+   function MyTable() {
+       export default {
+           data () {
+               return {
+                   columns1: [
+                       {
+                           title: '姓名',
+                           key: 'name'
+                       },
+                       {
+                           title: '年龄',
+                           key: 'age'
+                       },
+                       {
+                           title: '地址',
+                           key: 'address'
+                       }
+                   ],
+                   data1: [
+                       {
+                           name: '王小明',
+                           age: 18,
+                           address: '北京市朝阳区芍药居'
+                       },
+                       {
+                           name: '张小刚',
+                           age: 25,
+                           address: '北京市海淀区西二旗'
+                       },
+                       {
+                           name: '李小红',
+                           age: 30,
+                           address: '上海市浦东新区世纪大道'
+                       },
+                       {
+                           name: '周小伟',
+                           age: 26,
+                           address: '深圳市南山区深南大道'
+                       }
+                   ]
+               }
+           }
+       }
+   }
+
+
+
