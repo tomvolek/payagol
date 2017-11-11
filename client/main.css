@@ -93,6 +93,9 @@ div#Minimum {width:50px;}
 div#num_container_label  {   position: absolute; width:20px; height:40px; left :740px; top:500px; z-index:1; font-size: 16px; }
 div#reactive-table-1 {width:800px;}
 div#reactive-table-1 tr { line-height:30px; }
+.reactive-table tr:nth-child(odd) > td {background-color: rgb(230,230,233)}
+.reactive-table tr:nth-child(even) > td {background-color: #FFF}
+
 div#enter_prpduct_heading { background-color: rgb(51, 122, 183);   }
 div#panel-title_report {display:inline-block;margin-right:10px;}
 div#print_button {display:inline-block;  float:right;  }
@@ -306,10 +309,9 @@ input {
     line-height: 1em;
     font-size: 1.2em;
     padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-width: 1px 0 0 0;
-}
+    border: 2px solid #ddd;
 
+}
 
 
 
@@ -324,7 +326,7 @@ input {
     padding-top: 20px;
 }
 #sidebar .nav {
-    width: 95%;
+    width: 75%;
     background-color: #fff;
 }
 #sidebar li {
@@ -357,12 +359,11 @@ input {
 .sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 41.6%;
+
 }
 #sidebar {
     padding-top:0;
 }
-
 
 
 /* always show hamburger */
@@ -371,3 +372,30 @@ input {
         display: block;
     }
 }
+
+
+/*setup finance tables */
+div.fichecenter { width : 100%; clear: both;}
+div.fichettwothirdleft {float: left; width: 50%;padding-left: 16px;}
+div.fichettwothirdright {float: right; width: 50%; padding-left: 16px; padding-right: 16px;}
+tbody {display: table-row-group;
+    border-top-width: 2px;
+    border-top-color: rgb(120,120,120);
+    border-top-style: solid;
+    vertical-align: middle;
+    border-bottom-width: 0px;
+    border-bottom-color: #BBB;
+    border-bottom-style: solid;
+
+
+    margin: 0px 0px 5px 0px;
+}
+
+tbody tr.oddeven:nth-child(odd) {background-color: #a94acc }
+tbody tr.oddeven:nth-child(even) {background-color: #FFF}
+
+tbody > tr.oddeven:nth-child(odd) > td {background-color: rgb(230,230,233)}
+tbody > tr.oddeven:nth-child(even) > td  {background-color: #FFF}
+
+tr.liste_titre {background-color: rgb(230,230,233) ; height: 26px !important;}
+

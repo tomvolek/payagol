@@ -27,20 +27,26 @@ if (Meteor.isServer) {
 
         // setup the upload directory for images, etc.
         UploadServer.init({
-            tmpDir: process.env.PWD + '/.uploads/tmp',
-            uploadDir: process.env.PWD + '/.uploads/',
+            tmpDir: process.env.PWD + '/public/images/flower/tmp',
+            uploadDir: process.env.PWD + '/public/images/',
             checkCreateDirectories: true,//create the directories for you
             getDirectory: function(fileInfo, formData) {
                 // create a sub-directory in the uploadDir based on the content type (e.g. 'images')
-                return formData.contentType;
+               // return formData.contentType;
+                return '/flower';
             },
+            getFileName: function(fileInfo, formData) { console.log("filename",fileInfo.name) },
+
             finished: function(fileInfo, formFields) {
                 // perform a disk operation
+                fileInfo.extraData = fileInfo.url;
+
             },
             cacheTime: 100,
             mimeTypes: {
                 "xml": "application/xml",
-                "vcf": "text/x-vcard"
+                "vcf": "text/x-vcard",
+                "txt": "text/plain"
             }
         });
 

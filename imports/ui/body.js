@@ -11,8 +11,7 @@ import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FilesCollection } from 'meteor/ostrio:files';
 import { FlowersCatalog } from '/imports/api/models.js';
-import Vue from 'vue';
-import iView from 'meteor/efrancis:iview';
+
 
 
 //import  pdfMake from 'meteor/alexwine:pdfmake';
@@ -191,8 +190,10 @@ if (Meteor.isCordova) {
 }
 
     Meteor.startup(function () {
+        // this will prevent the application from reloading once a form is submitted.
+        Meteor._reload.onMigrate(function () { return [false]; });
 
-        Vue.use(iView);   // load the Vueand iview UI libraries.
+
         TimeSync.loggingEnabled = false; // turn off loggin for clock Timesync messages
         TAPi18n.setLanguage('fa');
         i18n.setLanguage('fa');
@@ -214,12 +215,16 @@ if (Meteor.isCordova) {
         Uploader.localisation.dropFiles = "I was رها کردن فایل ها در اینجا";
 
         Uploader.localisation = {
-            browse: "فهرست",
+            browse: "Browse",
             cancelled: i18n("Cancelled"),
             remove: i18n("Remove"),
             upload: "Upload",
             done: i18n("Done"),
             cancel: i18n("Cancel")
+        }
+        Uploader.finished = function(index, fileInfo, templateContext) {
+            console.log("filename is : ",fileInfo);
+            document.getElementById("ProductImage").value = fileInfo.extraData;
         }
 
 
@@ -496,7 +501,7 @@ if (Meteor.isCordova) {
         },
         tableSettings: function () {
             return {
-                rowsPerPage: 10,
+                rowsPerPage: 15,
                 showFilter: true,
                 showNavigation: 'auto',
                 showColumnToggles: true,
@@ -527,7 +532,7 @@ if (Meteor.isCordova) {
         },
         tableSettings: function () {
             return {
-                rowsPerPage: 10,
+                rowsPerPage: 15,
                 showFilter: true,
                 showNavigation: 'auto',
                 showColumnToggles: true,
@@ -1218,7 +1223,7 @@ if (Meteor.isCordova) {
     }
     });
 
-Template.Auction_Audio.events({
+    Template.Auction_Audio.events({
     "click #makeCall": function () {
         var user = this;
         var outgoingCall = peer.call(user.profile.peerId, window.localStream);
@@ -1232,17 +1237,17 @@ Template.Auction_Audio.events({
     "click #endCall": function () {
         window.currentCall.close();
     }
-});
+    });
 
-Template.Auction_Audio.helpers({
+    Template.Auction_Audio.helpers({
     users: function () {
         // exclude the currentUser
         var userIds = Presences.find().map(function(presence) {return presence.userId;});
         return Meteor.users.find({_id: {$in: userIds, $ne: Meteor.userId()}});
     }
-});
+    });
 
-Template.Auction_Audio.onCreated(function () {
+    Template.Auction_Audio.onCreated(function () {
     Meteor.subscribe("presences");
     Meteor.subscribe("users");
 
@@ -1293,7 +1298,7 @@ Template.Auction_Audio.onCreated(function () {
         }, function (error) { console.log(error); }
     );
 
-});
+    });
 
 
 
@@ -1394,7 +1399,15 @@ Template.Auction_Audio.onCreated(function () {
         }
 
     });
-
+    // Display alert on main page
+    Bert.alert({
+        title: 'پایاگل',
+        message: 'مزایده در ساعت 8 صبح آغاز خواهد شد',
+        type: 'info',
+        style: 'growl-top-right',
+        icon: 'fa-life-ring',
+        hideDelay: 6000
+    });
 
 
     console.log("user------------------");
@@ -1811,6 +1824,4 @@ Template.Auction_Audio.onCreated(function () {
            }
        }
    }
-
-
 

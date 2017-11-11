@@ -292,7 +292,7 @@
             <td>{{_ "Product ID"}} <br><input id="Product_Id" type="text"  name="Product_id" value="{{this.Product_id}}" required></td>
         </tr>
          <tr>
-             <td>{{_ "Product Image"}} <br><input type="text" name="ProductImage" value="{{this.ProductImage}}"/></td>
+             <td>{{_ "Product Image"}} <br><input type="text" name="ProductImage" id="ProductImage" value="{{this.ProductImage}}"/></td>
              <td>{{_ "Buyer Number"}} <br><input type="text" name="Buyer_Number" value="{{this.Buyer_Number}}"/></td>
              <td>{{_ "NumberOfItems"}} <br><input type="text" name="NumberOfItems" value="{{this.NumberOfItems}}"/></td>
              <td>{{_ "PricePerFlower"}} <br><input type="text" name="PricePerFlower" value="{{this.PricePerFlower}}"/></td>
@@ -328,13 +328,16 @@
       <!--  <p>{{_ "Upload product image" }}</p> -->
 
         {{> upload_bootstrap }}
-        {{> dropzone contentType='images' fileTypes='.jpg' multiple=true formData=specificFormData }}
+             <br>
+      <!--  {{> dropzone contentType='images' fileTypes='.jpg' multiple=true formData=specificFormData }} -->
 
         <div style="text-align: center;">
          <input class="btn btn-danger" id="Search_Item" type="submit"  value= {{_ "Search"}} />
          <input class="btn btn-danger" id ="Edit_Item" type="submit"   value= {{_ "Edit"}} />
          <input class="btn btn-danger" id = "Add_Item" type="submit"   value= {{_ "Add"}} />
+         <br>
         </div>
+
          </form>
       </div>
     </div>
@@ -382,8 +385,6 @@
         <input type="text" name="on_auction"/>
         <button class="btn btn-danger custom3" type="submit"  value={{_ "Set Auction"}} >{{_ "Set Auction"}}</button>
     </form>
-
-
     </div>
     </div>
 </template>
@@ -513,15 +514,6 @@
 
     <div class="navbar navbar-default navbar-static-top " style="margin-bottom: 0px; font-size: 12px; height: 35px;">
 
-        <div class="navbar-header">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            <a class="navbar-brand" href="#"></a>
-        </div>
-
-
         <div class="collapse navbar-collapse" >
             <ul class="nav navbar-nav">
 
@@ -546,14 +538,16 @@
 
         <div class="row row-offcanvas row-offcanvas-left ">
             <!-- sidebar -->
+
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
                 <ul class="nav">
-                    <li><a href="/bank_cash/"><i class="fa fa-fw fa-cog"></i> Bank/Cash</a></li>
+                    <li><a href="{{pathFor route='finance'}}"><i class="fa fa-fw fa-cog"></i> {{_ "Finance"}} </a></li>
                     <li><a href="/checks_deposits/"><i class="fa fa-fw fa-flask"></i> checks_deposits</a></li>
                     <li><a href="/scrap/"><i class="fa fa-fw fa-trash-o"></i> Scrap</a></li>
                     <li><a href="/labor/"><i class="fa fa-fw fa-user"></i> Labor Reporting</a></li>
                 </ul>
             </div>
+
         </div>
     </div>
 </template>
@@ -765,4 +759,265 @@
         </div>
     </div>
 </div>
+</template>
+
+
+<template name="Finance">
+     <div class="fichecenter" style=" .body { background: white;}">
+         <div class="fichettwothirdleft">
+         <table class="noborder" width="100%">
+             <tbody>
+             <tr class="liste_titre">
+                 <th height="45" colspan="3">
+                     Customer Draft invoices
+                     <span class="badge">1430</span>
+                 </th>
+             </tr>
+             <tr class="oddeven">
+               <td class="nowrap">
+                   <a href="*invoicenumber" class="classfortooltip">
+                       <img src="/images/logo/object_bill.png" alt=" (PROV392)<br>Amount (net of tax)" class="classfortooltip">
+                   </a>
+                   <a href="/compta/facture/card.php?facid=392" class="classfortooltip">(PROV392)</a>
+               </td>
+               <td class="nowrap">
+                 <a href="/societe/card.php?socid=92" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" TEST CLIENT<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=92" class="classfortooltip">TEST CLIENT</a>
+             </td>
+               <td align="right" class="nowrap">-775.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+
+             </tbody>
+         </table>
+         </div>
+         <div class="fichettwothirdright">
+         <table class="noborder" width="100%">
+             <tbody>
+             <tr class="liste_titre">
+                 <th height="45" colspan="3">
+                     Supplier Draft invoices
+                     <span class="badge">1430</span>
+                 </th>
+             </tr>
+             <tr class="oddeven">
+                 <td class="nowrap">
+                     <a href="*invoicenumber" class="classfortooltip">
+                         <img src="/images/logo/object_bill.png" alt=" (PROV392)<br>Amount (net of tax)" class="classfortooltip">
+                     </a>
+                     <a href="/compta/facture/card.php?facid=392" class="classfortooltip">(PROV392)</a>
+                 </td>
+                 <td class="nowrap">
+                     <a href="/societe/card.php?socid=92" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" TEST CLIENT<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                     <a href="/societe/card.php?socid=92" class="classfortooltip">TEST CLIENT</a>
+                 </td>
+                 <td align="right" class="nowrap">-775.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             <tr class="oddeven"><td class="nowrap">
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                 <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                 <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                 <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                 <td align="right" class="nowrap">1.00</td>
+             </tr>
+             </tbody>
+         </table>
+     </div>
+         <div class="fichettwothirdright">
+             <table class="noborder" width="100%">
+                 <tbody>
+                 <tr class="liste_titre">
+                     <th height="45" colspan="3">
+                         Supplier Draft invoices
+                         <span class="badge">1430</span>
+                     </th>
+                 </tr>
+                 <tr class="oddeven">
+                     <td class="nowrap">
+                         <a href="*invoicenumber" class="classfortooltip">
+                             <img src="/images/logo/object_bill.png" alt=" (PROV392)<br>Amount (net of tax)" class="classfortooltip">
+                         </a>
+                         <a href="/compta/facture/card.php?facid=392" class="classfortooltip">(PROV392)</a>
+                     </td>
+                     <td class="nowrap">
+                         <a href="/societe/card.php?socid=92" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" TEST CLIENT<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                         <a href="/societe/card.php?socid=92" class="classfortooltip">TEST CLIENT</a>
+                     </td>
+                     <td align="right" class="nowrap">-775.00</td>
+                 </tr>
+                 <tr class="oddeven"><td class="nowrap">
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                     <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                     <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                     <td align="right" class="nowrap">1.00</td>
+                 </tr>
+                 <tr class="oddeven"><td class="nowrap">
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                     <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                     <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                     <td align="right" class="nowrap">1.00</td>
+                 </tr>
+                 <tr class="oddeven"><td class="nowrap">
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                     <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                     <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                     <td align="right" class="nowrap">1.00</td>
+                 </tr>
+                 </tbody>
+             </table>
+         </div>
+         <div class="fichettwothirdright">
+             <table class="noborder" width="100%">
+                 <tbody>
+                 <tr class="liste_titre">
+                     <th height="45" colspan="3">
+                         Supplier Draft invoices
+                         <span class="badge">1430</span>
+                     </th>
+                 </tr>
+                 <tr class="oddeven">
+                     <td class="nowrap">
+                         <a href="*invoicenumber" class="classfortooltip">
+                             <img src="/images/logo/object_bill.png" alt=" (PROV392)<br>Amount (net of tax)" class="classfortooltip">
+                         </a>
+                         <a href="/compta/facture/card.php?facid=392" class="classfortooltip">(PROV392)</a>
+                     </td>
+                     <td class="nowrap">
+                         <a href="/societe/card.php?socid=92" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" TEST CLIENT<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                         <a href="/societe/card.php?socid=92" class="classfortooltip">TEST CLIENT</a>
+                     </td>
+                     <td align="right" class="nowrap">-775.00</td>
+                 </tr>
+                 <tr class="oddeven"><td class="nowrap">
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                     <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                     <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                     <td align="right" class="nowrap">1.00</td>
+                 </tr>
+                 <tr class="oddeven"><td class="nowrap">
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                     <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                     <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                     <td align="right" class="nowrap">1.00</td>
+                 </tr>
+                 <tr class="oddeven"><td class="nowrap">
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip"><img src="/images/logo/object_bill.png" alt=" (PROV394)<br>Amount (net of tax)" class="classfortooltip"></a>
+                     <a href="/compta/facture/card.php?facid=394" class="classfortooltip">(PROV394)</a></td><td class="nowrap">
+                     <a href="/societe/card.php?socid=105" class="classfortooltip"><img src="/images/logo/object_company.png" alt=" Falabella S.A<br>Customer code" class="classfortooltip valigntextbottom"></a>
+                     <a href="/societe/card.php?socid=105" class="classfortooltip">Falabella S.A</a></td>
+                     <td align="right" class="nowrap">1.00</td>
+                 </tr>
+                 </tbody>
+             </table>
+         </div>
+     </div>
 </template>
