@@ -1406,7 +1406,7 @@ if (Meteor.isCordova) {
         type: 'info',
         style: 'growl-top-right',
         icon: 'fa-life-ring',
-        hideDelay: 6000
+        hideDelay: 60000
     });
 
 

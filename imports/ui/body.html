@@ -650,6 +650,9 @@
         <div id="video-container">
         <thead id="head1">
             <tr>
+                <td>{{_ "Callee"}}</td>
+                <td>{{_ "Me"}}</td>
+                <td>{{_ "Controls"}}</td>
             </tr>
         </thead>
         <tbody>
@@ -662,21 +665,17 @@
                  <video id="myVideo" muted="false" class="myVideo" autoplay></video>
                  <p>{{_ "Your id"}}: <span id="myPeerId">...</span></p>
              </td>
+             <td>
+                 {{#each users}}
+                     <a href="#" id="makeCall">{{_ "Call"}} {{#each emails}}{{address}}{{/each}}</a><br>
+                 {{/each}}
+                 <p><a href="#" id="endCall">{{_ "End Call"}}</a></p>
+             </td>
             </tr>
 
         </tbody>
         </div>
     </table>
-
-
-            <h2>{{_ "Controls"}}</h2>
-    <div>
-        <p>{{_ "Make a call"}}</p><br>
-        {{#each users}}
-            <a href="#" id="makeCall">{{_ "Call"}} {{#each emails}}{{address}}{{/each}}</a><br>
-        {{/each}}
-        <p><a href="#" id="endCall">{{_ "End Call"}}</a></p>
-    </div>
 
 
 </template>
