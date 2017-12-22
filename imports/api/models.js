@@ -7,5 +7,6 @@ export const Purchased = new Mongo.Collection('purchased');
 export const PricePosition = new Mongo.Collection('price_positions');
 export const OldAuctions = new Mongo.Collection('old_auctions');
 export const FlowersCatalog = new Mongo.Collection('flowers_catalog');
+export const Events = new Mongo.Collection( 'events' );
 
 

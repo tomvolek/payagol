@@ -5,6 +5,7 @@ import { Purchased } from '/imports/api/models.js';
 import { FlowerBatchList } from '/imports/api/models.js';
 import { FlowersCatalog } from '/imports/api/models.js';
 import { OldAuctions } from '/imports/api/models.js';
+import { Events} from  '/imports/api/models.js' ;
 
 
 if (Meteor.isServer) {
@@ -24,6 +25,8 @@ if (Meteor.isServer) {
             }
             return false;
         }); */
+
+
 
         // setup the upload directory for images, etc.
         UploadServer.init({
@@ -231,6 +234,34 @@ if (Meteor.isServer) {
         Meteor.publish("flowers_catalog", function () {
             return FlowersCatalog.find({});
         }, {is_auto: true});
+
+        Meteor.publish("events", function () {
+            return Events.find({});
+        }, {is_auto: true});
+
+        // setup permissions on calendar collection
+        Events.allow({
+            //insert: () => false,
+            insert: function(){
+                    var currentUser = Meteor.user(),
+                        isUserAdmin = Roles.userIsInRole(currentUser,'Admin');
+                    if(isUserAdmin) {
+                        console.log("Ok the user is logged in on an admin account, lets allow it to update")
+                        return true;
+                    }else{
+                        console.log("Someone just try to update the document and he isn't logged in into an admin account")
+                    return false;
+                    }
+                    },
+            update: () => false,
+            remove: () => false
+        });
+
+        Events.deny({
+            insert: () => true,
+            update: () => true,
+            remove: () => true
+        });
 
         //publish users collection but only selected fields
         Meteor.publish("userlist", function () {
@@ -581,6 +612,48 @@ if (Meteor.isServer) {
                     console.log(response);
                 }
             });
+        },
+        'addEvent': function ( event ) {
+            check( event, {
+                title: String,
+                start: String,
+                end: String,
+                type: String,
+                guests: Number
+            });
+
+            try {
+                return Events.insert( event );
+            } catch ( exception ) {
+                throw new Meteor.Error( '500', `${ exception }` );
+            }
+        },
+        'editEvent': function ( event ) {
+            check( event, {
+                _id: String,
+                title: Match.Optional( String ),
+                start: String,
+                end: String,
+                type: Match.Optional( String ),
+                guests: Match.Optional( Number )
+            });
+
+            try {
+                return Events.update( event._id, {
+                    $set: event
+                });
+            } catch ( exception ) {
+                throw new Meteor.Error( '500', `${ exception }` );
+            }
+        },
+        'removeEvent': function ( event ) {
+            check( event, String );
+
+            try {
+                return Events.remove( event );
+            } catch ( exception ) {
+                throw new Meteor.Error( '500', `${ exception }` );
+            }
         }
 
     });

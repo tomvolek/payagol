@@ -85,7 +85,7 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 
 div#buyitem_container { z-index: 1; width:366px; left: 720px; top:500px; border-style: groove; }
 div#num_container_field  { position: absolute; width:60px; height:40px; left :721px; top:621px;  font-size: 24px; }
-div#buy_item { width: 40 px; text-align  : center;  padding-left:10px; padding-right:10px; height:15px;  font-size: 24px; }
+div#buy_item { width: 40px; text-align  : center;  padding-left:10px; padding-right:10px; height:15px;  font-size: 24px; }
 div#BalanceLabel {style: bold; font-size: 24px; background-color: bisque}
 
 button.buy_btn { background: red; text-align  : center; width: 50px; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :740px; top:550px; font-size: 24px; }
@@ -233,7 +233,7 @@ td {
     background-color: #337ab7 ;
 }
 
-.form-group { size: 30;}
+.form-group { size: 30px;}
 
 .small-btn {
     width: 40px;
@@ -398,4 +398,57 @@ tbody > tr.oddeven:nth-child(odd) > td {background-color: rgb(230,230,233)}
 tbody > tr.oddeven:nth-child(even) > td  {background-color: #FFF}
 
 tr.liste_titre {background-color: rgb(230,230,233) ; height: 26px !important;}
+
+/* callendar */
+.fc-event-container {
+    padding: 5px !important;
+}
+
+.fc-event {
+    padding: 5px 10px;
+    border-color: #ddd;
+    background: #fff !important;
+}
+.fc-content {
+    color: #444;
+}
+
+h4,
+h5 {
+    margin: 0;
+    font-weight: normal;
+}
+
+h4 {
+    color: #666;
+    font-size: 13px;
+    line-height: 18px;
+    white-space: normal;
+}
+
+h5 {
+    color: #888;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.guest-count {
+    margin: 5px 0;
+}
+
+p[class^="type-"] {
+    margin: 0;
+}
+
+p[class="type-Corporate"] {
+    color: red;
+}
+
+p[class="type-Wedding"] {
+    color: green;
+}
+
+p[class="type-Birthday"] {
+    color: blue;
+}
 
