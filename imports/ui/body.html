@@ -24,12 +24,6 @@
 
 
 
-
-
-
-
-
-
 <template name="Main">
     {{> flower_batch_lists}}
     <!-- draw the clock interface -->
@@ -39,20 +33,20 @@
 
     {{#if isInRole 'buyer' 'default-group'}}
 
-            <br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br>
             {{> report_user_purchase}}
         {{else}}
     {{/if}}
 
     {{#if isInRole 'admin' 'default-group'}}
-        {{> form_set_item_on_auction }}
+       <!-- {{> form_set_item_on_auction }} -->
        <!-- {{> barcode_scanner}} -->
         {{> myTemplate chartId="test" chartWidth="100%" chartHeight="100%" chartObject=topGenresChart}}
 
     {{/if}}
 
     {{> myTemplate chartId="test" chartWidth="100%" chartHeight="100%" chartObject=topGenresChart}}
-    {{> Auction_Audio}}
+
 
     {{> mytabel}}
 
@@ -118,7 +112,7 @@
 
 <template name="form_buy_item">
     <form id="buyitem">
-        <input  type="text" id="num_container_field" name="buyitem"/>
+        <input  type="text" class="num_container_field" name="buyitem"/>
         <input class="btn btn-danger custom1"  type="submit" id="buy_item" value={{_ "Buy"}} />
     </form>
 
@@ -152,7 +146,7 @@
             <button class="btn btn-primary small-btn"  type="submit" id="key_board3" value="3" name="3"> 3 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board4" value="4" name="4"> 4 </button>
             <button class="btn btn-primary small-btn"  type="submit" id="key_board5" value="5" name="5"> 5 </button>
-            <button class="btn btn-primary custom1"  type="submit" id="Minimum" value="Minimum" name="Minimum"> Minimum </button>
+            <button class="btn btn-primary custom2"  type="submit" id="Minimum" value="Minimum" name="Minimum"> Minimum </button>
 
         </div>
 
@@ -193,9 +187,9 @@
           <div id="MinContainerToBuyLabel">{{_ "Minimum Container To Buy"}}</div>
           <div class="clock_items" id="MinContainerToBuy_Value"> {{this.MinContainerToBuy}} </div>
 
-         <div id="producer_container">
+          <div id="producer_container">
           <div id="producer_table">
-           <table width= "360" border="2" >
+           <table width= "412" border="2" >
                 <thead id="head1">
                   <tr>
                     <th>{{_ "Supplier Name"}}</th>
@@ -213,7 +207,7 @@
             </table>
         </div>
           <div id="product_table">
-           <table width= "360" border="2">
+           <table width= "412" border="2">
               <thead id="head2">
                     <tr>
                       <th >{{_ "Product"}}</th>
@@ -233,7 +227,7 @@
            </table>
           </div>
           <div id="product_image_table">
-             <table width= "360" border="2">
+             <table width= "412" border="2">
                      <tbody>
                      <tr>
                          <td width="70%"><div id="ProductImage_Value"> <img src="/images/flower/{{this.ProductImage}}" height="120" width="120"/> </div></td>
@@ -242,14 +236,26 @@
                      </tbody>
                  </table>
           </div>
-             {{> mychat}}
                  {{#if isInRole 'buyer' 'default-group'}}
                      <div id="buyitem_container">
                          <div id="BalanceLabel"> {{_ "Balance"}}  {{> user_balance}} </div>
                          {{> form_buy_item}}
                          {{> user_keyboard}}
                      </div>
+                  {{else}}
+                     <div id="on_auction_container">
+                         <div id="formset_item_on_auction">
+                             <b> {{_ "Product ID"}} </b>
+                             <form id="my_auction_price" >
+                                 <input type="text" name="on_auction"/>
+                                 <button class="btn btn-danger custom3" type="submit"  value={{_ "Set Auction"}} >{{_ "Set Auction"}}</button>
+                             </form>
+                         </div>
+                     </div>
                  {{/if}}
+
+              {{> mychat}}
+              {{> Auction_Audio}}
          </div>
      {{/each}}
 
@@ -272,8 +278,6 @@
 
 
 <template name ="form_enter_product">
-
-
     <br><br>
     <div class="container">
          <div class="panel panel-primary">
@@ -282,48 +286,86 @@
              </div>
          <form id="myform">
        <table class="usertable" border="4">
-
+         {{#if Search_Item_found.count }}
            {{#each Search_Item_found}}
-        <tr>
-            <td>{{_ "Producer Name"}} <br><input type="text" name="Producer_name" value="{{this.Producer_name}}" required></td>
-            <td>{{_ "Producer ID"}} <br><input type="text" name="Producer_id" value="{{this.Producer_id}}" required></td>
-            <td>{{_ "Logo"}} <br><input type="text" name="Logo" value="{{this.Logo}}"/></td>
-            <td>{{_ "Product Name"}} <br><input type="text" name="ProductName" value="{{this.ProductName}}"/></td>
-            <td>{{_ "Product ID"}} <br><input id="Product_Id" type="text"  name="Product_id" value="{{this.Product_id}}" required></td>
-        </tr>
-         <tr>
-             <td>{{_ "Product Image"}} <br><input type="text" name="ProductImage" id="ProductImage" value="{{this.ProductImage}}"/></td>
-             <td>{{_ "Buyer Number"}} <br><input type="text" name="Buyer_Number" value="{{this.Buyer_Number}}"/></td>
-             <td>{{_ "NumberOfItems"}} <br><input type="text" name="NumberOfItems" value="{{this.NumberOfItems}}"/></td>
-             <td>{{_ "PricePerFlower"}} <br><input type="text" name="PricePerFlower" value="{{this.PricePerFlower}}"/></td>
-             <td>{{_ "Trolleys"}} <br><input type="text" name="Trolleys" value="{{this.Trolleys}}" /></td>
-          </tr>
-        <tr>
-            <td> {{_ "Containers/Trolley"}} <br><input type="text" name="ContainersPerTrolly" value="{{this.ContainersPerTrolly}}"/> </td>
-            <td>{{_ "Total Containers"}} <br><input type="text" name="TotalContainers" value="{{this.TotalContainers}}"/></td>
-            <td>{{_ "Flower/Container"}} <br><input type="text" name="FlowerPerContainer" value="{{this.FlowerPerContainer}}"/></td>
-            <td>{{_ "Minimum Container To Buy"}} <br><input type="text" name="MinContainerToBuy" value="{{this.MinContainerToBuy}}"/></td>
-            <td>{{_ "Quality"}} <br><input type="text" name="quality" value="{{this.quality}}"/></td>
-         </tr>
-         <tr>
-             <td>{{_ "Storage"}} <br><input type="text" name="storage" value="{{this.storage}}"/></td>
-             <td>s1 <br><input type="text" name="s1" value="{{this.s1}}"/></td>
-             <td>{{_ "color"}} <br> <input type="text" name="color" value="{{this.color}}" /></td>
-             <td>{{_ "Form_Number" }}<br><input type="text" name="formnumber" value="{{this.formnumber}}"/></td>
-             <td>{{_ "Product Grade"}}<br><input type="text" name="Product_grade" value="{{this.Product_grade}}"/></td>
+                <tr>
+                    <td>{{_ "Producer Name"}} <br><input type="text" name="Producer_name" value="{{this.Producer_name}}" required></td>
+                    <td>{{_ "Producer ID"}} <br><input type="text" name="Producer_id" value="{{this.Producer_id}}" required></td>
+                    <td>{{_ "Logo"}} <br><input type="text" name="Logo" value="{{this.Logo}}"/></td>
+                    <td>{{_ "Product Name"}} <br><input type="text" name="ProductName" value="{{this.ProductName}}"/></td>
+                    <td>{{_ "Product ID"}} <br><input id="Product_Id" type="text"  name="Product_id" value="{{this.Product_id}}" required></td>
+                </tr>
+                 <tr>
+                     <td>{{_ "Product Image"}} <br><input type="text" name="ProductImage" id="ProductImage" value="{{this.ProductImage}}"/></td>
+                     <td>{{_ "Buyer Number"}} <br><input type="text" name="Buyer_Number" value="{{this.Buyer_Number}}"/></td>
+                     <td>{{_ "NumberOfItems"}} <br><input type="text" name="NumberOfItems" value="{{this.NumberOfItems}}"/></td>
+                     <td>{{_ "PricePerFlower"}} <br><input type="text" name="PricePerFlower" value="{{this.PricePerFlower}}"/></td>
+                     <td>{{_ "Trolleys"}} <br><input type="text" name="Trolleys" value="{{this.Trolleys}}" /></td>
+                  </tr>
+                <tr>
+                    <td> {{_ "Containers/Trolley"}} <br><input type="text" name="ContainersPerTrolly" value="{{this.ContainersPerTrolly}}"/> </td>
+                    <td>{{_ "Total Containers"}} <br><input type="text" name="TotalContainers" value="{{this.TotalContainers}}"/></td>
+                    <td>{{_ "Flower/Container"}} <br><input type="text" name="FlowerPerContainer" value="{{this.FlowerPerContainer}}"/></td>
+                    <td>{{_ "Minimum Container To Buy"}} <br><input type="text" name="MinContainerToBuy" value="{{this.MinContainerToBuy}}"/></td>
+                    <td>{{_ "Quality"}} <br><input type="text" name="quality" value="{{this.quality}}"/></td>
+                 </tr>
+                 <tr>
+                     <td>{{_ "Storage"}} <br><input type="text" name="storage" value="{{this.storage}}"/></td>
+                     <td>s1 <br><input type="text" name="s1" value="{{this.s1}}"/></td>
+                     <td>{{_ "color"}} <br> <input type="text" name="color" value="{{this.color}}" /></td>
+                     <td>{{_ "Form_Number" }}<br><input type="text" name="formnumber" value="{{this.formnumber}}"/></td>
+                     <td>{{_ "Product Grade"}}<br><input type="text" name="Product_grade" value="{{this.Product_grade}}"/></td>
+               </tr>
+                    <tr>
+                     <td>{{_ "Monetary Unit"}} <br><input type="text" name="MoneteraryUnit" value="{{this.MoneteraryUnit}}" /></td>
+                     <td>{{_ "Country"}} <br><input type="text" name="Country" value="{{this.Country}}"/></td>
+                     <td>{{_ "Creator Id"}}<br><input type="text" name="CreatorId" value="{{this.CreatorId}}"/></td>
+                     <td div class="date_field">{{_ "Created At"}}<br><input type="text" id="created-datepicker"   name="createdAt" value="{{this.createdAt}}"/> </td>
+                     <td >{{_ "Auction Date"}}<br><input type="text" id="auctiondate-datepicker"  name="AuctionDate" value="{{this.AuctionDate}}" /></td>
+                    </tr>
+                  <tr>
+                  </tr>
+          {{/each}}
+         {{else}}
+             <tr>
+                 <td>{{_ "Producer Name"}} <br><input type="text" name="Producer_name" value=" " ></td>
+                 <td>{{_ "Producer ID"}} <br><input type="text" name="Producer_id" value="" ></td>
+                 <td>{{_ "Logo"}} <br><input type="text" name="Logo" value=""/></td>
+                 <td>{{_ "Product Name"}} <br><input type="text" name="ProductName" value=""/></td>
+                 <td>{{_ "Product ID"}} <br><input id="Product_Id" type="text"  name="Product_id" value="" required></td>
+             </tr>
+             <tr>
+                 <td>{{_ "Product Image"}} <br><input type="text" name="ProductImage" id="ProductImage" value=""/></td>
+                 <td>{{_ "Buyer Number"}} <br><input type="text" name="Buyer_Number" value=""/></td>
+                 <td>{{_ "NumberOfItems"}} <br><input type="text" name="NumberOfItems" value=""/></td>
+                 <td>{{_ "PricePerFlower"}} <br><input type="text" name="PricePerFlower" value=""/></td>
+                 <td>{{_ "Trolleys"}} <br><input type="text" name="Trolleys" value="" /></td>
+             </tr>
+             <tr>
+                 <td> {{_ "Containers/Trolley"}} <br><input type="text" name="ContainersPerTrolly" value=""/> </td>
+                 <td>{{_ "Total Containers"}} <br><input type="text" name="TotalContainers" value=""/></td>
+                 <td>{{_ "Flower/Container"}} <br><input type="text" name="FlowerPerContainer" value=""/></td>
+                 <td>{{_ "Minimum Container To Buy"}} <br><input type="text" name="MinContainerToBuy" value=""/></td>
+                 <td>{{_ "Quality"}} <br><input type="text" name="quality" value=""/></td>
+             </tr>
+             <tr>
+                 <td>{{_ "Storage"}} <br><input type="text" name="storage" value=""/></td>
+                 <td>s1 <br><input type="text" name="s1" value=""/></td>
+                 <td>{{_ "color"}} <br> <input type="text" name="color" value="" /></td>
+                 <td>{{_ "Form_Number" }}<br><input type="text" name="formnumber" value=""/></td>
+                 <td>{{_ "Product Grade"}}<br><input type="text" name="Product_grade" value=""/></td>
 
-       </tr>
-            <tr>
-             <td>{{_ "Monetary Unit"}} <br><input type="text" name="MoneteraryUnit" value="{{this.MoneteraryUnit}}" /></td>
-             <td>{{_ "Country"}} <br><input type="text" name="Country" value="{{this.Country}}"/></td>
-             <td>{{_ "Creator Id"}}<br><input type="text" name="CreatorId" value="{{this.CreatorId}}"/></td>
-             <td div class="date_field">{{_ "Created At"}}<br><input type="text" id="created-datepicker"   name="createdAt" value="{{this.createdAt}}"/> </td>
-             <td >{{_ "Auction Date"}}<br><input type="text" id="auctiondate-datepicker"  name="AuctionDate" value="{{this.AuctionDate}}" /></td>
-            </tr>
-          <tr>
-          </tr>
-       {{/each}}
-
+             </tr>
+             <tr>
+                 <td>{{_ "Monetary Unit"}} <br><input type="text" name="MoneteraryUnit" value="" /></td>
+                 <td>{{_ "Country"}} <br><input type="text" name="Country" value=""/></td>
+                 <td>{{_ "Creator Id"}}<br><input type="text" name="CreatorId" value=""/></td>
+                 <td div class="date_field">{{_ "Created At"}}<br><input type="text" id="created-datepicker"   name="createdAt" value="}"/> </td>
+                 <td >{{_ "Auction Date"}}<br><input type="text" id="auctiondate-datepicker"  name="AuctionDate" value="" /></td>
+             </tr>
+             <tr>
+             </tr>
+         {{/if}}
         </table>
       <!--  <p>{{_ "Upload product image" }}</p> -->
 
@@ -486,10 +528,10 @@
                                 <div class="col-xs-12 col-sm-4">
                                     <label for="type">Event Type</label>
                                     <select name="type" class="form-control">
-                                        <option selected="{{selected event.type 'Birthday' }}" value="Birthday">Birthday</option>
-                                        <option selected="{{selected event.type 'Corporate' }}" value="Corporate">Corporate</option>
-                                        <option selected="{{selected event.type 'Miscellaneous' }}" value="Miscellaneous">Miscellaneous</option>
-                                        <option selected="{{selected event.type 'Wedding' }}" value="Wedding">Wedding</option>
+                                        <option selected="{{selected event.type 'Sale:Rose' }}" value="RoseSale">{{_ "Rose Sales"}}</option>
+                                        <option selected="{{selected event.type 'Sale:Carnation' }}" value="CarnationSale">{{_ "Carnation Sale"}}</option>
+                                        <option selected="{{selected event.type 'Sale:Plants' }}" value="PlantsSale">{{_ "Plants Sale"}}</option>
+                                        <option selected="{{selected event.type 'Miscellaneous' }}" value="Miscellaneous">{{_ "Miscellaneous"}}</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-12 col-sm-3">
@@ -692,6 +734,7 @@
 
 <template name="mychat">
     <div id="chat_container">
+        <b> {{_ "Chat"}} </b>
         <div  class="messages">
 
             {{#each messages}}
@@ -712,39 +755,39 @@
 
 
 <template name="Auction_Audio">
-    <h2>{{_ "Video Chat"}}</h2>
+    <div id="video_container">
+        <b>{{_ "Video Chat"}}</b>
     <table  border="2" >
-        <div id="video-container">
         <thead id="head1">
             <tr>
                 <td>{{_ "Callee"}}</td>
                 <td>{{_ "Me"}}</td>
-                <td>{{_ "Controls"}}</td>
+                <td>{{_ "Controls"}}{{_ "Call"}}</td>
             </tr>
         </thead>
         <tbody>
             <tr>
              <td>
                     <!-- note the 'autoplay' -->
-                    {{_ "Your friend"}}: <video id="theirVideo" class="theirVideo" autoplay></video>
+                     <video id="theirVideo" class="theirVideo" autoplay></video><br>{{_ "Your friend"}}
              </td>
              <td>
                  <video id="myVideo" muted="false" class="myVideo" autoplay></video>
-                 <p>{{_ "Your id"}}: <span id="myPeerId">...</span></p>
+                 <p><span id="myPeerId">...</span></p>
              </td>
              <td>
+                 <br>
                  {{#each users}}
-                     <a href="#" id="makeCall">{{_ "Call"}} {{#each emails}}{{address}}{{/each}}</a><br>
+                     <a href="#" id="makeCall"> {{#each emails}}{{address}}{{/each}}</a><br>
                  {{/each}}
                  <p><a href="#" id="endCall">{{_ "End Call"}}</a></p>
              </td>
             </tr>
 
         </tbody>
-        </div>
+
     </table>
-
-
+    </div>
 </template>
 
 

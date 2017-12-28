@@ -60,7 +60,7 @@ div#About_Payagol { padding-left: 30px; background: whitesmoke; width:600px; hei
 
 
 
-div#producer_container {display: inline-block; float: right; left: 600px; vertical-align: middle; z-index: 1;}
+div#producer_container {display: inline-block; float: right; vertical-align: middle; z-index: 1;}
 div#producer_table {  z-index: 1; left:610px;  top: 250px; border-style: groove;}
  div#product_table  {  z-index: 1; left:610px;  top: 305px; border-style: groove;}
 div#product_image_table {  z-index: 1; left:610px; top:405px; border-style: groove;}
@@ -71,7 +71,7 @@ div#product_image_table {  z-index: 1; left:610px; top:405px; border-style: groo
 #head2 { font-size: 22px; }
 
 button.inc_btn { background: red;  z-index:1; font-size: 24px; }
-#on_auction_container {width: 368px; position: absolute; z-index: 1; left: 720px; top:598px; border-style: groove;}
+
 
 
 #Search_Item {  text-align  : center; width: auto; padding-left:10px; padding-right:10px;  z-index:1; font-size: 16px; }
@@ -83,9 +83,9 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #languages {position: absolute; left :735px; width: 80px; top:5px;}
 #Purchased_Items  {position: absolute; width:300px; height:15px; left :670px; top:610px; z-index:1; font-size: 24px; }
 
-div#buyitem_container { z-index: 1; width:366px; left: 720px; top:500px; border-style: groove; }
-div#num_container_field  { position: absolute; width:60px; height:40px; left :721px; top:621px;  font-size: 24px; }
-div#buy_item { width: 40px; text-align  : center;  padding-left:10px; padding-right:10px; height:15px;  font-size: 24px; }
+div#buyitem_container { z-index: 1; width:418px; left: 720px; top:500px; border-style: groove; }
+.num_container_field  {  width:237px; height:40px; left :721px; top:621px;  font-size: 24px; }
+div#buy_item { width: 60px; text-align  : center;  padding-left:10px; padding-right:10px; height:15px;  font-size: 24px; }
 div#BalanceLabel {style: bold; font-size: 24px; background-color: bisque}
 
 button.buy_btn { background: red; text-align  : center; width: 50px; padding-left:10px; padding-right:10px; position: absolute; z-index:1; left :740px; top:550px; font-size: 24px; }
@@ -100,14 +100,13 @@ div#enter_prpduct_heading { background-color: rgb(51, 122, 183);   }
 div#panel-title_report {display:inline-block;margin-right:10px;}
 div#print_button {display:inline-block;  float:right;  }
 div#chat-message {  width: 500px;  height: 50px;  }
-#messages { width: 700px;  height: 300px;  border: 1px solid rgb(230, 230, 230);  margin: 0px 0px 10px 0px;  }
 
 ul li {
     margin: 5px;
 }
-.custom1 {  width: 90px !important;  }
-.custom2 {  width: 46px !important;  }
-.custom3 {  width: 135px !important;  height: 40px; font-size: 22px ;}
+.custom1 {  width: 140px !important;  }
+.custom2 {  width: 145px !important;  }
+.custom3 {  width: 185px !important;  height: 50px; font-size: 22px ;}
 
 .AuctionDate {height: 30px;}
 .ProductName {height: 30px;}
@@ -116,8 +115,8 @@ ul li {
 .Current_auction_price {height: 20px;}
 .form_set_item_on_auction_container {width:850px; }
 
-.myVideo {width:200px; height:200px;}
-.theirVideo {width:200px; height:200px;}
+.myVideo {width:130px; height:130px;}
+.theirVideo {width:130px; height:130px;}
 
 
 #unit {width: 30px;}
@@ -260,12 +259,19 @@ td {
     border-bottom: 1px solid #ddd;
 }
 
+#messages {
+    width: 700px;
+    height: 300px;
+    border: 1px solid rgb(230, 230, 230);
+    margin: 0px 0px 10px 0px;  }
+
+
 .messages{
     border-style: groove;
     background-color: #f1f1f1;
     padding: 10px 5px;
     overflow: auto;
-    width: 360px;
+    width: 410px;
     height:80px;
     display: flex;
 
@@ -274,17 +280,26 @@ td {
 
 }
 
+div#on_auction_container {
+    width: 418px; z-index:1; border-style: groove;
+}
+
 div#chat_container{
-    display: inline-block;
-    float: right;
     z-index: 1;
     border-style: groove;
     top: 710px;
     left: 720px;
-    direction:rtl;
-
+    width: 418px;
 }
 
+div#video_container{
+
+    z-index: 1;
+    border-style: groove;
+    top: 710px;
+    left: 720px;
+    width: 418px;
+}
 
 .message {
     display: inline-block;
@@ -312,8 +327,6 @@ input {
     border: 2px solid #ddd;
 
 }
-
-
 
 
 .col-xs-12 {

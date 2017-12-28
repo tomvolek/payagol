@@ -1069,8 +1069,8 @@ if (Meteor.isCordova) {
             var Form_Product_id;
             Form_Product_id = Template.instance().Search_Product_Id.get();
             console.log("form_product_id", Form_Product_id);
+            console.log("product id number :",FlowerBatchList.find({Product_id: Form_Product_id}).count() );
             return FlowerBatchList.find({Product_id: Form_Product_id});
-           // return FlowerBatchList.find({});
         }
     });
 

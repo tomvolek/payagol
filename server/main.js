@@ -258,7 +258,12 @@ if (Meteor.isServer) {
         });
 
         Events.deny({
-            insert: () => true,
+            //insert: () => true,
+            insert: function (){
+                if (Roles.userIsInRole(Meteor.userId(), ['admin'])) { return false; }
+                else {
+                    return true;}
+            },
             update: () => true,
             remove: () => true
         });
