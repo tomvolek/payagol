@@ -254,8 +254,9 @@
                      </div>
                  {{/if}}
 
-              {{> mychat}}
+
               {{> Auction_Audio}}
+              {{> mychat}}
          </div>
      {{/each}}
 
@@ -734,7 +735,6 @@
 
 <template name="mychat">
     <div id="chat_container">
-        <b> {{_ "Chat"}} </b>
         <div  class="messages">
 
             {{#each messages}}
