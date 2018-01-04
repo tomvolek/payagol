@@ -250,7 +250,6 @@ if (Meteor.isCordova) {
 
 
 
-
     }); //Meteor.startup()
     const streamer = new Meteor.Streamer('chat');
     messages = new Mongo.Collection(null);

@@ -39,7 +39,7 @@
     {{/if}}
 
     {{#if isInRole 'admin' 'default-group'}}
-       <!-- {{> form_set_item_on_auction }} -->
+       <!--  {{> form_set_item_on_auction }} -->
        <!-- {{> barcode_scanner}} -->
         {{> myTemplate chartId="test" chartWidth="100%" chartHeight="100%" chartObject=topGenresChart}}
 
@@ -243,15 +243,9 @@
                          {{> user_keyboard}}
                      </div>
                   {{else}}
-                     <div id="on_auction_container">
-                         <div id="formset_item_on_auction">
-                             <b> {{_ "Product ID"}} </b>
-                             <form id="my_auction_price" >
-                                 <input type="text" name="on_auction"/>
-                                 <button class="btn btn-danger custom3" type="submit"  value={{_ "Set Auction"}} >{{_ "Set Auction"}}</button>
-                             </form>
-                         </div>
-                     </div>
+                     {{#if isInRole 'admin' 'default-group'}}
+                         {{> form_set_item_on_auction }}
+                      {{/if}}
                  {{/if}}
 
 
@@ -262,9 +256,20 @@
 
     <div id="Payaneh_Date"> <strong> {{ localizedDateAndTime  }} </strong>  </div>
     <div id="Payaneh_Auction"> <img src="/images/payagol.png" height="100" width="90"/> </div>
-
-
 </template>
+
+<template name ="form_set_item_on_auction">
+    <div id="on_auction_container">
+        <div id="formset_item_on_auction">
+            <b> {{_ "Product ID"}} </b>
+            <form id="my_auction_price" >
+                <input type="text" name="on_auction"/>
+                <button class="btn btn-danger custom3" type="submit"  value={{_ "Set Auction"}} >{{_ "Set Auction"}}</button>
+            </form>
+        </div>
+    </div>
+</template>
+
 
 
 <template name="flower_batch_lists">
@@ -419,18 +424,7 @@
 </template>
 
 
-<template name ="form_set_item_on_auction">
-    <div id="on_auction_container">
-    <div id="formset_item_on_auction">
-        <b> {{_ "Product ID"}} </b>
-    
-    <form id="my_auction_price" >
-        <input type="text" name="on_auction"/>
-        <button class="btn btn-danger custom3" type="submit"  value={{_ "Set Auction"}} >{{_ "Set Auction"}}</button>
-    </form>
-    </div>
-    </div>
-</template>
+
 
 
 
