@@ -1,3 +1,8 @@
+// Author: Tom Ajayebi
+// Module:  body.js
+// Functionality: Client side code for auction clock
+
+
 import { Template }    from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n }   from 'meteor/tap:i18n';

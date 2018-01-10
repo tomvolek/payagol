@@ -355,6 +355,11 @@ if (Meteor.isServer) {
 
             //look for the record which admin has passed in to set it to auction
             var onAuctionItem = FlowerBatchList.findOne({Product_id: id_on_auction});
+
+            //check to see if the product_id entered by user exists in DB , otherwise return
+            if (!onAuctionItem )
+                return;
+            console.log("Product_id on Auction=",onAuctionItem);
             PricePosition.update({_id: last_run_position[0]._id}, {$set: {TargetPrice: onAuctionItem.PricePerFlower}});
 
             FlowerBatchList.update({_id: onAuctionItem._id}, {

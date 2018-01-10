@@ -4,8 +4,8 @@ alanning:roles@1.2.16
 aldeed:autoform@6.2.0
 aldeed:collection2-core@2.1.0
 aldeed:simple-schema@1.5.3
-aldeed:tabular@1.4.2
-aldeed:template-extension@4.0.0
+aldeed:tabular@1.6.1
+aldeed:template-extension@4.1.0
 alexwine:pdfmake@0.1.26_8
 allow-deny@1.1.0
 amplify@1.0.0
@@ -41,8 +41,7 @@ cfs:upload-http@0.0.20
 cfs:worker@0.1.4
 check@1.2.5
 clinical:barcode@3.1.0
-coffeescript@1.12.7_3
-coffeescript-compiler@1.12.7_3
+coffeescript@1.12.6_1
 danappelxx:hover.css@1.0.0
 dburles:collection-helpers@1.1.0
 ddp@1.4.0
@@ -99,7 +98,7 @@ mdg:validation-error@0.5.1
 meteor@1.8.2
 meteor-base@1.2.0
 meteorhacks:inject-initial@1.0.4
-meteorhacks:meteorx@1.0.2
+meteorhacks:meteorx@1.4.1
 meteorhacks:unblock@1.1.0
 meteorspark:util@0.2.0
 mfactory:admin-lte@0.0.2
@@ -139,7 +138,7 @@ reactive-dict@1.2.0
 reactive-var@1.0.11
 reload@1.1.11
 retry@1.0.9
-reywood:publish-composite@1.4.2
+reywood:publish-composite@1.5.2
 rocketchat:streamer@0.6.1
 routepolicy@1.0.12
 rzymek:moment-locale-fa@2.14.1

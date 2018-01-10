@@ -84,7 +84,7 @@ button.inc_btn { background: red;  z-index:1; font-size: 24px; }
 #Purchased_Items  {position: absolute; width:300px; height:15px; left :670px; top:610px; z-index:1; font-size: 24px; }
 
 div#buyitem_container { z-index: 1; width:418px; left: 720px; top:500px; border-style: groove; }
-.num_container_field  {  width:237px; height:40px; left :721px; top:621px;  font-size: 24px; }
+div#num_container_field  {  width:237px; height:40px; left :721px; top:621px;  font-size: 24px; }
 div#buy_item { width: 60px; text-align  : center;  padding-left:10px; padding-right:10px; height:15px;  font-size: 24px; }
 div#BalanceLabel {style: bold; font-size: 24px; background-color: bisque}
 
