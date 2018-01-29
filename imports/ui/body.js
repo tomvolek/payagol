@@ -571,18 +571,65 @@ if (Meteor.isCordova) {
 
     Template.report_user_purchase.events({
         'click #print_button': function() {
-            //var customerPurchase = Purchased.find({username: Meteor.userId()});
 
-            /*Define the pdf-document
-            var docDefinition = {
+            // Grab number of
+            var customerPurchase = Purchased.find({username: Meteor.userId()},{fields: {username:1,NumberOfContainersBought:1,ProductName:1 }} ).fetch();
+            console.log("customer:",customerPurchase);
+
+            //Define the pdf-document
+           var docDefinition = {
+               footer: {
+                   columns: [
+                       'Left part',
+                       { text: 'Right part', alignment: 'right' }
+                   ]
+               },
                 content: [
-                    'Some text',
-                    customerPurchase,
-                    'Some text'
-                ]
-            }; */
-            var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+                    {
+                        layout: 'lightHorizontalLines', // optional
+                        table: {
+                            // headers are automatically repeated if the table spans over multiple pages
+                            // you can declare how many rows should be treated as headers
+                            headerRows: 1,
+                            widths: [ '*', 'auto', 100, '*' ],
 
+                            body: [
+                                [ 'Date', 'Product Name', 'Number of Items', 'Price Per Flower' ],
+                                //customerPurchase ,
+                               [ 'Value 1', 'Value 2', 'Value 3', 'Value 4' ],
+                                [ { text: 'Total:', bold: true }, 'Val 2', 'Val 3', 'Val 4' ]
+                            ]
+                        },
+
+                    }
+                ]
+            };
+           /* var docDefinition = { content: ['This is an sample PDF printed with pdfMake',
+                    {
+                        columns:[
+                            {
+                                // auto-sized columns have their widths based on their content
+                                width:'auto',
+                                text: 'First column'
+                            },
+                            {
+                                // star-sized columns fill the remaining space
+                                width: '*',
+                                text: 'Seconf column'},
+                            {
+                                // fixed width
+                                width: 100,
+                                text: 'Third column'
+                            }
+                        ],
+                        // optional space between columns
+                        columnGap: 10
+                    },
+                    'This paragraph goes below all columns and has full width'
+                ] }; */
+
+            var docDefinitionStr=JSON.stringify(docDefinition);
+            docDefinition=JSON.parse(docDefinitionStr);
             // Start the pdf-generation process
             pdfMake.createPdf(docDefinition).open();
             //pdfMake.createPdf(docDefinition).print();
