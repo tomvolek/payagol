@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f667815-ac7f-4be1-84cf-bf4893cdcd93" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Payaneh2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Payaneh2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.meteor/.finished-upgraders" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/.finished-upgraders" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.meteor/packages" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.meteor/release" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/release" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="96" column="23" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="23" />
+            <state relative-caret-position="1485">
+              <caret line="99" column="64" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="64" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -179,8 +173,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="246" />
-    <option name="y" value="121" />
+    <option name="x" value="44" />
+    <option name="y" value="77" />
     <option name="width" value="1135" />
     <option name="height" value="770" />
   </component>
@@ -189,6 +183,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -196,21 +191,10 @@
               <item name="payagol" type="b2602c69:ProjectViewProjectNode" />
               <item name="payagol" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="payagol" type="b2602c69:ProjectViewProjectNode" />
-              <item name="payagol" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="payagol" type="b2602c69:ProjectViewProjectNode" />
-              <item name="payagol" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -326,11 +310,20 @@
       <workItem from="1539285243670" duration="2907000" />
       <workItem from="1544736923188" duration="95000" />
       <workItem from="1544737099131" duration="109000" />
+      <workItem from="1547600287681" duration="470000" />
+      <workItem from="1547763412220" duration="479000" />
+      <workItem from="1548630145369" duration="14000" />
+      <workItem from="1548630190038" duration="148000" />
+      <workItem from="1548731525979" duration="14000" />
+      <workItem from="1548975415045" duration="140000" />
+      <workItem from="1549503119269" duration="26000" />
+      <workItem from="1551299809319" duration="67000" />
+      <workItem from="1551299902544" duration="737000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="684796000" />
+    <option name="totallyTimeSpent" value="686891000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -342,7 +335,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="246" y="121" width="1135" height="770" extended-state="0" />
+    <frame x="44" y="77" width="1135" height="770" extended-state="0" />
     <layout>
       <window_info active="true" id="Project" order="0" visible="true" weight="0.14901257" />
       <window_info id="Structure" order="1" weight="0.25479144" />
@@ -496,8 +489,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="96" column="23" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="23" />
+        <state relative-caret-position="1485">
+          <caret line="99" column="64" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="64" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
