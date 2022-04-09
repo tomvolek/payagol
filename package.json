@@ -11,7 +11,7 @@
     "griddle-react": "^1.13.1",
     "jalaali-js": "^1.0.0",
     "meteor-node-stubs": "^0.2.11",
-    "moment": "^2.18.1",
+    "moment": "^2.29.2",
     "moment-jalaali": "^0.7.0",
     "pdfmake": "^0.1.59",
     "pdfmake-browserified": "^0.1.4",
